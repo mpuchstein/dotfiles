@@ -497,6 +497,6 @@
   "theme.bar.transparent": true,
   "theme.bar.buttons.modules.storage.enableBorder": false,
   "notifications.position": "top right",
-  "menus.dashboard.shortcuts.right.shortcut1.icon": "",
-  "menus.dashboard.shortcuts.right.shortcut1.command": "uwsm app -- nwg-shell-settings"
+  "menus.dashboard.shortcuts.right.shortcut1.icon": "",
+  "menus.dashboard.shortcuts.right.shortcut1.command": "sleep 0.5 && hyprpicker -a"
 }
