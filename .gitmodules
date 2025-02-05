@@ -1,3 +1,6 @@
 [submodule "alacritty/themes"]
 	path = alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme
+[submodule "fuzzel/theme_dracula"]
+	path = fuzzel/theme_dracula
+	url = https://github.com/dracula/fuzzel.git

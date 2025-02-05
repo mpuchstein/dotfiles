@@ -69,7 +69,6 @@
         "storage"
       ],
       "right": [
-        "cava",
         "media",
         "updates",
         "systray",
@@ -103,7 +102,7 @@
   "hyprpanel.restartCommand": "uwsm app -- hyprpanel -q; uwsm app --hyprpanel",
   "menus.transitionTime": 200,
   "theme.bar.buttons.workspaces.smartHighlight": true,
-  "bar.customModules.ram.labelType": "used/total",
+  "bar.customModules.ram.labelType": "used",
   "theme.bar.buttons.modules.cpu.enableBorder": false,
   "bar.customModules.cpuTemp.unit": "metric",
   "bar.customModules.cpuTemp.sensor": "/sys/devices/platform/nct6683.2592/hwmon/hwmon4/temp1_input",
@@ -498,5 +497,6 @@
   "theme.bar.buttons.modules.storage.enableBorder": false,
   "notifications.position": "top right",
   "menus.dashboard.shortcuts.right.shortcut1.icon": "",
-  "menus.dashboard.shortcuts.right.shortcut1.command": "sleep 0.5 && hyprpicker -a"
+  "menus.dashboard.shortcuts.right.shortcut1.command": "sleep 0.5 && hyprpicker -a",
+  "menus.clock.weather.enabled": false
 }
