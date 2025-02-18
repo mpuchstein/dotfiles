@@ -102,7 +102,7 @@
   "hyprpanel.restartCommand": "uwsm app -- hyprpanel -q; uwsm app --hyprpanel",
   "menus.transitionTime": 200,
   "theme.bar.buttons.workspaces.smartHighlight": true,
-  "bar.customModules.ram.labelType": "used",
+  "bar.customModules.ram.labelType": "used/total",
   "theme.bar.buttons.modules.cpu.enableBorder": false,
   "bar.customModules.cpuTemp.unit": "metric",
   "bar.customModules.cpuTemp.sensor": "/sys/devices/platform/nct6683.2592/hwmon/hwmon4/temp1_input",

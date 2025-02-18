@@ -3,21 +3,19 @@ set nocompatible
 " Helps force plugins to load correctly when it is turned back on below.
 filetype off
 
-" PlugInstallation
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.'/home/mpuchstein/.config/vim'.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-endif
-
 call plug#begin()
 " List Plugins here
-Plug 'ajmwagar/vim-deus'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'simnalamburt/vim-mundo'
-Plug 'dense-analysis/ale'
-Plug 'mhinz/vim-signify'
+  Plug 'ajmwagar/vim-deus'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'simnalamburt/vim-mundo'
+  Plug 'dense-analysis/ale'
+  Plug 'mhinz/vim-signify'
+  Plug 'preservim/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'PhilRunninger/nerdtree-visual-selection'
 call plug#end()
 
 " Enable plugins and load plugin for the detected file type.
