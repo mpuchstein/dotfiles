@@ -1,0 +1,46 @@
+(include "./widgets/music.yuck")
+(include "./widgets/lorem.yuck")
+
+(defwindow topbar_0
+  :monitor 1
+  :geometry (geometry :x "0%"
+             :y "0%"
+             :width "90%"
+             :height "10px"
+             :anchor "top center")
+  :stacking "bg"
+  :exclusive true
+  :reserve (struts :side "top" :distance "4%")
+  :windowtype "dock"
+  (bar0))
+
+(defwidget bar0 []
+  (centerbox :orientation "h"
+    (left)
+    (center)
+    (right)))
+
+(defwindow left []
+  (box :orientation 'h'
+       :class: 'left'
+       :space-evenly true
+       :spacing 5
+       :halign 'start'
+   (loremText :text "Workspaces")))
+    
+
+(defwidget center []
+  (box :orientation 'h'
+       :class 'center'
+       :space-evenly false
+       :spacing 5
+   (media)))
+    
+  
+(defwidget right []
+  (box :orientation 'h'
+       :class 'right'
+       :space-evenly false
+       :spacing 5
+       :halign 'end'
+    (loremText :text "Bar stuff")))

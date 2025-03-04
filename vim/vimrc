@@ -17,6 +17,7 @@ call plug#begin()
   Plug 'ryanoasis/vim-devicons'
   Plug 'PhilRunninger/nerdtree-visual-selection'
   Plug 'elkowar/yuck.vim'
+  Plug 'eraserhd/parinfer-rust', {'do':'cargo build --release'}
 call plug#end()
 
 " Enable plugins and load plugin for the detected file type.
