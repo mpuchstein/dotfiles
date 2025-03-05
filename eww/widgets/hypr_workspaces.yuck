@@ -1,0 +1,12 @@
+(deflisten events :initial ""
+  ../scripts/hyprman)
+
+(defvar workspaceIcons '{
+  "empty": "",
+  "full": "",
+  "focused": "󱓻"
+}')
+
+(defvar seperator " ")
+
+

@@ -1,5 +1,6 @@
 (include "./widgets/music.yuck")
 (include "./widgets/lorem.yuck")
+(include "./widgets/hypr_activewindow.yuck")
 
 (defwindow topbar_0
   :monitor 1
@@ -20,13 +21,13 @@
     (center)
     (right)))
 
-(defwindow left []
+(defwidget left []
   (box :orientation 'h'
        :class: 'left'
        :space-evenly true
        :spacing 5
        :halign 'start'
-   (loremText :text "Workspaces")))
+   (active_window)))
     
 
 (defwidget center []

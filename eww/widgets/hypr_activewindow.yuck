@@ -1,0 +1,7 @@
+(deflisten activewindow :initial "..." "hyprman -f activewindow")
+
+(defwidget active_window []
+  (box :class "activewindow"
+       :halign "center"
+       :valign "center"
+    {activewindow.data.window_class}))
