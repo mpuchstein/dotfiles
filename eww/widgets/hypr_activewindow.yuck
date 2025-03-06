@@ -1,7 +1,34 @@
 (deflisten activewindow :initial "..." "hyprman -f activewindow")
 
+(defvar windowIcons 
+  `{
+     "generic": "",
+     "spotify": "",
+     "mpv": "",
+     "firefox": "",
+     "chromium": "",
+     "zen": "",
+     "Alacritty": "",
+     "steam": "󰓓",
+     "discord": "󰙯"
+  }`)
+
+(defwidget windowIcon []
+  (image
+    :limit-width 10
+    :icon-size: 12
+    :icon {activewindow.data.window_class}))
+
+(defwidget windowTitle []
+  (label 
+    :class "windowIcon"
+    :limit-width 10
+    :text {activewindow.data.window_title}))
+
 (defwidget active_window []
-  (box :class "activewindow"
-       :halign "center"
-       :valign "center"
-    {activewindow.data.window_class}))
+  (box 
+    :class "activewindow"
+    :halign "center"
+    :valign "center"
+    :spacing 1
+    (windowIcon) (windowTitle)))
