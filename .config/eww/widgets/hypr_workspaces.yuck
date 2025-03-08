@@ -18,9 +18,9 @@
         :onclick "hyprctl dispatch workspace ${workspace.id}"
         :cursor "pointer"
         :tooltip "${workspace.name}"
-        :class "workspaces--ws ${workspace.active == true ? 'workspaces--ws--active' : 'workspaces--ws--inactive'}"
+        :class "workspaces--ws${workspace.windows > 0 ? '' : ' workspace--ws--empty'}${workspace.active == true ? ' workspaces--ws--active' : ' workspaces--ws--inactive'}"
         (label 
           :class "workspaces--ws--label"
           :xalign 0.2
           :yalign 0.5
-          :text "${workspace.windows > 0 ? workspaceIcons.full : workspaceIcons.empty}")))))
+          :text "")))))

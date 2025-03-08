@@ -1,35 +1,36 @@
 .workspaces {
-	/* Green */
-	$light: #bad012;
-	$dark: #53730a;
+
+  /* Colors */
+  $ws-background: darksalmon;
+  $ws-active: sienna;
+  $ws-active-border: sienna;
+  $ws-inactive: chocolate;
+  $ws-inactive-border: chocolate;
+  $ws-empty: coral;
+  $ws-empty-border: chocolate;
+
 	
-  /* Orange */
-	//$light: #fde10e;
-	//$dark: #ff6520;
-	
-	background: $dark;
+	background: $ws-background;
 	padding: 3px 1rem;
 	
 	&--ws {
 		border-radius: 50%;
 		font-family: 'Symbols Nerd Font Mono';
-		border: 1px solid blue;
-		color: black;
+		border: 1px solid;
 
-    &--label {
-			font-size: 0.7rem;
-		}
-	
 		&--active {
-			background: $light;
-			color: $dark;
-			border-color: $light;
+			background:   $ws-active;
+			border-color: $ws-active-border;
 		}
 		
 		&--inactive {
-			background: $dark;
-			color: $dark;
-			border-color: $light;
+			background:   $ws-inactive;
+			border-color: $ws-inactive-border;
+		}
+
+		&--empty {
+			background:   $ws-empty;
+			border-color: $ws-empty-border;
 		}
 	}	
 }
