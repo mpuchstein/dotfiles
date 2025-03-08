@@ -9,15 +9,15 @@
   :exclusive true
   :reserve (struts :side "top" :distance "4%")
   :windowtype "dock"
-  (bar0))
+  (bar1))
 
-(defwidget bar0 []
+(defwidget bar1 []
   (centerbox :orientation "h"
-    (left)
-    (center)
-    (right)))
+    (bar1_left)
+    (bar1_center)
+    (bar1_right)))
 
-(defwidget left []
+(defwidget bar1_left []
   (box :orientation 'h'
        :class: 'left'
        :space-evenly false
@@ -26,14 +26,14 @@
    (hypr_workspaces)))
     
 
-(defwidget center []
+(defwidget bar1_center []
   (box :orientation 'h'
        :class 'center'
        :space-evenly false
        :spacing 5
    (sysmon)))
 
-(defwidget right []
+(defwidget bar1_right []
   (box
     :orientation 'h'
     :class 'right'

@@ -13,11 +13,11 @@
 
 (defwidget bar0 []
   (centerbox :orientation "h"
-    (left)
-    (center)
-    (right)))
+    (bar0_left)
+    (bar0_center)
+    (bar0_right)))
 
-(defwidget left []
+(defwidget bar0_left []
   (box :orientation 'h'
        :class: 'left'
        :space-evenly false
@@ -27,7 +27,7 @@
    (hypr_active_window)))
     
 
-(defwidget center []
+(defwidget bar0_center []
   (box :orientation 'h'
        :class 'center'
        :space-evenly false
@@ -35,7 +35,7 @@
    (media)
    (sysmon)))
 
-(defwidget right []
+(defwidget bar0_right []
   (box
     :orientation 'h'
     :class 'right'
