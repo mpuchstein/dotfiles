@@ -1,6 +1,0 @@
-[submodule ".config/alacritty/themes"]
-	path = .config/alacritty/themes
-	url = https://github.com/alacritty/alacritty-theme
-[submodule ".config/fuzzel/theme_dracula"]
-	path = .config/fuzzel/theme_dracula
-	url = https://github.com/dracula/fuzzel

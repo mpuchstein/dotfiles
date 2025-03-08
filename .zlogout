@@ -1,0 +1,1 @@
+/home/mpuchstein/.zprezto/runcoms/zlogout
