@@ -1,4 +1,4 @@
-(deflisten activewindow :initial "..." "RUST_BACKTRACE=1 hyprman -a 2>>/tmp/eww_hyprman_activewindow.log")
+(deflisten activewindow :initial "..." "hyprman -a 2>>/tmp/eww_hyprman_activewindow.log")
 
 (defvar windowIcons 
   `{
@@ -15,20 +15,18 @@
 
 (defwidget windowIcon []
   (image
-    :limit-width 10
     :icon-size: 12
     :icon {activewindow.class}))
 
 (defwidget hypr_active_window []
   (tooltip
-    (label :class "activewindow--tooltip" :text {activewindow.title})
+    (label :text {activewindow.title})
     (box
       :class "activewindow${activewindow.xwayland == true ? '--xwayland' : ''}"
       :halign "left"
       :valign "center"
-      :spacing 1
+      :spacing 3
       (label 
         :limit-width 25
         :unindent true
-        :text "${activewindow.class}"))))
-  
+        :text "${windowIcons[activewindow.class] ?: windowIcons['generic']}  ${activewindow.class}"))))

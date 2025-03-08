@@ -1,14 +1,9 @@
 .activewindow{
   background: lightgreen;
   color: black;
-
+  
   &--xwayland{
-    background: red;
-    color: black;
-  }
-
-  &--tooltip{
-    background: darkgrey;
+    background: maroon;
     color: white;
   }
 }

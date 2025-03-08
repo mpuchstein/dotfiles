@@ -4,27 +4,27 @@
   (box
     :class 'sysmon'
     :space-evenly false
-    :spacing 1
-    (cpu)
-    (ram)
-    (disk)
-    (net)))
+    :spacing 0
+    (cpu :class "first")
+    (ram :class "middle")
+    (disk :class "middle")
+    (net :class "last")))
     
-(defwidget ram []
+(defwidget ram [class]
   (tooltip
-    :class 'ram ${EWW_RAM.used_mem_perc > 90 ? 'danger' : ''}'
+    :class 'ram ${EWW_RAM.used_mem_perc > 90 ? 'danger' : ''} ${class}'
     (label :text "  ${round(EWW_RAM.free_swap/1000000000, 2)} GB/${round(EWW_RAM.total_swap/1000000000, 2)} GB")
     (label :text "  ${round(EWW_RAM.used_mem/1000000000, 2)} GB/${round(EWW_RAM.total_mem/1000000000, 2)} GB")))
     
-(defwidget disk []
+(defwidget disk [class]
   (tooltip
-    :class 'disk ${EWW_DISK["/"].used_perc > 90 ? 'danger' : ''}'
+    :class 'disk ${EWW_DISK["/"].used_perc > 90 ? 'danger' : ''} ${class}'
     (label :text "  ${round(EWW_DISK["/"].free/1000000000, 2)} GB /${round(EWW_DISK["/"].total/1000000000, 2)} GB")
     (label :text "  ${round(EWW_DISK["/"].used_perc,2)}%")))
 
-(defwidget cpu []
+(defwidget cpu [class]
   (tooltip
-    :class 'cpu'
+    :class 'cpu ${class}'
     (box :orientation "vertical"
       (for cpu in {EWW_CPU.cores}
         (box
@@ -42,10 +42,10 @@
           (label :text "${cpu.freq} Hz ${cpu.usage}%"))))
     (label :text "  ${round(EWW_CPU.avg, 2)}%")))
 
-(defwidget net []
+(defwidget net [class]
   (box
-    :class 'net'
+    :class 'net ${class}'
     :space-evenly false
     (label :text "")
-    (label :text " ${round(EWW_NET.enp34s0.NET_UP * 8 / 1000000, 2)} Mbit")
-    (label :text " ${round(EWW_NET.enp34s0.NET_DOWN * 8 / 1000000, 2)} Mbit")))
+    (label :text " ${round(EWW_NET[netiface].NET_UP * 8 / 1000000, 2)} Mbit")
+    (label :text " ${round(EWW_NET[netiface].NET_DOWN * 8 / 1000000, 2)} Mbit")))

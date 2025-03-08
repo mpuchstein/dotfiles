@@ -1,19 +1,35 @@
-.workspacecontainer{
-  background: orange;
-}
+.workspaces {
+	/* Green */
+	$light: #bad012;
+	$dark: #53730a;
+	
+  /* Orange */
+	//$light: #fde10e;
+	//$dark: #ff6520;
+	
+	background: $dark;
+	padding: 3px 1rem;
+	
+	&--ws {
+		border-radius: 50%;
+		font-family: 'Symbols Nerd Font Mono';
+		border: 1px solid blue;
+		color: black;
 
-.workspace{ 
-  border-radius: 1rem 1rem;
-  font-family: 'Symbols Nerd Font Mono';
-  font-size: 16px;
-  border: 1px solid blue;
-  color: black;
-}
-
-.wsactive{
-  background: red;
-}
-
-.wsinactive{
-  background: yellow;
+    &--label {
+			font-size: 0.7rem;
+		}
+	
+		&--active {
+			background: $light;
+			color: $dark;
+			border-color: $light;
+		}
+		
+		&--inactive {
+			background: $dark;
+			color: $dark;
+			border-color: $light;
+		}
+	}	
 }

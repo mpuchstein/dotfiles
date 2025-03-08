@@ -1,19 +1,42 @@
 .sysmon{
-  background: darkred;
+  * {
+    border-radius: 0;
+  }
+
+  $border-middle: 1px solid black;
+
+  background: transparent;
   color: black;
-}
-.danger{
-    color: red
-}
-.ram{
-  background: tan;
-}
-.disk{
-  background: mediumturquoise;
-}
-.cpu{
-  background: lightgreen;
-}
-.net{
-  background: plum;
+
+  .first {
+    border-radius: 1.5rem 0 0 1rem;
+    border-right: $border-middle;
+  }
+
+  .middle {
+    border-right: $border-middle;
+  }
+
+  .last {
+    border-radius: 0 1rem 1.5rem 0;
+  }
+  .danger{
+      color: red
+  }
+
+  .ram{
+    background: tan;
+  }
+
+  .disk{
+    background: mediumturquoise;
+  }
+
+  .cpu{
+    background: lightgreen;
+  }
+
+  .net{
+    background: plum;
+  }
 }

@@ -8,18 +8,19 @@
 
 (defwidget hypr_workspaces []
   (box
-    :class "workspacecontainer"
+    :class "workspaces"
     :space-evenly false
     :spacing 3
     (for workspace in workspaces
       (eventbox
-        :width 20
         :height 20
+        :width 20
         :onclick "hyprctl dispatch workspace ${workspace.id}"
+        :cursor "pointer"
         :tooltip "${workspace.name}"
-        :class "workspace ${workspace.active == true ? 'wsactive' : 'wsinactive'}"
+        :class "workspaces--ws ${workspace.active == true ? 'workspaces--ws--active' : 'workspaces--ws--inactive'}"
         (label 
-          :xalign 0
+          :class "workspaces--ws--label"
+          :xalign 0.2
           :yalign 0.5
-          :limit-width 1
           :text "${workspace.windows > 0 ? workspaceIcons.full : workspaceIcons.empty}")))))
