@@ -8,3 +8,4 @@
 (include "widgets/sysmon.yuck")
 (include "widgets/swaync.yuck")
 (include "widgets/volume.yuck")
+(include "widgets/hyprscreencast.yuck")

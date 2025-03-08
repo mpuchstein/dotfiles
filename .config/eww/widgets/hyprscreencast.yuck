@@ -1,0 +1,8 @@
+(deflisten screencast :initial '{"event":"Screencast","data":{"state":0,"owner":0}}"' "hyprman -f screencast")
+
+(defwidget hyprscreencast []
+  (box
+    :class "screencast${screencast.data.state == 1 ? '--active' : ''}"
+    (label
+      :padding 3
+      :text "${screencast.data.state == 1 ? '󰐯': '󱠎'}")))

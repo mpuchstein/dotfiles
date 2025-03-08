@@ -23,7 +23,8 @@
        :space-evenly false
        :spacing 5
        :halign 'start'
-   (hypr_workspaces)))
+   (hypr_workspaces)
+   (hyprscreencast)))
     
 
 (defwidget bar1_center []
