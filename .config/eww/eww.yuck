@@ -1,1 +1,4 @@
+(include "./widgets.yuck")
+
 (include "./topbar_dp2.yuck")
+(include "./topbar_dp3.yuck")

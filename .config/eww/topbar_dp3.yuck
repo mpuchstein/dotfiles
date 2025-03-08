@@ -1,5 +1,5 @@
-(defwindow topbar_DP-2
-  :monitor "DP-2"
+(defwindow topbar_DP-3
+  :monitor "DP-3"
   :geometry (geometry :x "0%"
              :y "0%"
              :width "90%"
@@ -23,8 +23,7 @@
        :space-evenly false
        :spacing 5
        :halign 'start'
-   (hypr_workspaces)
-   (hypr_active_window)))
+   (hypr_workspaces)))
     
 
 (defwidget center []
@@ -32,7 +31,6 @@
        :class 'center'
        :space-evenly false
        :spacing 5
-   (media)
    (sysmon)))
 
 (defwidget right []
@@ -42,8 +40,5 @@
     :space-evenly false
     :spacing 5
     :halign 'end'
-    (hyprsunset)
-    (datetime)
-    (stray)
-    (volume)
-    (swaync)))
+    (media)
+    (datetime)))
