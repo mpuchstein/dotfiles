@@ -1,0 +1,34 @@
+.music {
+  background: transparent;
+  color: transparent;
+
+  &--off {
+    background: transparent;
+    color: transparent;
+  }
+
+  &--on {
+    background: #8ce513;
+    color: #010101;
+  }
+
+  &--spotify {
+    background: #17d860;
+    color: #282828;
+  }
+
+  &--firefox {
+    background: #fd8728;
+    color: #010101;
+  }
+
+  &--mpv {
+    background: #420042;
+    color: white;
+  }
+
+  &--chromium {
+    background: #1a73e8;
+    color: white;
+  }
+}

@@ -1,0 +1,25 @@
+(deflisten workspaces :initial "" "hyprman -w 2>>/tmp/eww_hyprman_workspaces.log")
+
+(defvar workspaceIcons '{
+  "empty": "",
+  "full": "",
+  "focused": "󱓻"
+}')
+
+(defwidget hypr_workspaces []
+  (box
+    :class "workspacecontainer"
+    :space-evenly false
+    :spacing 3
+    (for workspace in workspaces
+      (eventbox
+        :width 20
+        :height 20
+        :onclick "hyprctl dispatch workspace ${workspace.id}"
+        :tooltip "${workspace.name}"
+        :class "workspace ${workspace.active == true ? 'wsactive' : 'wsinactive'}"
+        (label 
+          :xalign 0
+          :yalign 0.5
+          :limit-width 1
+          :text "${workspace.windows > 0 ? workspaceIcons.full : workspaceIcons.empty}")))))

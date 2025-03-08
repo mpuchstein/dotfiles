@@ -1,0 +1,35 @@
+; icons used can be found on https://www.nerdfonts.com/cheat-sheet
+(defvar playerIcons `{
+  "spotify": "",
+  "mpv": "",
+  "firefox": "",
+  "chromium": ""
+}`)
+(defvar playerRegex "spotify|firefox|mpv|chromium") ; don't forget to update this with your icons
+(defvar separator " | ") ; separator between artist and title
+(defvar ellipsisIcon "…") ; your icon to display in case of ellipsis
+(defvar ellipsisArtist 20) ; set length for ellipsis on artist
+(defvar ellipsisTitle 25) ; set length for ellipsis on title
+(defwidget media []
+  (box
+    :class "media"
+    :halign "center"
+    :valign "center"
+    :class { playerctl == '' || objectlength(playerctl) == 0
+      ? 'music--off'
+      : matches(playerctl.player, playerRegex)
+        ? 'music--' + playerctl.player
+        : 'music--on' }
+    { playerctl == '' || objectlength(playerctl) == 0
+      ? ''
+      : matches(playerctl.player, playerRegex)
+        ? "${playerIcons[playerctl.player]} ${substring(playerctl.artist, 0, ellipsisArtist)}${strlength(playerctl.artist) >= ellipsisArtist ? ellipsisIcon : ''} | ${substring(playerctl.title, 0, ellipsisTitle)}${strlength(playerctl.title) >= ellipsisTitle ? ellipsisIcon : ''}"
+        : "${playerctl.player} - ${substring(playerctl.artist, 0, ellipsisArtist)}${strlength(playerctl.artist) >= ellipsisArtist ? ellipsisIcon : ''} | ${      substring(playerctl.title, 0, ellipsisTitle)}${strlength(playerctl.title) >= ellipsisTitle ? ellipsisIcon : ''}"
+    }
+  )
+)
+
+(deflisten playerctl
+  :initial ""
+  `playerctl --follow metadata --format '{"player": "{{ playerName }}", "trackid": "{{ mpris:trackid }}", "length": "{{ duration(mpris:length) }}", "artUrl": "{{ mrpis:artUrl }}", "album": "{{ album }}", "albumArtist": "{{ xesam:albumArtist }}", "artist": "{{ artist }}", "autoRating": "{{ xesam:autoRating }}", "discNumber": "{{ xesam:discNumber }}", "title": "{{ title }}", "trackNumber": "{{ xesam:trackNumber }}", "url": "{{ xesam:url }}", "position": "{{ position }}"}'`
+)

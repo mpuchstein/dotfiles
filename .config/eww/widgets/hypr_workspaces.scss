@@ -1,0 +1,19 @@
+.workspacecontainer{
+  background: orange;
+}
+
+.workspace{ 
+  border-radius: 1rem 1rem;
+  font-family: 'Symbols Nerd Font Mono';
+  font-size: 16px;
+  border: 1px solid blue;
+  color: black;
+}
+
+.wsactive{
+  background: red;
+}
+
+.wsinactive{
+  background: yellow;
+}

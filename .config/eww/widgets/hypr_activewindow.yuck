@@ -1,0 +1,34 @@
+(deflisten activewindow :initial "..." "RUST_BACKTRACE=1 hyprman -a 2>>/tmp/eww_hyprman_activewindow.log")
+
+(defvar windowIcons 
+  `{
+     "generic": "",
+     "spotify": "",
+     "mpv": "",
+     "firefox": "",
+     "chromium": "",
+     "zen": "",
+     "Alacritty": "",
+     "steam": "󰓓",
+     "discord": "󰙯"
+  }`)
+
+(defwidget windowIcon []
+  (image
+    :limit-width 10
+    :icon-size: 12
+    :icon {activewindow.class}))
+
+(defwidget hypr_active_window []
+  (tooltip
+    (label :class "activewindow--tooltip" :text {activewindow.title})
+    (box
+      :class "activewindow${activewindow.xwayland == true ? '--xwayland' : ''}"
+      :halign "left"
+      :valign "center"
+      :spacing 1
+      (label 
+        :limit-width 25
+        :unindent true
+        :text "${activewindow.class}"))))
+  

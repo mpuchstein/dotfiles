@@ -1,0 +1,19 @@
+(defwidget datetime []
+  (box
+    :class "datetime"
+    :halign "center"
+    :valign "center"
+    { time == ''
+      ? ''
+      : time
+    }
+  )
+)
+
+(defvar time-visible false)
+(defpoll time
+  :interval "1s"
+  :initial "initial-value"  ; optional, defaults to poll at startup
+  :run-while time-visible   ; optional, defaults to 'true'
+  `date +"%H:%M - %a, %d %b"`        ; https://www.man7.org/linux/man-pages/man1/date.1.html
+)

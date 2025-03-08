@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/home/mpuchstein/.ssh'
+let g:netrw_dirhist_8='/home/mpuchstein/.config/uwsm'
+let g:netrw_dirhist_7='/home/mpuchstein/.config/HybridBar'
+let g:netrw_dirhist_6='/home/mpuchstein/gits/dotfiles/hypr'
+let g:netrw_dirhist_5='/home/mpuchstein/gits/dotfiles/hypr/hyprland.d'
+let g:netrw_dirhist_4='/home/mpuchstein/gits/dotfiles/hypr'
+let g:netrw_dirhist_3='/home/mpuchstein/.config/uwsm'
+let g:netrw_dirhist_2='/home/mpuchstein/.config'
+let g:netrw_dirhist_1='/home/mpuchstein/.config/uwsm'

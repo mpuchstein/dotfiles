@@ -1,0 +1,13 @@
+.swaync{
+  background: aqua;
+  color: black;
+  &--dnd{
+    background: rosybrown;
+    color: black;
+  }
+  &--inhib{
+    background: indianred;
+    color: black;
+  }
+}
+

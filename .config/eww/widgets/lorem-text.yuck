@@ -1,0 +1,6 @@
+(defwidget loremText [text]
+  (label
+    :text text
+    :class 'lorem-text'
+  )
+)

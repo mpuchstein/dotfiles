@@ -1,0 +1,21 @@
+export XCURSOR_SIZE=24
+export XCURSOR_THEME=phinger-cursors-light
+
+export GDK_BACKEND=wayland,x11,*
+
+export SDL_VIDEODRIVER=wayland,x11
+export CLUTTER_BACKEND=wayland
+
+export QT_QPA_PLATFORM=wayland;xcb
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt6ct
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+#fix some bug with kde applications in hyprland https://www.lorenzobettini.it/2024/05/fixing-the-empty-open-with-in-dolphin-in-hyprland/
+export XDG_MENU_PREFIX=arch-
+
+export MOZ_ENABLE_WAYLAND=1
+
+export GRIMBLAST_EDITOR='swappy -f'
+
+export PATH=$PATH:/home/mpuchstein/.local/bin

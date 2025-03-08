@@ -1,0 +1,10 @@
+(defwidget stray []
+  (systray
+    :class "systray"
+    :halign "center"
+    :valign "center"
+    :active true
+    :icon-size 16
+    :spacing -5
+  )
+)

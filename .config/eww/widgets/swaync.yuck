@@ -1,0 +1,19 @@
+(deflisten notification :initial '{ "count": 0, "dnd": false, "visible": false, "inhibited": false }' "swaync-client -s")
+
+(defvar swaync_icon_act "󰀠")
+(defvar swaync_icon_inh "󰚎")
+(defvar swaync_icon_dnd "󰀣")
+
+(defwidget swaync []
+  (eventbox
+    :class "swaync${notification.dnd == true ? " swaync--dnd" : ""}${notification.inhibited == true ? " swaync--inhib" : ""}"
+    :cursor "pointer"
+    :onclick "swaync-client -t"
+    :onmiddleclick "swaync-client -d"
+    :onrightclick "swaync-client -C"
+    (box
+      :orientation "horizontal"
+      :spacing 3
+      :space-evenly false
+      (label :text "${notification.dnd == true ? swaync_icon_dnd : notification.inhibited == true ? swaync_icon_inh : swaync_icon_act}")
+      (label :text "${notification.count}"))))

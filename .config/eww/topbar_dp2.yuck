@@ -1,0 +1,51 @@
+(include "./widgets.yuck")
+
+(defwindow topbar_DP-2
+  :monitor "DP-2"
+  :geometry (geometry :x "0%"
+             :y "0%"
+             :width "90%"
+             :height "10px"
+             :anchor "top center")
+  :stacking "bg"
+  :exclusive true
+  :reserve (struts :side "top" :distance "4%")
+  :windowtype "dock"
+  (bar0))
+
+(defwidget bar0 []
+  (centerbox :orientation "h"
+    (left)
+    (center)
+    (right)))
+
+(defwidget left []
+  (box :orientation 'h'
+       :class: 'left'
+       :space-evenly false
+       :spacing 5
+       :halign 'start'
+   (hypr_workspaces)
+   (hypr_active_window)))
+    
+
+(defwidget center []
+  (box :orientation 'h'
+       :class 'center'
+       :space-evenly false
+       :spacing 5
+   (media)
+   (sysmon)))
+
+(defwidget right []
+  (box
+    :orientation 'h'
+    :class 'right'
+    :space-evenly false
+    :spacing 5
+    :halign 'end'
+    (hyprsunset)
+    (datetime)
+    (stray)
+    (volume)
+    (swaync)))

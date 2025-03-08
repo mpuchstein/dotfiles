@@ -1,0 +1,16 @@
+(defvar temperature "3000K")
+(defvar display-fix "off")
+(defwidget hyprsunset []
+  (box
+    :class "hypr-sunset"
+    :halign "center"
+    :valign "center"
+    (eventbox
+      :cursor "pointer"
+      :onclick `${display-fix == "off" 
+        ? "eww update display-fix=on && nohup hyprsunset -t ${temperature} > /dev/null 2>&1 &"
+        : "eww update display-fix=off && pkill hyprsunset"}`
+      `${display-fix == "off" ? "󰛨  Off" : "󱩌  On"}`)))
+    
+  
+
