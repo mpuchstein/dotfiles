@@ -24,7 +24,6 @@
        :spacing 5
        :halign 'start'
    (hypr_workspaces)
-   (hyprscreencast)
    (hypr_active_window)))
     
 
@@ -34,6 +33,7 @@
        :space-evenly false
        :spacing 5
    (media)
+   (hyprscreencast)
    (sysmon)))
 
 (defwidget bar0_right []
