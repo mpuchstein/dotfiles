@@ -6,11 +6,11 @@
   $sc-label-active: maroon;
   $sc-label-inactive: gainsboro;
 
-  background: $sc-inactive;
-  color: $sc-label-inactive;
+  background: $sc-active;
+  color: $sc-label-active;
 
   &--active{
-    background: $sc-active;
-    color: $sc-label-active;
+    background: $sc-inactive;
+    color: $sc-label-inactive;
   }
 }
