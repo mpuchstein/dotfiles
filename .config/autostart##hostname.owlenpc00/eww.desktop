@@ -1,0 +1,4 @@
+[Desktop Entry]
+Exec=/home/mpuchstein/.local/bin/eww open-many topbar_DP-2 topbar_DP-3
+Name=eww
+Type=Application
