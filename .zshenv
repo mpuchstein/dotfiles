@@ -1,1 +1,0 @@
-/home/mpuchstein/.zprezto/runcoms/zshenv
