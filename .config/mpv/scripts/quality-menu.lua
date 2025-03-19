@@ -1,0 +1,1 @@
+../.gits/mpv-quality-menu/quality-menu.lua

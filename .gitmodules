@@ -1,0 +1,3 @@
+[submodule ".config/mpv/.gits/mpv-quality-menu"]
+	path = .config/mpv/.gits/mpv-quality-menu
+	url = https://github.com/christoph-heinrich/mpv-quality-menu.git
