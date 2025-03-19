@@ -1,0 +1,50 @@
+(defwindow topbar_owlenlap02
+  :monitor "eDP-1"
+  :geometry (geometry :x "0%"
+             :y "0%"
+             :width "90%"
+             :height "10px"
+             :anchor "top center")
+  :stacking "bg"
+  :exclusive true
+  :reserve (struts :side "top" :distance "4%")
+  :windowtype "dock"
+  (bar3))
+
+(defwidget bar3 []
+  (centerbox :orientation "h"
+    (bar0_left)
+    (bar0_center)
+    (bar0_right)))
+
+(defwidget bar0_left []
+  (box :orientation 'h'
+       :class: 'left'
+       :space-evenly false
+       :spacing 5
+       :halign 'start'
+   (hypr_workspaces)
+   (hypr_active_window)))
+    
+
+(defwidget bar0_center []
+  (box :orientation 'h'
+       :class 'center'
+       :space-evenly false
+       :spacing 5
+   (media)
+   (hyprscreencast)
+   (sysmon)))
+
+(defwidget bar0_right []
+  (box
+    :orientation 'h'
+    :class 'right'
+    :space-evenly false
+    :spacing 5
+    :halign 'end'
+    (hyprsunset)
+    (datetime)
+    (stray)
+    (volume)
+    (swaync)))
