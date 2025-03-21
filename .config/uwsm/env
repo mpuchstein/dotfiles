@@ -1,5 +1,8 @@
 export XCURSOR_SIZE=24
-export XCURSOR_THEME=phinger-cursors-light
+export XCURSOR_THEME=volantes
+
+export HYPRCURSOR_SIZE=24
+export HYPRCURSOR_THEME=volantes
 
 export GDK_BACKEND=wayland,x11,*
 
