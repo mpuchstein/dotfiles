@@ -1,0 +1,4 @@
+[Desktop Entry]
+Exec=/usr/bin/jellyfin-mpv-shim
+Name=jellyfin-mpv-shim
+Type=Application
