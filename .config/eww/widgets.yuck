@@ -9,3 +9,4 @@
 (include "widgets/swaync.yuck")
 (include "widgets/volume.yuck")
 (include "widgets/hyprscreencast.yuck")
+(include "widgets/battery.yuck")
