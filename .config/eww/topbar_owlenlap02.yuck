@@ -47,4 +47,5 @@
     (datetime)
     (stray)
     (volume)
+    (battery)
     (swaync)))

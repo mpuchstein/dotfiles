@@ -1,0 +1,6 @@
+(defwidget battery []
+  (box
+    :class "battery ${EWW_BATTERY.BAT1.status}"
+    :halign "center"
+    :valign "center"
+    (label :text "󱈑 ${EWW_BATTERY.BAT1.capacity} %")))
