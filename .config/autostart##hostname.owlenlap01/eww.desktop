@@ -1,0 +1,4 @@
+[Desktop Entry]
+Exec=/home/mpuchstein/.local/bin/eww open topbar_owlenlap02
+Name=eww
+Type=Application
