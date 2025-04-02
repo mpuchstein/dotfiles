@@ -18,4 +18,4 @@ export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
 export MOZ_ENABLE_WAYLAND=1
 
-export GRIMBLAST_EDITOR='swappy -f'
+export GRIMBLAST_EDITOR='satty -f'
