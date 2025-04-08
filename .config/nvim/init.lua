@@ -6,10 +6,9 @@ require("config.keymaps")
 require("config.lazy")
 
 -- Plugin settings
+require("config.plugins.mason")
 require("config.plugins.treesitter")
 require("config.plugins.lsp")
-require("config.plugins.completion")
-require("config.plugins.telescope")
 require("config.plugins.explorer")
 require("config.plugins.whichkey")
 

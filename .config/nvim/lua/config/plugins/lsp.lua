@@ -1,26 +1,18 @@
 -- lsp.lua
--- Install Mason first for managing servers
-require("mason").setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
-    }
-  }
-})
-
 -- Connect Mason with lspconfig
 require("mason-lspconfig").setup({
   -- Automatically install these servers
   ensure_installed = {
-    "lua_ls",         -- Lua
-    "pyright",        -- Python
-    "biome",          -- TypeScript/JavaScript
-    "rust_analyzer",  -- Rust
-    "gopls",          -- Go
-    "clangd",         -- C/C++
-    "bashls",         -- Bash
+    "lua_ls",                 -- Lua
+    "pyright",                -- Python
+    "biome",                  -- TypeScript/JavaScript
+    "rust_analyzer",          -- Rust
+    "gopls",                  -- Go
+    "clangd",                 -- C/C++
+    "bashls",                 -- Bash
+    "emmet_language_server",  -- Emmet
+    "somesass_ls",            -- SASS
+    "hyprls",                 -- Hyprlang
   },
   automatic_installation = true,
 })
