@@ -1,2 +1,2 @@
 -- theme.lua
-vim.cmd[[colorscheme deus]]
+vim.cmd[[colorscheme tokyonight]]
