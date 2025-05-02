@@ -1,5 +1,5 @@
 app_launch_prefix = "uwsm app -- "
-terminal= "alacritty"
+terminal= "kitty"
 terminal_title_flag = ""
 locale = ""
 close_when_open = false
