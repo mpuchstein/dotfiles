@@ -7,6 +7,8 @@ export PATH="${PATH}:/home/mpuchstein/.local/bin"
 
 export ZDOTDIR="/home/mpuchstein/.config/zsh"
 
+export EDITOR="nvim"
+
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
   --info=inline-right \
