@@ -24,5 +24,7 @@ return {
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.kotlin" },
   { import = "astrocommunity.pack.php" },
+
+  { import = "astrocommunity.lsp.nvim-java" },
   -- import/override with your plugins folder
 }
