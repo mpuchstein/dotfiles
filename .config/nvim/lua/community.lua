@@ -26,5 +26,8 @@ return {
   { import = "astrocommunity.pack.php" },
 
   { import = "astrocommunity.lsp.nvim-java" },
+  { import = "astrocommunity.markdown-and-latex.vimtex" },
+
+  { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
   -- import/override with your plugins folder
 }
