@@ -3,7 +3,7 @@
   :geometry (geometry :x "0%"
              :y "0%"
              :width "90%"
-             :height "10px"
+             :height "1%"
              :anchor "top center")
   :stacking "bg"
   :exclusive true
@@ -32,7 +32,6 @@
        :class 'center'
        :space-evenly false
        :spacing 5
-   (media)
    (hyprscreencast)
    (sysmon)))
 
@@ -41,7 +40,7 @@
     :orientation 'h'
     :class 'right'
     :space-evenly false
-    :spacing 5
+    :spacing 2
     :halign 'end'
     (hyprsunset)
     (datetime)

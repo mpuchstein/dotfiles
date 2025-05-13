@@ -11,6 +11,3 @@
         ? "eww update display-fix=on && nohup hyprsunset -t ${temperature} > /dev/null 2>&1 &"
         : "eww update display-fix=off && pkill hyprsunset"}`
       `${display-fix == "off" ? "󰛨  Off" : "󱩌  On"}`)))
-    
-  
-

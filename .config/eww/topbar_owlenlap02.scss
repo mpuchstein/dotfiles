@@ -1,20 +1,20 @@
-@import 'widgets';
+@import "widgets";
 
 * {
   all: unset;
 }
 
 tooltip {
-  background: #2E3440;
-  color: #E5E6E7;
+  background: #2e3440;
+  color: #e5e6e7;
   border-radius: 1.5rem 1rem;
-  border: 1px solid #6F7175;
+  border: 1px solid #6f7175;
 }
 
 .popup {
-  background: #2E3440;
-  color: #E5E6E7;
-  border: 1px solid #6F7175;
+  background: #2e3440;
+  color: #e5e6e7;
+  border: 1px solid #6f7175;
 }
 
 .popup menuitem:hover {
@@ -26,22 +26,9 @@ window {
   color: transparent;
 
   * {
-    font-family: 'Inconsolata Go Nerd Font';
+    font-family: "Inconsolata Go Nerd Font";
     font-size: 0.85rem;
     border-radius: 1.5rem 1rem;
     padding: 2px 6px;
-  }
-
-  /* Modules */
-  .left {
-    //background: orange;
-  }
-
-  .center {
-    //background: blue;
-  }
-
-  .right {
-    //background: yellow;
   }
 }
