@@ -1,3 +1,6 @@
 [submodule ".config/mpv/.gits/mpv-quality-menu"]
 	path = .config/mpv/.gits/mpv-quality-menu
 	url = https://github.com/christoph-heinrich/mpv-quality-menu.git
+[submodule "/home/mpuchstein/.config/tmux/plugins/tpm"]
+	path = /home/mpuchstein/.config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
