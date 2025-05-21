@@ -7,6 +7,7 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.colorscheme.catppuccin" },
   -- these packs can set up things such as Treesitter, Language Servers, additional language specific plugins, and more!
+  { import = "astrocommunity.snippet.nvim-snippets" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.hyprlang" },
   { import = "astrocommunity.pack.java" },
@@ -25,8 +26,9 @@ return {
   { import = "astrocommunity.pack.kotlin" },
   { import = "astrocommunity.pack.php" },
 
-  { import = "astrocommunity.lsp.nvim-java" },
-  { import = "astrocommunity.markdown-and-latex.vimtex" },
+  -- { import = "astrocommunity.markdown-and-latex.vimtex" },
+  { import = "astrocommunity.markdown-and-latex.texpresso-vim" },
+  { import = "astrocommunity.completetion.cmp-latex-symbols" },
 
   { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
   -- import/override with your plugins folder
