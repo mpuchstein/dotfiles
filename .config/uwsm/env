@@ -10,7 +10,6 @@ export SDL_VIDEODRIVER=wayland,x11
 export CLUTTER_BACKEND=wayland
 
 export QT_QPA_PLATFORM=wayland;xcb
-export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=qt6ct
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
@@ -19,3 +18,4 @@ export ELECTRON_OZONE_PLATFORM_HINT=wayland
 export MOZ_ENABLE_WAYLAND=1
 
 export GRIMBLAST_EDITOR='satty -f'
+

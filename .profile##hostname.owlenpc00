@@ -32,3 +32,12 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=separator:#ff9e64 \
   --color=spinner:#ff007c \
 "
+
+export ROCM_PATH=/opt/rocm
+export HSA_OVERRIDE_GFX_VERSION=10.3.0
+export HIP_VISIBLE_DEVICES=1
+export LD_LIBRARY_PATH=/opt/rocm/lib:$LD_LIBRARY_PATH
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
