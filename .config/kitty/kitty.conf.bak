@@ -2707,6 +2707,6 @@ bold_italic_font auto
 
 
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Catppuccin-Mocha
 include current-theme.conf
 # END_KITTY_THEME
