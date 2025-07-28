@@ -2,8 +2,8 @@
 
 # Added by Toolbox App
 export PATH="${PATH}:/home/mpuchstein/.local/share/JetBrains/Toolbox/scripts"
-
 export PATH="${PATH}:/home/mpuchstein/.local/bin"
+export PATH="${PATH}:/home/mpuchstein/.cargo/bin"
 
 export ZDOTDIR="/home/mpuchstein/.config/zsh"
 
