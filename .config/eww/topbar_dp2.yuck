@@ -9,42 +9,37 @@
   :exclusive true
   :reserve (struts :side "top" :distance "4%")
   :windowtype "dock"
-  (bar0))
+  (bar1))
 
-(defwidget bar0 []
+(defwidget bar1 []
   (centerbox :orientation "h"
-    (bar0_left)
-    (bar0_center)
-    (bar0_right)))
+    (bar1_left)
+    (bar1_center)
+    (bar1_right)))
 
-(defwidget bar0_left []
+(defwidget bar1_left []
   (box :orientation 'h'
        :class: 'left'
        :space-evenly false
        :spacing 5
        :halign 'start'
-   (hypr_workspaces)
-   (hypr_active_window)))
+   (hypr_workspaces)))
     
 
-(defwidget bar0_center []
+(defwidget bar1_center []
   (box :orientation 'h'
        :class 'center'
        :space-evenly false
        :spacing 5
-   (media)
-   (hyprscreencast)
    (sysmon)))
 
-(defwidget bar0_right []
+(defwidget bar1_right []
   (box
     :orientation 'h'
     :class 'right'
     :space-evenly false
     :spacing 5
     :halign 'end'
-    (hyprsunset)
-    (datetime)
-    (stray)
-    (volume)
-    (swaync)))
+    (media)
+    (hyprscreencast)
+    (datetime)))

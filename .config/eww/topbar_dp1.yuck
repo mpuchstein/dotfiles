@@ -1,5 +1,5 @@
-(defwindow topbar_DP-3
-  :monitor "DP-3"
+(defwindow topbar_DP-1
+  :monitor "DP-1"
   :geometry (geometry :x "0%"
              :y "0%"
              :width "90%"
@@ -9,37 +9,42 @@
   :exclusive true
   :reserve (struts :side "top" :distance "4%")
   :windowtype "dock"
-  (bar1))
+  (bar0))
 
-(defwidget bar1 []
+(defwidget bar0 []
   (centerbox :orientation "h"
-    (bar1_left)
-    (bar1_center)
-    (bar1_right)))
+    (bar0_left)
+    (bar0_center)
+    (bar0_right)))
 
-(defwidget bar1_left []
+(defwidget bar0_left []
   (box :orientation 'h'
        :class: 'left'
        :space-evenly false
        :spacing 5
        :halign 'start'
-   (hypr_workspaces)))
+   (hypr_workspaces)
+   (hypr_active_window)))
     
 
-(defwidget bar1_center []
+(defwidget bar0_center []
   (box :orientation 'h'
        :class 'center'
        :space-evenly false
        :spacing 5
+   (media)
+   (hyprscreencast)
    (sysmon)))
 
-(defwidget bar1_right []
+(defwidget bar0_right []
   (box
     :orientation 'h'
     :class 'right'
     :space-evenly false
     :spacing 5
     :halign 'end'
-    (media)
-    (hyprscreencast)
-    (datetime)))
+    (hyprsunset)
+    (datetime)
+    (stray)
+    (volume)
+    (swaync)))
