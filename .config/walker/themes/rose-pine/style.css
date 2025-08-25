@@ -1,0 +1,200 @@
+/* ===================================================================
+   Rosé Pine for Walker — GTK4 CSS Theme
+   - Transparent fullscreen background with a floating panel.
+   - Authentic Rosé Pine palette colors.
+   - To use a different variant, uncomment its variable block
+     and comment out the active one.
+   =================================================================== */
+
+:root {
+  /*
+  // Rosé Pine (Main) - Active by default
+  */
+  --base: #191724;
+  --surface: #1f1d2e;
+  --overlay: #26233a;
+  --text: #e0def4;
+  --subtle: #908caa;
+  --muted: #6e6a86;
+  --love: #eb6f92;
+  --gold: #f6c177;
+  --rose: #ebbcba;
+  --pine: #31748f;
+  --foam: #9ccfd8;
+  --iris: #c4a7e7;
+  --hl-low: #21202e;
+  --hl-med: #403d52;
+  --hl-high: #524f67;
+
+  /*
+  // Rosé Pine Moon
+  --base:    #232136;
+  --surface: #2a273f;
+  --overlay: #393552;
+  --text:    #e0def4;
+  --subtle:  #908caa;
+  --muted:   #6e6a86;
+  --love:    #eb6f92;
+  --gold:    #f6c177;
+  --rose:    #ea9a97;
+  --pine:    #3e8fb0;
+  --foam:    #9ccfd8;
+  --iris:    #c4a7e7;
+  --hl-low:  #2a283e;
+  --hl-med:  #44415a;
+  --hl-high: #56526e;
+  */
+
+  /*
+  // Rosé Pine Dawn
+  --base:    #faf4ed;
+  --surface: #fffaf3;
+  --overlay: #f2e9e1;
+  --text:    #575279;
+  --subtle:  #797593;
+  --muted:   #9893a5;
+  --love:    #b4637a;
+  --gold:    #ea9d34;
+  --rose:    #d7827e;
+  --pine:    #286983;
+  --foam:    #56949f;
+  --iris:    #907aa9;
+  --hl-low:  #f2e9e1;
+  --hl-med:  #e6dccf;
+  --hl-high: #dcd3c9;
+  */
+}
+
+/* ===================================================================
+   Global Styles & Window
+   =================================================================== */
+
+* {
+  transition: all 120ms ease-out;
+}
+
+/* Make the main window transparent so only the panel is visible */
+window,
+window.background {
+  background: transparent;
+}
+
+/* ===================================================================
+   Layout (Based on your provided style.css)
+   =================================================================== */
+
+scrollbar {
+  opacity: 0;
+}
+
+/* The main launcher panel */
+.box-wrapper {
+  /* Panel uses the Rosé Pine 'base' color, slightly transparent for the Hyprland bug */
+  background: color-mix(in srgb, var(--base) 97%, transparent);
+  border: 1px solid var(--hl-high);
+  border-radius: 14px;
+  /* A softer, color-matched shadow */
+  box-shadow: 0 10px 30px -5px color-mix(in srgb, var(--base) 50%, transparent);
+}
+
+/* The search bar and results list share the panel's base color */
+.search-container,
+.list,
+.content-container {
+  background: transparent;
+}
+
+/* The search input field itself uses the 'surface' color for a subtle depth effect */
+.input {
+  background: var(--surface);
+  color: var(--text);
+  font-size: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--hl-med);
+  box-shadow: none;
+  outline: none;
+}
+
+.input:focus,
+.input:active {
+  border-color: var(--iris);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--iris) 25%, transparent);
+}
+
+.input placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+/* The preview panel also uses the 'surface' color */
+.preview-box,
+.preview {
+  background: var(--surface);
+  color: var(--text);
+  border-top: 1px solid var(--hl-med);
+}
+
+/* The keybinds hint bar at the bottom */
+.keybind-hints {
+  background: var(--hl-low);
+  color: var(--subtle);
+  font-size: 14px;
+  padding: 10px;
+  opacity: 1;
+  border-top: 1px solid var(--hl-med);
+}
+
+/* ===================================================================
+   Result Items
+   =================================================================== */
+
+/* Reset item spacing */
+child,
+child > * {
+  padding: 0;
+  margin: 0;
+}
+
+.item-box {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent; /* for smooth transitions */
+}
+
+/* Selected item styling */
+.item-box:hover,
+.item-box::selected {
+  background: var(--hl-med);
+}
+
+/* Unset the default text box styling to allow our own */
+.item-text-box {
+  all: unset;
+}
+
+.item-text {
+  color: var(--text);
+  font-weight: bold;
+}
+
+.item-subtext {
+  color: var(--subtle);
+  font-size: 12px;
+  opacity: 1;
+}
+
+.item-image {
+  color: var(--subtle);
+}
+
+/* Specific item types */
+.calc .item-text {
+  font-size: 24px;
+  color: var(--foam);
+}
+
+.symbols .item-image {
+  font-size: 18px;
+  color: var(--rose);
+}
