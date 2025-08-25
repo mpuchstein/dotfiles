@@ -1,0 +1,176 @@
+/* Rosé Pine (main) palette
+base: #191724  surface: #1f1d2e  overlay: #26233a  text: #e0def4
+muted: #6e6a86  subtle: #908caa
+love: #eb6f92  gold: #f6c177  rose: #ea9a97  pine: #31748f  foam: #9ccfd8  iris: #c4a7e7
+highlight-low: #21202e  highlight-med: #403d52  highlight-high: #524f67
+*/
+
+/* Bar */
+window#waybar {
+  background: #191724; /* base */
+  color: #e0def4; /* text */
+  border-right: 1px solid #21202e; /* highlight-low */
+}
+
+/* Typography */
+* {
+  font-family:
+    JetBrainsMono Nerd Font,
+    monospace;
+  font-size: 11px;
+}
+
+/* Common module padding for a narrow vertical bar */
+#workspaces,
+#window,
+#cpu,
+#memory,
+#disk,
+#network,
+#privacy,
+#wireplumber,
+#clock,
+#idle_inhibitor,
+#gamemode {
+  padding: 6px 8px;
+}
+
+/* Window title (top) */
+#window {
+  background: #1f1d2e; /* surface */
+  color: #e0def4; /* text */
+  border-radius: 8px;
+  margin: 4px 6px 6px 6px;
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 2px 2px;
+}
+#workspaces button {
+  padding: 3px; /* was 6px */
+  margin: 1px 1px; /* was 3px 2px */
+  border-radius: 6px;
+  font-size: 10px; /* was 11px */
+}
+
+/* Optional: smaller global font just for workspaces */
+#workspaces {
+  font-size: 10px;
+}
+#workspaces button:hover {
+  background: #21202e; /* highlight-low */
+  color: #e0def4; /* text */
+}
+#workspaces button.active {
+  background: #403d52; /* highlight-med */
+  border-color: #524f67; /* highlight-high */
+  color: #e0def4; /* text */
+}
+#workspaces button.urgent {
+  background: #eb6f92; /* love */
+  color: #191724; /* base for contrast */
+}
+
+/* Center stack (cpu/ram/ssds/network) */
+#cpu,
+#memory,
+#disk,
+#network {
+  background: #1f1d2e; /* surface */
+  color: #e0def4; /* text */
+  margin: 3px 6px;
+  border-radius: 8px;
+  border: 1px solid #21202e; /* highlight-low */
+}
+
+/* Accent hints for metrics */
+#cpu {
+  border-left: 3px solid #31748f;
+} /* pine */
+#memory {
+  border-left: 3px solid #c4a7e7;
+} /* iris */
+#disk {
+  border-left: 3px solid #9ccfd8;
+} /* foam */
+#network {
+  border-left: 3px solid #f6c177;
+} /* gold */
+
+/* Bottom stack */
+#privacy,
+#wireplumber,
+#clock,
+#idle_inhibitor,
+#gamemode {
+  background: #1f1d2e; /* surface */
+  color: #e0def4; /* text */
+  margin: 3px 6px;
+  border-radius: 8px;
+  border: 1px solid #21202e; /* highlight-low */
+}
+
+/* Microphone button (wireplumber#microphone) */
+#wireplumber.microphone {
+  background: #1f1d2e; /* surface */
+  color: #e0def4; /* text */
+  margin: 3px 6px;
+  border-radius: 8px;
+  border: 1px solid #21202e; /* highlight-low */
+  border-left: 3px solid #f6c177; /* gold */
+}
+#wireplumber.microphone.muted {
+  border-left-color: #524f67; /* highlight-high when muted */
+  color: #6e6a86; /* muted */
+}
+#wireplumber.microphone:hover {
+  background: #26233a;
+} /* overlay */
+
+/* Privacy states (camera/mic/screencast) */
+#privacy.screencast {
+  border-left: 3px solid #ea9a97;
+} /* rose */
+#privacy.microphone {
+  border-left: 3px solid #f6c177;
+} /* gold */
+#privacy.camera {
+  border-left: 3px solid #c4a7e7;
+} /* iris */
+
+/* Idle inhibitor */
+#idle_inhibitor.activated {
+  border-left: 3px solid #9ccfd8;
+} /* foam */
+#idle_inhibitor.deactivated {
+  border-left: 3px solid #524f67;
+} /* highlight-high */
+#idle_inhibitor:hover {
+  background: #26233a;
+} /* overlay */
+
+/* Gamemode */
+#gamemode {
+  border-left: 3px solid #f6c177;
+}
+#gamemode:hover {
+  background: #26233a;
+}
+
+/* Speaker (PipeWire via wireplumber) */
+#wireplumber.muted {
+  color: #6e6a86; /* muted */
+  border-color: #21202e;
+}
+
+/* Clock */
+#clock {
+  border-left: 3px solid #9ccfd8; /* foam */
+}
+
+/* Subtle separators */
+.modules-center > *:not(:last-child),
+.modules-right > *:not(:last-child) {
+  border-bottom: 1px solid #21202e; /* highlight-low */
+}

@@ -1,0 +1,122 @@
+/* --- Rosé Pine Theme für Walker (GTK4 Version) --- */
+
+/* 1. Palette (Rosé Pine) */
+:root {
+  /* Rosé Pine Palette */
+  --foreground: #e0def4; /* Text */
+  --background: rgba(25, 23, 36, 0.98); /* Base */
+  --color1: #c4a7e7; /* Iris (Accent) */
+  --selection_bg: rgba(64, 61, 82, 0.5); /* HighlightMed (transparent) */
+  --search_bg: rgba(31, 29, 46, 0.85); /* Surface */
+}
+
+/* 2. Globaler Reset und Schriftart (unverändert) */
+* {
+  all: unset;
+  box-sizing: border-box;
+  font-family: "Inconsolata Go Nerd Font", monospace;
+  color: var(--foreground);
+}
+
+/* 3. Hauptfenster und Container */
+/* Gilt für das GtkWindow, macht es transparent, damit der Blur-Effekt des Compositors durchscheint */
+window {
+  background-color: transparent;
+}
+
+/* Der Hauptcontainer, ersetzt #box */
+.box {
+  padding: 24px; /* Etwas weniger Padding für modernes Aussehen */
+  background-color: var(--background);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Etwas stärkerer Schatten für den Kontrast */
+  /* KORRIGIERT: alpha() durch rgba() mit den Werten von --color1 ersetzt */
+  border: 1px solid rgba(196, 167, 231, 0.5);
+  margin: 12px;
+}
+
+/* 4. Suchleiste */
+/* Ersetzt #search */
+.search-container {
+  padding: 8px 12px;
+  background-color: var(--search_bg);
+  border-radius: 20px;
+  transition:
+    background 150ms ease,
+    border 150ms ease;
+  margin-bottom: 8px;
+  border: 1px solid transparent; /* Platzhalter für den Fokus-Rand */
+}
+
+.search-container:focus-within {
+  /* Angepasst an Rosé Pine Palette */
+  background-color: rgba(38, 35, 58, 0.95); /* Overlay */
+  border: 1px solid var(--color1);
+}
+
+/* Das GtkEntry-Feld selbst, ersetzt #input */
+entry.input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  line-height: 1.2em;
+  color: var(--foreground);
+}
+
+/* 5. Ergebnisliste und Einträge */
+/* Die GtkGridView, welche die Items enthält */
+.list {
+  /* Keine speziellen Stile nötig, wird durch die Items selbst formatiert */
+}
+
+/* Ein einzelnes Ergebnis, ersetzt .item */
+.item-box {
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: background 120ms ease;
+  margin: 2px 4px; /* Kleiner Außenabstand für die Items */
+}
+
+.item-box:hover {
+  background-color: var(--selection_bg);
+}
+
+/* Ausgewähltes Item */
+.item-box:selected {
+  background-color: var(--selection_bg);
+  border-left: 4px solid var(--color1);
+  padding-left: 10px;
+}
+
+/* Styling für die verschiedenen Teile eines Items */
+.item-image {
+  margin-right: 12px;
+  font-size: 26px; /* Größe für Icon-Fonts */
+}
+
+.item-text {
+  font-weight: 500;
+}
+
+.item-subtext {
+  opacity: 0.7;
+  font-size: 0.9em;
+}
+
+/* 6. Scrollbar (unverändert) */
+scrollbar {
+  background-color: transparent;
+  width: 6px;
+  border-radius: 3px;
+}
+
+scrollbar:hover {
+  /* Angepasst an Rosé Pine Palette */
+  background-color: rgba(82, 79, 103, 0.4); /* HighlightHigh (transparent) */
+}
+
+slider {
+  background-color: var(--color1);
+  border-radius: 3px;
+}
