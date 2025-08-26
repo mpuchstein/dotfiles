@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Elephant
+Comment=A powerful data provider backend for building custom application launchers and desktop utilities.
+Exec=elephant
+Icon=applications-other
+Terminal=false
+Categories=Utility;
+Keywords=backend;data-provider;launcher;desktop;utility;
