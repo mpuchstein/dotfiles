@@ -18,7 +18,9 @@
     "cpu",
     "memory",
     "disk#root",
-    "network"
+    "network",
+    "temperature#cpu",
+    "temperature#gpu_hotspot"
   ],
 
   "modules-right": [
@@ -28,7 +30,10 @@
     "privacy",
     "wireplumber#source",
     "wireplumber#sink",
-    "tray"
+    "tray",
+    "bluetooth",
+    "power-profiles-daemon",
+    "battery"
   ],
 
   "hyprland/window": {
@@ -74,8 +79,8 @@
     "interval": 3,
     "format-wifi": " {essid}%",
     "format-ethernet": " {ifname}",
-    "tooltip-format-wifi": "{signalStrength}\n {bandwidthUpBytes}\n {bandwidthDownBytes}"
-    "tooltip-format-ethernet": " {bandwidthUpBytes}\n {bandwidthDownBytes}"
+    "tooltip-format-wifi": "{signalStrength}\n {bandwidthUpBytes}\n {bandwidthDownBytes}",
+    "tooltip-format-ethernet": " {bandwidthUpBytes}\n {bandwidthDownBytes}",
     "format-disconnected": ""
   },
 
@@ -145,7 +150,113 @@
       "on-scroll-down": "shift_down"
     }
   },
-  
+
+  "power-profiles-daemon": {
+    "format": "{icon} {profile}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "performance": "",
+      "balanced": "",
+      "power-saver": "",
+      "default": ""
+    }
+  },
+
+  "battery": {
+    "interval": 30,
+    "states": { "warning": 30, "critical": 15 },
+    "format": "{capacity}% {icon}",
+    "format-time": "{H}h {M}m",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": true,
+    "events": {
+      "on-discharging-warning": "notify-send -u normal 'Battery low'",
+      "on-discharging-critical": "notify-send -u critical 'Battery very low'",
+      "on-charging-100": "notify-send -u normal 'Battery full'"
+    }
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "",
+    "format-off": "",
+    "format-on": "",
+    "tooltip": true,
+    "on-click": "blueman-manager"
+  },
+
+
+  "group/temps": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "transition-left-to-right": true,
+      "click-to-reveal": true
+    },
+    "modules": [
+      "custom/temps-wrap",        // leader, always visible
+      "temperature#cpu",
+      "temperature#gpu_hotspot",
+      "temperature#nvme",
+    ]
+  },
+
+  "custom/temps-wrap": {
+    "format": "",
+    "tooltip-format": "Temperatures"
+  },
+
+  "temperature#cpu": {
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+    "input-filename": "temp1_input",
+    "interval": 5,
+    "critical-threshold": 85,
+    "format": " CPU: {temperatureC}°C",
+    "format-critical": " CPU: {temperatureC}°C ",
+    "tooltip-format": "CPU Tctl: {temperatureC}°C"
+  },
+
+  "temperature#gpu_edge": {
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.1/0000:10:00.0/0000:11:00.0/0000:12:00.0/hwmon",
+    "input-filename": "temp1_input",
+    "interval": 5,
+    "critical-threshold": 100,
+    "format": "GPU {temperatureC}°C",
+    "format-critical": "GPU {temperatureC}°C ",
+    "tooltip-format": "GPU edge: {temperatureC}°C"
+  },
+
+  "temperature#gpu_hotspot": {
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.1/0000:10:00.0/0000:11:00.0/0000:12:00.0/hwmon",
+    "input-filename": "temp2_input",
+    "interval": 5,
+    "critical-threshold": 110,
+    "format": "  GPU: {temperatureC}°C",
+    "format-critical": "  GPU: {temperatureC}°C ",
+    "tooltip-format": "GPU junction: {temperatureC}°C"
+  },
+
+  "temperature#gpu_mem": {
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.1/0000:10:00.0/0000:11:00.0/0000:12:00.0/hwmon",
+    "input-filename": "temp3_input",
+    "interval": 5,
+    "critical-threshold": 100,
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C ",
+    "tooltip-format": "GPU memory: {temperatureC}°C"
+  },
+
+  "temperature#nvme": {
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:02.2/0000:23:00.0/nvme/nvme0/hwmon",
+    "input-filename": "temp1_input",
+    "interval": 10,
+    "critical-threshold": 85,
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C ",
+    "tooltip-format": "NVMe Composite: {temperatureC}°C"
+  },
+
   "custom/swaync": {
     "format": " {}",
     "exec-if": "which swaync-client >/dev/null 2>&1 && pgrep -x swaync >/dev/null 2>&1",
