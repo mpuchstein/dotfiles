@@ -21,11 +21,13 @@
 
   "modules-right": [
     "idle_inhibitor",
+    "custom/hyprsunset",
     "gamemode",
     "privacy",
     "wireplumber#source",
     "wireplumber#sink",
     "tray",
+    "custom/swaync",
     "clock"
   ],
 
@@ -140,5 +142,28 @@
       "on-scroll-up": "shift_up",
       "on-scroll-down": "shift_down"
     }
+  },
+  
+  "custom/swaync": {
+    "format": " {}",
+    "exec-if": "which swaync-client >/dev/null 2>&1 && pgrep -x swaync >/dev/null 2>&1",
+    "exec": "swaync-client -c",
+    "interval": 2,
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d",
+    "on-click-middle": "swaync-client -C"
+  },
+
+  "custom/hyprsunset": {
+    "format": "SUN",
+    "tooltip": true,
+    "tooltip-format": "Hyprsunset controls: Left=Enable, Right=Disable, Scroll=Gamma ±10%",
+
+    "on-click": "hyprctl hyprsunset temperature 2500", // enable warm tint
+    "on-click-right": "hyprctl hyprsunset identity",   // disable (neutral)
+    "on-scroll-up": "hyprctl hyprsunset gamma +10",    // brighter
+    "on-scroll-down": "hyprctl hyprsunset gamma -10",  // dimmer
+
+    "interval": 0
   }
 }
