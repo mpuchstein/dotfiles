@@ -174,3 +174,35 @@ window#waybar {
 .modules-right > *:not(:last-child) {
   border-bottom: 1px solid #21202e; /* highlight-low */
 }
+
+/* SwayNC widget */
+#custom-swaync {
+  background: #1f1d2e; /* surface */
+  color: #e0def4; /* text */
+  margin: 3px 6px;
+  border-radius: 8px;
+  border: 1px solid #21202e; /* highlight-low */
+  padding: 6px 8px;
+  border-left: 3px solid #c4a7e7; /* iris */
+}
+#custom-swaync.dnd {
+  /* if swaync emits a 'dnd' class */
+  border-left-color: #f6c177; /* gold */
+}
+#custom-swaync:hover {
+  background: #26233a; /* overlay */
+}
+
+/* Hyprsunset widget */
+#custom-hyprsunset {
+  background: #1f1d2e; /* surface */
+  color: #e0def4; /* text */
+  margin: 3px 6px;
+  border-radius: 8px;
+  border: 1px solid #21202e; /* highlight-low */
+  padding: 6px 8px;
+  border-left: 3px solid #ea9a97; /* rose */
+}
+#custom-hyprsunset:hover {
+  background: #26233a; /* overlay */
+}
