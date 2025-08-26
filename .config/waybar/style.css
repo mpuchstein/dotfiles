@@ -1,27 +1,65 @@
-/* Rosé Pine (main) palette
-base: #191724  surface: #1f1d2e  overlay: #26233a  text: #e0def4
-muted: #6e6a86  subtle: #908caa
-love: #eb6f92  gold: #f6c177  rose: #ea9a97  pine: #31748f  foam: #9ccfd8  iris: #c4a7e7
-highlight-low: #21202e  highlight-med: #403d52  highlight-high: #524f67
-*/
+@define-color base #191724;
+@define-color surface #1f1d2e;
+@define-color overlay #26233a;
+@define-color text #e0def4;
+
+@define-color muted #6e6a86;
+@define-color subtle #908caa;
+
+@define-color love #eb6f92;
+@define-color gold #f6c177;
+@define-color rose #ea9a97;
+@define-color pine #31748f;
+@define-color foam #9ccfd8;
+@define-color iris #c4a7e7;
+
+@define-color hl_low  #21202e;
+@define-color hl_med  #403d52;
+@define-color hl_high #524f67;
 
 /* Bar */
 window#waybar {
-  background: #191724; /* base */
-  color: #e0def4; /* text */
-  border-right: 1px solid #21202e; /* highlight-low */
+  background: @base;
+  color: @text;
+  border-right: 1px solid @hl_low;
 }
 
 /* Typography */
 * {
   font-family:
-    JetBrainsMono Nerd Font,
-    monospace;
+    "InconsolataGo Nerd Font Mono", "InconsolataGo Nerd Font", monospace;
   font-size: 11px;
 }
 
-/* Common module padding for a narrow vertical bar */
-#workspaces,
+/* Workspaces */
+#workspaces {
+  margin: 1px;
+  padding: 2px 4px;
+  background: transparent;
+  font-size: 10px;
+}
+#workspaces button {
+  background: @surface;
+  color: @text;
+  border: 1px solid @hl_low;
+  border-radius: 6px;
+  margin: 2px;
+  padding: 3px 6px;
+}
+#workspaces button:hover {
+  background: @overlay;
+}
+#workspaces button.active {
+  background: @hl_med;
+  border-color: @hl_high;
+  color: @text;
+}
+#workspaces button.urgent {
+  background: @love;
+  color: @base;
+}
+
+/* Shared pill look (applied per-module for parser robustness) */
 #window,
 #cpu,
 #memory,
@@ -31,178 +69,282 @@ window#waybar {
 #wireplumber,
 #clock,
 #idle_inhibitor,
-#gamemode {
-  padding: 6px 8px;
+#gamemode,
+#battery,
+#power-profiles-daemon,
+#bluetooth,
+#group-temps,
+#tray,
+#custom-swaync,
+#custom-hyprsunset {
+  background: @surface;
+  color: @text;
+  border: 1px solid @hl_low;
+  border-radius: 8px;
+  padding: 3px 6px;
+  margin: 2px 4px;
 }
 
-/* Window title (top) */
+/* Hovers */
+#window:hover {
+  background: @overlay;
+}
+#cpu:hover {
+  background: @overlay;
+}
+#memory:hover {
+  background: @overlay;
+}
+#disk:hover {
+  background: @overlay;
+}
+#network:hover {
+  background: @overlay;
+}
+#privacy:hover {
+  background: @overlay;
+}
+#wireplumber:hover {
+  background: @overlay;
+}
+#clock:hover {
+  background: @overlay;
+}
+#idle_inhibitor:hover {
+  background: @overlay;
+}
+#gamemode:hover {
+  background: @overlay;
+}
+#battery:hover {
+  background: @overlay;
+}
+#power-profiles-daemon:hover {
+  background: @overlay;
+}
+#bluetooth:hover {
+  background: @overlay;
+}
+#group-temps:hover {
+  background: @overlay;
+}
+#tray:hover {
+  background: @overlay;
+}
+#custom-swaync:hover {
+  background: @overlay;
+}
+#custom-hyprsunset:hover {
+  background: @overlay;
+}
+
+/* Window title */
 #window {
-  background: #1f1d2e; /* surface */
-  color: #e0def4; /* text */
-  border-radius: 8px;
-  margin: 4px 6px 6px 6px;
+  border-left: 3px solid @iris;
 }
 
-/* Workspaces */
-#workspaces {
-  padding: 2px 2px;
-}
-#workspaces button {
-  padding: 3px; /* was 6px */
-  margin: 1px 1px; /* was 3px 2px */
-  border-radius: 6px;
-  font-size: 10px; /* was 11px */
-}
-
-/* Optional: smaller global font just for workspaces */
-#workspaces {
-  font-size: 10px;
-}
-#workspaces button:hover {
-  background: #21202e; /* highlight-low */
-  color: #e0def4; /* text */
-}
-#workspaces button.active {
-  background: #403d52; /* highlight-med */
-  border-color: #524f67; /* highlight-high */
-  color: #e0def4; /* text */
-}
-#workspaces button.urgent {
-  background: #eb6f92; /* love */
-  color: #191724; /* base for contrast */
-}
-
-/* Center stack (cpu/ram/ssds/network) */
-#cpu,
-#memory,
-#disk,
-#network {
-  background: #1f1d2e; /* surface */
-  color: #e0def4; /* text */
-  margin: 3px 6px;
-  border-radius: 8px;
-  border: 1px solid #21202e; /* highlight-low */
-}
-
-/* Accent hints for metrics */
+/* Accents for metrics */
 #cpu {
-  border-left: 3px solid #31748f;
-} /* pine */
+  border-left: 3px solid @pine;
+}
 #memory {
-  border-left: 3px solid #c4a7e7;
-} /* iris */
+  border-left: 3px solid @iris;
+}
 #disk {
-  border-left: 3px solid #9ccfd8;
-} /* foam */
+  border-left: 3px solid @foam;
+}
 #network {
-  border-left: 3px solid #f6c177;
-} /* gold */
-
-/* Bottom stack */
-#privacy,
-#wireplumber,
-#clock,
-#idle_inhibitor,
-#gamemode {
-  background: #1f1d2e; /* surface */
-  color: #e0def4; /* text */
-  margin: 3px 6px;
-  border-radius: 8px;
-  border: 1px solid #21202e; /* highlight-low */
+  border-left: 3px solid @gold;
 }
 
-/* Microphone button (wireplumber#microphone) */
+/* WirePlumber / audio */
+#wireplumber {
+  border-left: 3px solid @gold;
+}
+#wireplumber.muted {
+  color: @muted;
+  border-left-color: @hl_high;
+}
 #wireplumber.microphone {
-  background: #1f1d2e; /* surface */
-  color: #e0def4; /* text */
-  margin: 3px 6px;
-  border-radius: 8px;
-  border: 1px solid #21202e; /* highlight-low */
-  border-left: 3px solid #f6c177; /* gold */
+  border-left-color: @gold;
 }
 #wireplumber.microphone.muted {
-  border-left-color: #524f67; /* highlight-high when muted */
-  color: #6e6a86; /* muted */
+  border-left-color: @hl_high;
+  color: @muted;
 }
-#wireplumber.microphone:hover {
-  background: #26233a;
-} /* overlay */
 
-/* Privacy states (camera/mic/screencast) */
+/* Privacy states */
 #privacy.screencast {
-  border-left: 3px solid #ea9a97;
-} /* rose */
+  border-left: 3px solid @rose;
+}
 #privacy.microphone {
-  border-left: 3px solid #f6c177;
-} /* gold */
+  border-left: 3px solid @gold;
+}
 #privacy.camera {
-  border-left: 3px solid #c4a7e7;
-} /* iris */
+  border-left: 3px solid @iris;
+}
 
 /* Idle inhibitor */
 #idle_inhibitor.activated {
-  border-left: 3px solid #9ccfd8;
-} /* foam */
+  border-left: 3px solid @foam;
+}
 #idle_inhibitor.deactivated {
-  border-left: 3px solid #524f67;
-} /* highlight-high */
-#idle_inhibitor:hover {
-  background: #26233a;
-} /* overlay */
+  border-left: 3px solid @hl_high;
+}
 
 /* Gamemode */
 #gamemode {
-  border-left: 3px solid #f6c177;
-}
-#gamemode:hover {
-  background: #26233a;
-}
-
-/* Speaker (PipeWire via wireplumber) */
-#wireplumber.muted {
-  color: #6e6a86; /* muted */
-  border-color: #21202e;
+  border-left: 3px solid @gold;
 }
 
 /* Clock */
 #clock {
-  border-left: 3px solid #9ccfd8; /* foam */
+  border-left: 3px solid @foam;
 }
 
-/* Subtle separators */
-.modules-center > *:not(:last-child),
-.modules-right > *:not(:last-child) {
-  border-bottom: 1px solid #21202e; /* highlight-low */
+/* Battery */
+#battery {
+  border-left: 3px solid @foam;
+}
+#battery.warning {
+  border-left-color: @gold;
+}
+#battery.critical {
+  border-left-color: @love;
+  color: @love;
 }
 
-/* SwayNC widget */
+/* Power profiles */
+#power-profiles-daemon {
+  border-left: 3px solid @gold;
+}
+#power-profiles-daemon.performance {
+  border-left-color: @love;
+}
+#power-profiles-daemon.balanced {
+  border-left-color: @foam;
+}
+#power-profiles-daemon.power-saver {
+  border-left-color: @pine;
+}
+
+/* Bluetooth */
+#bluetooth {
+  border-left: 3px solid @iris;
+}
+#bluetooth.off,
+#bluetooth.disabled {
+  color: @muted;
+  border-left-color: @hl_high;
+}
+
+/* Notifications */
 #custom-swaync {
-  background: #1f1d2e; /* surface */
-  color: #e0def4; /* text */
-  margin: 3px 6px;
-  border-radius: 8px;
-  border: 1px solid #21202e; /* highlight-low */
-  padding: 6px 8px;
-  border-left: 3px solid #c4a7e7; /* iris */
+  border-left: 3px solid @iris;
 }
 #custom-swaync.dnd {
-  /* if swaync emits a 'dnd' class */
-  border-left-color: #f6c177; /* gold */
-}
-#custom-swaync:hover {
-  background: #26233a; /* overlay */
+  border-left-color: @gold;
 }
 
-/* Hyprsunset widget */
+/* Night shift */
 #custom-hyprsunset {
-  background: #1f1d2e; /* surface */
-  color: #e0def4; /* text */
-  margin: 3px 6px;
-  border-radius: 8px;
-  border: 1px solid #21202e; /* highlight-low */
-  padding: 6px 8px;
-  border-left: 3px solid #ea9a97; /* rose */
+  border-left: 3px solid @rose;
 }
-#custom-hyprsunset:hover {
-  background: #26233a; /* overlay */
+
+/* Temps group: outer pill + compact rows */
+#group-temps {
+  border-left: 3px solid @rose;
+}
+#group-temps > * {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+#custom-temps-wrap {
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+#group-temps #temperature {
+  background: transparent;
+  color: @text;
+  margin: 2px 0;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+#group-temps #temperature:hover {
+  background: @overlay;
+}
+#temperature.cpu {
+  border-left: 3px solid @pine;
+}
+#temperature.gpu_edge {
+  border-left: 3px solid @iris;
+}
+#temperature.gpu_hotspot {
+  border-left: 3px solid @rose;
+}
+#temperature.gpu2_edge {
+  border-left: 3px solid @foam;
+}
+#temperature.nvme {
+  border-left: 3px solid @gold;
+}
+#temperature.critical {
+  background: @hl_med;
+  color: @text;
+}
+
+/* Tray */
+#tray {
+  border-left: 3px solid @iris;
+}
+#tray > .passive {
+  opacity: 0.7;
+}
+#tray > .needs-attention {
+  border-left: 3px solid @love;
+}
+
+/* Tooltips */
+tooltip,
+window#waybar tooltip {
+  background: @surface;
+  color: @text;
+  border: 1px solid @hl_low;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+/* Popup menus */
+menu,
+.menu,
+popover,
+.popover {
+  background: @surface;
+  color: @text;
+  border: 1px solid @hl_low;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+menuitem,
+.menuitem {
+  background: transparent;
+  color: @text;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+menuitem:hover,
+.menuitem:hover {
+  background: @overlay;
+}
+menuitem:disabled,
+.menuitem:disabled {
+  color: @muted;
+}
+menu separator,
+.menu separator {
+  background: @hl_low;
+  min-height: 1px;
+  margin: 6px 0;
 }
