@@ -8,6 +8,8 @@
   "margin-bottom": 6,
 
   "modules-left": [
+    "clock",
+    "custom/swaync",
     "hyprland/window",
     "hyprland/workspaces"
   ],
@@ -26,9 +28,7 @@
     "privacy",
     "wireplumber#source",
     "wireplumber#sink",
-    "tray",
-    "custom/swaync",
-    "clock"
+    "tray"
   ],
 
   "hyprland/window": {
