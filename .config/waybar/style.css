@@ -2,17 +2,14 @@
 @define-color surface #1f1d2e;
 @define-color overlay #26233a;
 @define-color text #e0def4;
-
 @define-color muted #6e6a86;
 @define-color subtle #908caa;
-
 @define-color love #eb6f92;
 @define-color gold #f6c177;
 @define-color rose #ea9a97;
 @define-color pine #31748f;
 @define-color foam #9ccfd8;
 @define-color iris #c4a7e7;
-
 @define-color hl_low  #21202e;
 @define-color hl_med  #403d52;
 @define-color hl_high #524f67;
@@ -38,6 +35,7 @@ window#waybar {
   background: transparent;
   font-size: 10px;
 }
+
 #workspaces button {
   background: @surface;
   color: @text;
@@ -46,20 +44,23 @@ window#waybar {
   margin: 2px;
   padding: 3px 6px;
 }
+
 #workspaces button:hover {
   background: @overlay;
 }
+
 #workspaces button.active {
   background: @hl_med;
   border-color: @hl_high;
   color: @text;
 }
+
 #workspaces button.urgent {
   background: @love;
   color: @base;
 }
 
-/* Shared pill look (applied per-module for parser robustness) */
+/* Shared pill look for ALL modules - FIXED */
 #window,
 #cpu,
 #memory,
@@ -75,8 +76,10 @@ window#waybar {
 #bluetooth,
 #group-temps,
 #tray,
+#temperature,
 #custom-swaync,
-#custom-hyprsunset {
+#custom-hyprsunset,
+#custom-alhp {
   background: @surface;
   color: @text;
   border: 1px solid @hl_low;
@@ -85,56 +88,26 @@ window#waybar {
   margin: 2px 4px;
 }
 
-/* Hovers */
-#window:hover {
-  background: @overlay;
-}
-#cpu:hover {
-  background: @overlay;
-}
-#memory:hover {
-  background: @overlay;
-}
-#disk:hover {
-  background: @overlay;
-}
-#network:hover {
-  background: @overlay;
-}
-#privacy:hover {
-  background: @overlay;
-}
-#wireplumber:hover {
-  background: @overlay;
-}
-#clock:hover {
-  background: @overlay;
-}
-#idle_inhibitor:hover {
-  background: @overlay;
-}
-#gamemode:hover {
-  background: @overlay;
-}
-#battery:hover {
-  background: @overlay;
-}
-#power-profiles-daemon:hover {
-  background: @overlay;
-}
-#bluetooth:hover {
-  background: @overlay;
-}
-#group-temps:hover {
-  background: @overlay;
-}
-#tray:hover {
-  background: @overlay;
-}
-#custom-swaync:hover {
-  background: @overlay;
-}
-#custom-hyprsunset:hover {
+/* Universal hover effects - FIXED */
+#window:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#privacy:hover,
+#wireplumber:hover,
+#clock:hover,
+#idle_inhibitor:hover,
+#gamemode:hover,
+#battery:hover,
+#power-profiles-daemon:hover,
+#bluetooth:hover,
+#group-temps:hover,
+#tray:hover,
+#temperature:hover,
+#custom-swaync:hover,
+#custom-hyprsunset:hover,
+#custom-alhp:hover {
   background: @overlay;
 }
 
@@ -147,27 +120,60 @@ window#waybar {
 #cpu {
   border-left: 3px solid @pine;
 }
+
 #memory {
   border-left: 3px solid @iris;
 }
+
 #disk {
   border-left: 3px solid @foam;
 }
+
 #network {
   border-left: 3px solid @gold;
+}
+
+/* Temperature modules - individual styling for standalone use */
+#temperature.cpu {
+  border-left: 3px solid @pine;
+}
+
+#temperature.gpu_edge {
+  border-left: 3px solid @iris;
+}
+
+#temperature.gpu_hotspot {
+  border-left: 3px solid @rose;
+}
+
+#temperature.gpu_mem {
+  border-left: 3px solid @foam;
+}
+
+#temperature.nvme {
+  border-left: 3px solid @gold;
+}
+
+#temperature.critical {
+  background: @hl_med;
+  color: @love;
+  border-left-color: @love;
 }
 
 /* WirePlumber / audio */
 #wireplumber {
   border-left: 3px solid @gold;
 }
+
 #wireplumber.muted {
   color: @muted;
   border-left-color: @hl_high;
 }
+
 #wireplumber.microphone {
   border-left-color: @gold;
 }
+
 #wireplumber.microphone.muted {
   border-left-color: @hl_high;
   color: @muted;
@@ -177,9 +183,11 @@ window#waybar {
 #privacy.screencast {
   border-left: 3px solid @rose;
 }
+
 #privacy.microphone {
   border-left: 3px solid @gold;
 }
+
 #privacy.camera {
   border-left: 3px solid @iris;
 }
@@ -188,6 +196,7 @@ window#waybar {
 #idle_inhibitor.activated {
   border-left: 3px solid @foam;
 }
+
 #idle_inhibitor.deactivated {
   border-left: 3px solid @hl_high;
 }
@@ -206,9 +215,11 @@ window#waybar {
 #battery {
   border-left: 3px solid @foam;
 }
+
 #battery.warning {
   border-left-color: @gold;
 }
+
 #battery.critical {
   border-left-color: @love;
   color: @love;
@@ -218,12 +229,15 @@ window#waybar {
 #power-profiles-daemon {
   border-left: 3px solid @gold;
 }
+
 #power-profiles-daemon.performance {
   border-left-color: @love;
 }
+
 #power-profiles-daemon.balanced {
   border-left-color: @foam;
 }
+
 #power-profiles-daemon.power-saver {
   border-left-color: @pine;
 }
@@ -232,6 +246,7 @@ window#waybar {
 #bluetooth {
   border-left: 3px solid @iris;
 }
+
 #bluetooth.off,
 #bluetooth.disabled {
   color: @muted;
@@ -242,6 +257,7 @@ window#waybar {
 #custom-swaync {
   border-left: 3px solid @iris;
 }
+
 #custom-swaync.dnd {
   border-left-color: @gold;
 }
@@ -251,20 +267,28 @@ window#waybar {
   border-left: 3px solid @rose;
 }
 
+/* ALHP custom module - FIXED */
+#custom-alhp {
+  border-left: 3px solid @pine;
+}
+
 /* Temps group: outer pill + compact rows */
 #group-temps {
   border-left: 3px solid @rose;
 }
+
 #group-temps > * {
   background: transparent;
   border: 0;
   margin: 0;
   padding: 0;
 }
+
 #custom-temps-wrap {
   padding: 4px 6px;
   border-radius: 6px;
 }
+
 #group-temps #temperature {
   background: transparent;
   color: @text;
@@ -272,25 +296,33 @@ window#waybar {
   padding: 4px 6px;
   border-radius: 6px;
 }
+
 #group-temps #temperature:hover {
   background: @overlay;
 }
-#temperature.cpu {
+
+/* Temperature modules within group - maintain specific colors */
+#group-temps #temperature.cpu {
   border-left: 3px solid @pine;
 }
-#temperature.gpu_edge {
+
+#group-temps #temperature.gpu_edge {
   border-left: 3px solid @iris;
 }
-#temperature.gpu_hotspot {
+
+#group-temps #temperature.gpu_hotspot {
   border-left: 3px solid @rose;
 }
-#temperature.gpu2_edge {
+
+#group-temps #temperature.gpu2_edge {
   border-left: 3px solid @foam;
 }
-#temperature.nvme {
+
+#group-temps #temperature.nvme {
   border-left: 3px solid @gold;
 }
-#temperature.critical {
+
+#group-temps #temperature.critical {
   background: @hl_med;
   color: @text;
 }
@@ -299,9 +331,11 @@ window#waybar {
 #tray {
   border-left: 3px solid @iris;
 }
+
 #tray > .passive {
   opacity: 0.7;
 }
+
 #tray > .needs-attention {
   border-left: 3px solid @love;
 }
@@ -327,6 +361,7 @@ popover,
   border-radius: 8px;
   padding: 6px 8px;
 }
+
 menuitem,
 .menuitem {
   background: transparent;
@@ -334,14 +369,17 @@ menuitem,
   border-radius: 6px;
   padding: 6px 8px;
 }
+
 menuitem:hover,
 .menuitem:hover {
   background: @overlay;
 }
+
 menuitem:disabled,
 .menuitem:disabled {
   color: @muted;
 }
+
 menu separator,
 .menu separator {
   background: @hl_low;
