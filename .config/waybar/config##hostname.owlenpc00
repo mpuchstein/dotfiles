@@ -10,6 +10,7 @@
   "modules-left": [
     "clock",
     "custom/swaync",
+    "custom/alhp",
     "hyprland/window",
     "hyprland/workspaces"
   ],
@@ -278,5 +279,14 @@
     "on-scroll-down": "hyprctl hyprsunset gamma -10",  // dimmer
 
     "interval": 0
+  },
+
+  "custom/alhp": {
+    "id": "custom-alhp",
+    "exec": "$HOME/.config/waybar/scripts/alhp.sh",
+    "return-type": "json",
+    "interval": 60,
+    "tooltip": true,
+    "format": "{text}",
   }
 }
