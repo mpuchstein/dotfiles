@@ -5,6 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load personal aliases
+if [[ -f "${HOME}/.config/zsh/aliases.zsh" ]]; then
+  source "${HOME}/.config/zsh/aliases.zsh"
+fi
+
 # Variables for ZIM
 ZIM_CONFIG_FILE=${ZDOTDIR}/.zimrc
 ZIM_HOME=${ZDOTDIR}/zim
