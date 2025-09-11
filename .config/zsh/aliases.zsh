@@ -37,4 +37,7 @@ gai-commit() {
 }
 
 # Interactive version - shows summary first, then generates commit message
-alias yadmai-interactive='echo "=== DIFF SUMMARY ===" && git diff --cached | ollama run git-change-g3n2b && echo -e "\n=== COMMIT MESSAGE OPTIONS ===" && git diff --cached | ollama run git-change-g3n2b | ollama run git-commit-g3n2b'
+alias yadmai-interactive='echo "=== DIFF SUMMARY ===" && yadm diff --staged | ollama run git-change-g3n2b && echo -e "\n=== COMMIT MESSAGE OPTIONS ===" && yadm diff --staged | ollama run git-change-g3n2b | ollama run git-commit-g3n2b'
+
+# Full git commit message generation pipeline
+alias yadmai-msg="yadm diff --staged | ollama run git-change-g3n2b | ollama run git-commit-g3n2b"
