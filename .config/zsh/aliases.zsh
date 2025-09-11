@@ -35,3 +35,6 @@ gai-commit() {
         echo "Commit cancelled."
     fi
 }
+
+# Interactive version - shows summary first, then generates commit message
+alias yadmai-interactive='echo "=== DIFF SUMMARY ===" && git diff --cached | ollama run git-change-g3n2b && echo -e "\n=== COMMIT MESSAGE OPTIONS ===" && git diff --cached | ollama run git-change-g3n2b | ollama run git-commit-g3n2b'
