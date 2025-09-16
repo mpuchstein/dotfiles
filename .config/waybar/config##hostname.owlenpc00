@@ -288,6 +288,6 @@
     "interval": 60,
     "tooltip": true,
     "format": "{text}",
-    "on-click": "kitty --hold alhp.utils"
+    "on-click": "kitty --hold alhp.utils -j"
   }
 }
