@@ -1,7 +1,12 @@
 [Desktop Entry]
-Type=Application
 Name=Vesktop
-Comment=Vesktop autostart script
-Exec="/usr/lib/vesktop/vesktop"
-StartupNotify=false
+Exec=vesktop %U
 Terminal=false
+Type=Application
+Icon=vesktop
+StartupWMClass=vesktop
+GenericName=Internet Messenger
+Categories=Network;
+Keywords=discord;vencord;electron;chat;
+MimeType=x-scheme-handler/discord;
+Comment=Vesktop is a custom Discord desktop app
