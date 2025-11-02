@@ -2,8 +2,7 @@ splash = true
 splash_offset = 2.0
 ipc = true
 
-preload = /home/mpuchstein/Pictures/wallpaper/1920x1080/rosepinesuccubus10.png
-preload = /home/mpuchstein/Pictures/wallpaper/1920x1080/rosepinesuccubus3.png
-preload = /home/mpuchstein/Pictures/wallpaper/1920x1080/rosepineskull.png
-wallpaper = DP-1, /home/mpuchstein/Pictures/wallpaper/1920x1080/rosepinesuccubus10.png
-wallpaper = DP-2, /home/mpuchstein/Pictures/wallpaper/1920x1080/rosepinesuccubus3.png
+preload = /home/mpuchstein/Pictures/wallpaper/ki/1920x1080/witch_autumn.png
+preload = /home/mpuchstein/Pictures/wallpaper/ki/1920x1080/rosepinesuccubus11.png
+wallpaper = DP-1, /home/mpuchstein/Pictures/wallpaper/ki/1920x1080/rosepinesuccubus11.png
+wallpaper = DP-2, /home/mpuchstein/Pictures/wallpaper/ki/1920x1080/witch_autumn.png
