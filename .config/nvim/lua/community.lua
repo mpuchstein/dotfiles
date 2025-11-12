@@ -27,7 +27,6 @@ return {
   { import = "astrocommunity.pack.php" },
 
   { import = "astrocommunity.markdown-and-latex.vimtex" },
-  { import = "astrocommunity.completion.cmp-latex-symbols" },
 
   { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
   -- import/override with your plugins folder

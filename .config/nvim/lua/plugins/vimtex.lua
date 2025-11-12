@@ -14,8 +14,6 @@ return {
         "-synctex=1",
         "-interaction=nonstopmode",
         "-file-line-error",
-        -- remove if you don't need shell-escape:
-        "-shell-escape",
       },
     }
     -- Option B (also helpful): make LuaLaTeX the default engine for latexmk

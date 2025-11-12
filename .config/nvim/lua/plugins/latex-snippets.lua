@@ -3,7 +3,7 @@ return {
   -- Make sure autosnippets are enabled globally
   {
     "L3MON4D3/LuaSnip",
-    opts = function(_, _) require("luasnip").config.setup { enable_autosnippets = true } end,
+    opts = function(_, opts) opts.enable_autosnippets = true end,
   },
 
   -- The LaTeX snippets themselves
