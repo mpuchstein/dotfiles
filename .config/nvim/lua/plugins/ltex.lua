@@ -17,13 +17,25 @@ return {
               -- Run checks on save for performance; switch to "edit" if you prefer live feedback
               checkFrequency = "save",
               -- Pick the language you want LTeX to check as the document language
-              language = "en-US",
+              language = "en-GB",
               -- Mother tongue helps the grammar engine (adjust to your preference)
               additionalRules = { motherTongue = "de-DE" },
               -- Let ltex_extra manage dictionaries/rules on disk
-              dictionary = {},
-              disabledRules = {},
-              hiddenFalsePositives = {},
+              dictionary = {
+                ["en-GB"] = {},
+                ["de-DE"] = {},
+                ["fr-FR"] = {},
+              },
+              disabledRules = {
+                ["en-GB"] = {},
+                ["de-DE"] = {},
+                ["fr-FR"] = {},
+              },
+              hiddenFalsePositives = {
+                ["en-GB"] = {},
+                ["de-DE"] = {},
+                ["fr-FR"] = {},
+              },
             },
           },
           -- hook up ltex_extra when the server attaches
@@ -32,7 +44,7 @@ return {
             if ok then
               ltex_extra.setup {
                 -- load both EN+DE dictionaries; change to your set
-                load_langs = { "en-US", "de-DE" },
+                load_langs = { "en-GB", "de-DE", "fr-FR" },
                 init_check = true,
                 -- store per-project files in .ltex (add to .gitignore if you want)
                 path = ".ltex",
