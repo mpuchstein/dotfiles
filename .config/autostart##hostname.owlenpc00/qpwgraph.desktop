@@ -1,5 +1,0 @@
-[Desktop Entry]
-Exec=/usr/bin/qpwgraph
-Name=qpwgraph
-Comment=A PipeWire Graph Qt GUI Interface
-Type=Application
