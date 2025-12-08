@@ -1,0 +1,256 @@
+[
+  {
+    "name": "Weather",
+    "alias": null,
+    "tag_start": null,
+    "tag_end": null,
+    "display_name": null,
+    "on_return": null,
+    "next_content": null,
+    "type": "weather",
+    "priority": 1.0,
+    "exit": true,
+    "shortcut": false,
+    "spawn_focus": false,
+    "async": true,
+    "home": "OnlyHome",
+    "args": {
+      "location": "nospelt, luxembourg",
+      "update_interval": 60
+    },
+    "binds": null,
+    "actions": [
+      {
+        "name": "Show in Web",
+        "exec": "https://www.wttr.in/nospelt",
+        "icon": "sherlock-link",
+        "method": "web_launcher",
+        "exit": true
+      }
+    ],
+    "add_actions": null
+  },
+  {
+    "name": "Spotify",
+    "type": "audio_sink",
+    "args": {},
+    "async": true,
+    "priority": 0.5,
+    "home": "Home",
+    "spawn_focus": false,
+    "actions": [
+      {
+        "name": "Skip",
+        "icon": "media-seek-forward",
+        "exec": "playerctl next",
+        "method": "command"
+      },
+      {
+        "name": "Previous",
+        "icon": "media-seek-backward",
+        "exec": "playerctl previous",
+        "method": "command"
+      }
+    ],
+    "binds": [
+      {
+        "bind": "control+p",
+        "callback": "playpause",
+        "exit": false
+      },
+      {
+        "bind": "control+l",
+        "callback": "next",
+        "exit": false
+      },
+      {
+        "bind": "control+h",
+        "callback": "previous",
+        "exit": false
+      }
+    ]
+  },
+  {
+    "name": "Calculator",
+    "alias": null,
+    "tag_start": null,
+    "tag_end": null,
+    "display_name": null,
+    "on_return": "copy",
+    "next_content": null,
+    "type": "calculation",
+    "priority": 1.0,
+    "exit": true,
+    "shortcut": true,
+    "spawn_focus": true,
+    "async": false,
+    "home": "Search",
+    "args": {
+      "capabilities": [
+        "calc.math",
+        "calc.units"
+      ]
+    },
+    "binds": null,
+    "actions": null,
+    "add_actions": null
+  },
+  {
+    "name": "App Launcher",
+    "alias": "app",
+    "tag_start": null,
+    "tag_end": null,
+    "display_name": null,
+    "on_return": null,
+    "next_content": null,
+    "type": "app_launcher",
+    "priority": 3.0,
+    "exit": true,
+    "shortcut": true,
+    "spawn_focus": true,
+    "async": false,
+    "home": "Home",
+    "args": {},
+    "binds": null,
+    "actions": null,
+    "add_actions": null
+  },
+  {
+    "name": "Kill Process",
+    "alias": "kill",
+    "tag_start": null,
+    "tag_end": null,
+    "display_name": null,
+    "on_return": null,
+    "next_content": null,
+    "type": "process",
+    "priority": 0.0,
+    "exit": true,
+    "shortcut": true,
+    "spawn_focus": true,
+    "async": false,
+    "home": "Search",
+    "args": {},
+    "binds": null,
+    "actions": null,
+    "add_actions": null
+  },
+  {
+    "name": "Web Search",
+    "alias": "gg",
+    "tag_start": "{keyword}",
+    "tag_end": null,
+    "display_name": "Google Search",
+    "on_return": null,
+    "next_content": null,
+    "type": "web_launcher",
+    "priority": 100.0,
+    "exit": true,
+    "shortcut": true,
+    "spawn_focus": true,
+    "async": false,
+    "home": "Search",
+    "args": {
+      "icon": "google",
+      "search_engine": "google"
+    },
+    "binds": null,
+    "actions": null,
+    "add_actions": null
+  },
+  {
+    "name": "Pomodoro Timer",
+    "type": "pomodoro",
+    "args": {
+      "program": "~/.config/sherlock/scripts/sherlock-pomodoro",
+      "socket": "/tmp/sherlock-pomorodo.sock",
+      "style": "minimal"
+    },
+    "priority": 0,
+    "home": "Home",
+    "spawn_focus": false,
+    "binds": [
+      {
+        "bind": "control+r",
+        "callback": "reset"
+      }
+    ],
+    "actions": [
+      {
+        "name": "Reset",
+        "icon": "edit-undo",
+        "exec": "",
+        "method": "inner.reset",
+        "exit": false
+      },
+      {
+        "name": "Toggle",
+        "icon": "media-playback-start",
+        "exec": "",
+        "method": "inner.toggle",
+        "exit": false
+      }
+    ]
+  },
+  {
+    "name": "Clipboard",
+    "type": "clipboard",
+    "priority": 1.5,
+    "exit": true,
+    "shortcut": true,
+    "home": "Search",
+    "args": {
+      "history_length": 50,
+      "detect_urls": true,
+      "detect_colors": true,
+      "detect_expressions": true
+    }
+  },
+  {
+    "name": "Emoji",
+    "alias": "em",
+    "type": "emoji",
+    "priority": 4.0,
+    "exit": true,
+    "shortcut": false,
+    "home": "Search",
+    "args": {
+      "default_skin_tone": "Simpson"
+    }
+  },
+  {
+    "name": "Power Menu",
+    "alias": "pow",
+    "type": "custom",
+    "priority": 0.5,
+    "exit": true,
+    "shortcut": true,
+    "home": "Search",
+    "args": {
+      "commands": [
+        {
+          "name": "Shutdown",
+          "exec": "systemctl poweroff",
+          "icon": "system-shutdown",
+          "confirm": true
+        },
+        {
+          "name": "Reboot",
+          "exec": "systemctl reboot",
+          "icon": "system-reboot",
+          "confirm": true
+        },
+        {
+          "name": "Sleep",
+          "exec": "systemctl suspend",
+          "icon": "media-playback-pause"
+        },
+        {
+          "name": "Lock Screen",
+          "exec": "hyprlock",
+          "icon": "system-lock-screen"
+        }
+      ]
+    }
+  }
+]

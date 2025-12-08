@@ -1,0 +1,260 @@
+/* Rosé Pine (main) theme for Sherlock
+ * - condensed tiles
+ * - coherent dark scheme
+ */
+
+/* 1. Rosé Pine palette variables (main variant) */
+:root {
+  --rp-base:        #191724;
+  --rp-surface:     #1f1d2e;
+  --rp-overlay:     #26233a;
+  --rp-muted:       #6e6a86;
+  --rp-subtle:      #908caa;
+  --rp-text:        #e0def4;
+  --rp-love:        #eb6f92;
+  --rp-gold:        #f6c177;
+  --rp-rose:        #ebbcba;
+  --rp-pine:        #31748f;
+  --rp-foam:        #9ccfd8;
+  --rp-iris:        #c4a7e7;
+  --rp-hl-low:      #21202e;
+  --rp-hl-med:      #403d52;
+  --rp-hl-high:     #524f67;
+
+  --rp-radius:       10px;
+  --rp-radius-small: 7px;
+  --rp-border-width: 1px;
+
+  --rp-shadow-soft:  0 18px 45px rgba(0, 0, 0, 0.45);
+  --rp-transition-fast: 120ms ease-out;
+  --rp-transition-med:  170ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Tile sizing (condensed) */
+  --rp-tile-padding-y: 4px;
+  --rp-tile-padding-x: 10px;
+  --rp-tile-gap:       4px;
+  --rp-tile-min-height: 32px;
+  --rp-font-size-main: 13px;
+  --rp-font-size-sub:  11px;
+}
+
+/* 2. Global window & base layout */
+
+window,
+.main,
+.root {
+  background-color: var(--rp-base);
+  color: var(--rp-text);
+  font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font",
+               "Iosevka", system-ui, sans-serif;
+}
+
+/* Sherlock main container (centered blurred panel) */
+#main,
+.main-container,
+.window {
+  background-color: var(--rp-surface);
+  border-radius: var(--rp-radius);
+  border: var(--rp-border-width) solid var(--rp-hl-high);
+  box-shadow: var(--rp-shadow-soft);
+}
+
+/* 3. Search entry / input bar */
+
+entry,
+.search-entry,
+.search-input {
+  background-color: var(--rp-hl-low);
+  color: var(--rp-text);
+  border-radius: var(--rp-radius-small);
+  border: var(--rp-border-width) solid var(--rp-hl-med);
+  padding: 6px 9px;
+  font-size: 13px;
+}
+
+entry:focus,
+.search-entry:focus,
+.search-input:focus {
+  border-color: var(--rp-iris);
+  box-shadow: 0 0 0 1px rgba(196, 167, 231, 0.35);
+}
+
+/* 4. Condensed tile list */
+
+.list,
+.list-container,
+.tile-list {
+  background: transparent;
+  margin-top: 4px;
+  row-gap: var(--rp-tile-gap);
+}
+
+/* Base tile style (unselected) */
+.tile,
+.launcher-tile,
+.launcher-item,
+.item {
+  background-color: var(--rp-hl-low);
+  border-radius: var(--rp-radius-small);
+  border: var(--rp-border-width) solid transparent;
+  min-height: var(--rp-tile-min-height);
+  padding: var(--rp-tile-padding-y) var(--rp-tile-padding-x);
+  margin-bottom: var(--rp-tile-gap);
+
+  color: var(--rp-text);
+  font-size: var(--rp-font-size-main);
+
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+
+  transition: background-color var(--rp-transition-fast),
+              border-color var(--rp-transition-fast),
+              transform var(--rp-transition-med);
+}
+
+/* Hover / active state */
+.tile:hover,
+.launcher-tile:hover,
+.launcher-item:hover,
+.item:hover {
+  background-color: var(--rp-hl-med);
+}
+
+/* Selected / focused tile */
+.tile:selected,
+.launcher-tile:selected,
+.launcher-item:selected,
+.item:selected,
+.tile:focus {
+  background-color: var(--rp-overlay);
+  border-color: var(--rp-iris);
+  transform: translateY(-1px);
+}
+
+/* 5. Icon, title, subtitle */
+
+.tile-icon,
+.item-icon,
+.icon {
+  color: var(--rp-foam);
+  min-width: 18px;
+  min-height: 18px;
+}
+
+/* Main name/title */
+.tile-label,
+.tile-title,
+.item-title,
+.title {
+  color: var(--rp-text);
+  font-weight: 500;
+  font-size: var(--rp-font-size-main);
+}
+
+/* Secondary description */
+.tile-description,
+.item-subtitle,
+.subtitle,
+.description {
+  color: var(--rp-subtle);
+  font-size: var(--rp-font-size-sub);
+}
+
+/* 6. Shortcut indicator (mod+number) */
+
+.shortcut,
+.tile-shortcut,
+.item-shortcut {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background-color: var(--rp-hl-med);
+  color: var(--rp-gold);
+}
+
+/* 7. Category / section headers */
+
+.section-header,
+.category-header,
+.header-label {
+  color: var(--rp-iris);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 3px 0 2px 2px;
+}
+
+/* 8. Widgets (weather, music, async) */
+
+.widget,
+.weather-widget,
+.music-widget,
+.async-widget {
+  background-color: var(--rp-overlay);
+  border-radius: var(--rp-radius-small);
+  border: var(--rp-border-width) solid var(--rp-hl-high);
+  padding: 6px 9px;
+  margin-bottom: 6px;
+}
+
+/* Weather-specific hints (you can tweak to taste) */
+.weather-widget .temperature {
+  color: var(--rp-rose);
+  font-weight: 500;
+}
+.weather-widget .condition {
+  color: var(--rp-subtle);
+}
+
+/* 9. Context menu */
+
+.context-menu,
+.menu,
+popover {
+  background-color: var(--rp-surface);
+  border-radius: var(--rp-radius-small);
+  border: var(--rp-border-width) solid var(--rp-hl-high);
+}
+
+.context-menu row,
+.menu-item {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.context-menu row:hover,
+.menu-item:hover {
+  background-color: var(--rp-hl-med);
+}
+
+/* 10. Scrollbars (subtle) */
+
+scrollbar,
+scrollbar slider {
+  background-color: transparent;
+}
+
+scrollbar slider {
+  background-color: rgba(144, 140, 170, 0.6); /* subtle */
+  border-radius: 999px;
+}
+
+/* 11. Error / warning / info states */
+
+.error,
+.error-label {
+  color: var(--rp-love);
+}
+
+.warning,
+.warning-label {
+  color: var(--rp-gold);
+}
+
+.info,
+.info-label {
+  color: var(--rp-foam);
+}
+
