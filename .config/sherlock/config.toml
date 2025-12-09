@@ -5,7 +5,7 @@ terminal = "kitty"
 browser = "/usr/lib/firefox/firefox %u"
 
 [units]
-lengths = "meters"
+lengths = "meter"
 weights = "kg"
 volumes = "l"
 temperatures = "C"
@@ -36,7 +36,7 @@ use_lr_nav = false
 [binds]
 up = "control-k"
 down = "control-j"
-left = "control-ih"
+left = "control-h"
 right = "control-l"
 context = "control-i"
 modifier = "control"
@@ -44,7 +44,7 @@ exec_inplace = "control-return"
 
 [files]
 config = "/home/mpuchstein/.config/sherlock/config.toml"
-css = "/home/mpuchstein/.config/sherlock/main.css"
+css = "/home/mpuchstein/.config/sherlock/themes/rose-pine_v3.css"
 fallback = "/home/mpuchstein/.config/sherlock/fallback.json"
 alias = "/home/mpuchstein/.config/sherlock/sherlock_alias.json"
 ignore = "/home/mpuchstein/.config/sherlock/sherlockignore"
