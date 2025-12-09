@@ -209,48 +209,46 @@
   {
     "name": "Emoji",
     "alias": "em",
-    "type": "emoji",
+    "type": "emoji_picker",
     "priority": 4.0,
     "exit": true,
     "shortcut": false,
     "home": "Search",
     "args": {
-      "default_skin_tone": "Simpson"
+      "default_skin_tone": "Simpsons"
     }
   },
   {
     "name": "Power Menu",
     "alias": "pow",
-    "type": "custom",
-    "priority": 0.5,
+    "type": "command",
+    "priority": 1.0,
     "exit": true,
     "shortcut": true,
     "home": "Search",
     "args": {
-      "commands": [
-        {
-          "name": "Shutdown",
-          "exec": "systemctl poweroff",
+      "commands": {
+        "Shutdown": {
           "icon": "system-shutdown",
-          "confirm": true
+          "exec": "systemctl poweroff",
+          "search_string": "shutdown;poweroff"
         },
-        {
-          "name": "Reboot",
-          "exec": "systemctl reboot",
+        "Reboot": {
           "icon": "system-reboot",
-          "confirm": true
+          "exec": "systemctl reboot",
+          "search_string": "reboot"
         },
-        {
-          "name": "Sleep",
+        "Sleep": {
+          "icon": "media-playback-pause",
           "exec": "systemctl suspend",
-          "icon": "media-playback-pause"
+          "search_string": "sleep;suspend"
         },
-        {
-          "name": "Lock Screen",
+        "Lock Screen": {
+          "icon": "system-lock-screen",
           "exec": "hyprlock",
-          "icon": "system-lock-screen"
+          "search_string": "lock;screenlock"
         }
-      ]
+      }
     }
   }
 ]
