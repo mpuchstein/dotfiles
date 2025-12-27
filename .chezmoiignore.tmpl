@@ -17,6 +17,11 @@
 
 {{- if not (index $tags "entertainment") -}}
 .config/autostart/jellyfin-mpv-shim.desktop
+.config/spicetify/**
+{{- end -}}
+
+{{- if not (index $tags "laptop") -}}
+.config/autostart/nm-applet.desktop
 {{- end -}}
 
 {{- if not (index $tags "desktop") -}}
