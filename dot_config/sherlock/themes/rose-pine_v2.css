@@ -1,0 +1,141 @@
+/* 
+ * ROSÉ PINE THEME FOR SHERLOCK
+ * Target: GTK4 / Rust
+ * Author: Generated Report
+ */
+
+/* --- PALETTE DEFINITIONS (Rosé Pine Main) --- */
+@define-color rp_base           #191724;
+@define-color rp_surface        #1f1d2e;
+@define-color rp_overlay        #26233a;
+@define-color rp_muted          #6e6a86;
+@define-color rp_subtle         #908caa;
+@define-color rp_text           #e0def4;
+@define-color rp_love           #eb6f92;
+@define-color rp_gold           #f6c177;
+@define-color rp_rose           #ebbcba;
+@define-color rp_pine           #31748f;
+@define-color rp_foam           #9ccfd8;
+@define-color rp_iris           #c4a7e7;
+@define-color rp_highlight_low  #21202e;
+@define-color rp_highlight_med  #403d52;
+@define-color rp_highlight_high #524f67;
+
+/* --- GLOBAL SEMANTICS --- */
+@define-color theme_bg_color @rp_base;
+@define-color theme_fg_color @rp_text;
+@define-color theme_selected_bg_color @rp_highlight_med;
+@define-color theme_selected_fg_color @rp_text;
+@define-color warning_color @rp_gold;
+@define-color error_color @rp_love;
+@define-color success_color @rp_foam;
+
+/* --- WINDOW STYLING --- */
+window {
+    background-color: @rp_base;
+    color: @rp_text;
+    border: 2px solid @rp_overlay;
+    border-radius: 12px;
+}
+
+/* --- LAYOUT BOXES --- */
+box {
+    padding: 6px;
+}
+
+/* --- SEARCH INPUT --- */
+entry {
+    background-color: @rp_surface;
+    color: @rp_text;
+    caret-color: @rp_rose;
+    border: 2px solid @rp_overlay;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+}
+
+entry:focus {
+    border-color: @rp_iris;
+    background-color: @rp_surface;
+}
+
+entry selection {
+    background-color: @rp_highlight_high;
+    color: @rp_text;
+}
+
+entry text {
+    color: @rp_text;
+}
+
+/* --- LIST VIEW & RESULTS --- */
+listview {
+    background-color: transparent;
+}
+
+listview > row {
+    padding: 8px;
+    margin: 2px 0;
+    border-radius: 6px;
+    border: 1px solid transparent; 
+}
+
+listview > row:hover {
+    background-color: @rp_overlay;
+}
+
+listview > row:selected {
+    background-color: @rp_highlight_med;
+    color: @rp_text;
+    border: 1px solid @rp_muted;
+    border-left: 3px solid @rp_rose;
+}
+
+/* --- TYPOGRAPHY --- */
+label {
+    color: @rp_subtle;
+}
+
+listview > row:selected label {
+    color: @rp_text;
+    font-weight: 600;
+}
+
+/* --- WIDGETS --- */
+
+/* Scrollbars */
+scrollbar slider {
+    background-color: @rp_muted;
+    min-width: 6px;
+    border-radius: 10px;
+}
+
+scrollbar slider:hover {
+    background-color: @rp_subtle;
+}
+
+/* Progress Bars (Audio/RAM) */
+progressbar trough {
+    background-color: @rp_surface;
+    border-radius: 4px;
+}
+
+progressbar progress {
+    background-color: @rp_pine;
+    border-radius: 4px;
+}
+
+/* Buttons */
+button {
+    background-color: @rp_surface;
+    color: @rp_text;
+    border: 1px solid @rp_overlay;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+button:hover {
+    background-color: @rp_overlay;
+    border-color: @rp_iris;
+}

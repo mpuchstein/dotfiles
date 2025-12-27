@@ -1,0 +1,5 @@
+{{- range $monitor := .monitors }}
+  {{- range $index, $ws := .workspaces }}
+workspace = {{ $ws }}, monitor:{{ $monitor.name }}{{ if eq $index 0 }}, default:true{{ end }}
+  {{- end }}
+{{- end }}

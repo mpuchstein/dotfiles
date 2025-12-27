@@ -1,0 +1,39 @@
+context.modules = [
+  {
+    name = libpipewire-module-echo-cancel
+    args = {
+      library.name = aec/libspa-aec-webrtc
+      monitor.mode = true
+      
+      capture.props = {
+        node.name = "EC Capture"
+        node.passive = true
+        "target.object" = "{{ .chezmoi.config.data.microphone }}"
+      }
+      
+      source.props = {
+        node.name = "source_ec"
+        node.description = "Echo-cancelled microphone"
+        node.autoconnect = false
+        audio.channels = 1
+        audio.position = [ MONO ]
+      }
+      
+      sink.props = {
+        node.name = "sink_ec"
+        node.description = "Echo cancellation reference"
+      }
+      
+      playback.props = {
+        node.name = "EC Playback"
+        node.passive = true
+      }
+      
+      aec.args = {
+        webrtc.extended_filter = false
+        webrtc.gain_control = false
+        webrtc.voice_detection = true
+      }
+    }
+  }
+]

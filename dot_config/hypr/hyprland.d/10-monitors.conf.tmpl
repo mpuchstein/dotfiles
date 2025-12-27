@@ -1,0 +1,14 @@
+{{- range .monitors }}
+monitorv2 {
+  output = {{ .name }}
+  mode = {{ .width }}x{{ .height }}@{{ .refresh_rate }}
+  position = {{ .position }}
+  scale = {{ .scale }}
+  {{- if index . "vrr" }}
+  vrr = {{ .vrr }}
+  {{- end }}
+}
+{{- end }}
+{{- if not .monitors }}
+monitor = , preferred, auto, 1
+{{- end }}

@@ -1,0 +1,29 @@
+["scripts/uosc"]
+type = "archive"
+url = "https://github.com/tomasklaen/uosc/releases/latest/download/uosc.zip"
+refreshPeriod = "168h"
+include = ["**"]
+exclude = ["fonts/**"]
+stripComponents = 2
+
+["fonts/uosc_icons.otf"]
+type = "archive-file"
+url = "https://github.com/tomasklaen/uosc/releases/latest/download/uosc.zip"
+path = "fonts/uosc_icons.otf"
+refreshPeriod = "168h"
+
+["fonts/uosc_textures.ttf"]
+type = "archive-file"
+url = "https://github.com/tomasklaen/uosc/releases/latest/download/uosc.zip"
+path = "fonts/uosc_textures.ttf"
+refreshPeriod = "168h"
+
+["scripts/quality-menu.lua"]
+type = "file"
+url = "https://raw.githubusercontent.com/christoph-heinrich/mpv-quality-menu/refs/heads/master/quality-menu.lua"
+refreshPeriod = "168h"
+
+["scripts/thumbfast.lua"]
+type = "file"
+url = "https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thumbfast.lua"
+refreshPeriod = "168h"

@@ -1,0 +1,31 @@
+{{- if (index .chezmoi.config.data.tags "pipewire") -}}
+#!/bin/sh
+set -eu
+
+# Re-run whenever the denoising config changes.
+# conf-sha: {{ (include "dot_config/pipewire/pipewire.conf.d/99-input-denoising.conf") | sha256sum }}
+
+if command -v pacman >/dev/null 2>&1; then
+  if pacman -Q noise-suppression-for-voice >/dev/null 2>&1; then
+    exit 0
+  fi
+
+  if [ -t 0 ]; then
+    printf 'noise-suppression-for-voice not installed. Install now? [y/N] ' >&2
+    read -r ans
+    case "$ans" in
+      [yY]|[yY][eE][sS]) sudo pacman -S --needed noise-suppression-for-voice ;;
+      *) printf 'Skipping noise-suppression-for-voice install.\n' >&2 ;;
+    esac
+  else
+    printf 'noise-suppression-for-voice not installed. Install with: sudo pacman -S --needed noise-suppression-for-voice\n' >&2
+  fi
+else
+  if [ ! -f /usr/lib/ladspa/librnnoise_ladspa.so ]; then
+    printf 'rnnoise LADSPA plugin missing; install noise-suppression-for-voice for your distro.\n' >&2
+  fi
+fi
+{{- else -}}
+#!/bin/sh
+exit 0
+{{- end -}}

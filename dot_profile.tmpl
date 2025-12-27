@@ -1,0 +1,48 @@
+{{- $tags := .chezmoi.config.data.tags -}}
+
+{{- if (index $tags "dev") }}
+# Added by Toolbox App
+export PATH="${PATH}:{{ .chezmoi.homeDir }}/Dev/JetBrains/Toolbox/scripts"
+{{- end }}
+
+export PATH="${PATH}:{{ .chezmoi.homeDir }}/.local/bin"
+export PATH="${PATH}:{{ .chezmoi.homeDir }}/.cargo/bin"
+
+export ZDOTDIR="{{ .chezmoi.homeDir }}/.config/zsh"
+
+export EDITOR="nvim"
+
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --border=none \
+  --color=bg+:#283457 \
+  --color=bg:#16161e \
+  --color=border:#27a1b9 \
+  --color=fg:#c0caf5 \
+  --color=gutter:#16161e \
+  --color=header:#ff9e64 \
+  --color=hl+:#2ac3de \
+  --color=hl:#2ac3de \
+  --color=info:#545c7e \
+  --color=marker:#ff007c \
+  --color=pointer:#ff007c \
+  --color=prompt:#2ac3de \
+  --color=query:#c0caf5:regular \
+  --color=scrollbar:#27a1b9 \
+  --color=separator:#ff9e64 \
+  --color=spinner:#ff007c \
+"
+
+{{- if (index $tags "desktop") }}
+export ROCM_PATH=/opt/rocm
+export HSA_OVERRIDE_GFX_VERSION=10.3.0
+export HIP_VISIBLE_DEVICES=1
+export LD_LIBRARY_PATH=/opt/rocm/lib:$LD_LIBRARY_PATH
+{{- end }}
+
+{{- if (index $tags "dev") }}
+export UV_CACHE_DIR="{{ .chezmoi.homeDir }}/Dev/uv/uv-cache/"
+{{- end }}
