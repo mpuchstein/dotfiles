@@ -1,6 +1,6 @@
 return {
   "lervag/vimtex",
-  lazy = false, -- load immediately (recommended by astrocommunity)
+  ft = { "tex", "latex" }, -- lazy-load on filetype
   init = function()
     -- Viewer
     vim.g.vimtex_view_method = "zathura"

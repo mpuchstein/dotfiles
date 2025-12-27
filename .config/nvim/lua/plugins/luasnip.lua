@@ -7,10 +7,12 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
   },
-  config = function()
-    local ls = require "luasnip"
-
-    -- optional, but nice:
+  config = function(plugin, opts)
+    -- run the default astronvim config that calls the setup call
+    require "astronvim.plugins.configs.luasnip"(plugin, opts)
+    -- lazy load snippets from friendly-snippets
     require("luasnip.loaders.from_vscode").lazy_load()
+    -- add more custom luasnip configuration such as filetype extend or custom snippets
+    require("luasnip").filetype_extend("javascript", { "javascriptreact" })
   end,
 }

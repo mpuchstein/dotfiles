@@ -21,7 +21,6 @@ return {
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.xml" },
   { import = "astrocommunity.pack.yaml" },
-  { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.kotlin" },
   { import = "astrocommunity.pack.php" },

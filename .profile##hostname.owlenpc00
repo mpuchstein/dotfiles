@@ -1,7 +1,5 @@
-
-
 # Added by Toolbox App
-export PATH="${PATH}:/home/mpuchstein/.local/share/JetBrains/Toolbox/scripts"
+export PATH="${PATH}:/home/mpuchstein/Dev/JetBrains/Toolbox/scripts"
 
 export PATH="${PATH}:/home/mpuchstein/.local/bin"
 export PATH="${PATH}:/home/mpuchstein/.cargo/bin"
@@ -38,3 +36,5 @@ export ROCM_PATH=/opt/rocm
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
 export HIP_VISIBLE_DEVICES=1
 export LD_LIBRARY_PATH=/opt/rocm/lib:$LD_LIBRARY_PATH
+
+export UV_CACHE_DIR=/home/mpuchstein/Dev/uv/uv-cache/

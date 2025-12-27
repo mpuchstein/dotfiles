@@ -39,6 +39,10 @@ return {
     servers = {
       -- "pyright"
     },
+    -- ensure servers are installed
+    ensure_installed = {
+      "ltex",
+    },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
