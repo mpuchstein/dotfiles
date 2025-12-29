@@ -20,7 +20,7 @@ font_size = 14
 border_radius = 12
 
 # Theme: "owl" for built-in dark theme, or leave unset for GTK default
-theme = "owl"
+theme = "apex-neon"
 
 # Individual color overrides (CSS color values)
 # [appearance.colors]

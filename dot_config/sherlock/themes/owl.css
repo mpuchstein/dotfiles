@@ -1,0 +1,200 @@
+/* Owl theme for Sherlock
+ * Owl-inspired dark palette with amber accents.
+ */
+
+/* Palette */
+@define-color owl_base           #1a1b26;
+@define-color owl_surface        #24283b;
+@define-color owl_overlay        #414868;
+@define-color owl_muted          #414868;
+@define-color owl_subtle         #565f89;
+@define-color owl_text           #c0caf5;
+@define-color owl_love           #f7768e;
+@define-color owl_gold           #e0af68;
+@define-color owl_rose           #f5e0dc;
+@define-color owl_pine           #9ece6a;
+@define-color owl_foam           #7aa2f7;
+@define-color owl_iris           #bb9af7;
+@define-color owl_hl_low         #24283b;
+@define-color owl_hl_med         #414868;
+@define-color owl_hl_high        #565f89;
+
+/* Global semantics */
+@define-color theme_bg_color @owl_base;
+@define-color theme_fg_color @owl_text;
+@define-color theme_selected_bg_color @owl_hl_med;
+@define-color theme_selected_fg_color @owl_text;
+@define-color warning_color @owl_gold;
+@define-color error_color @owl_love;
+@define-color success_color @owl_pine;
+
+/* Window */
+window {
+    background-color: @owl_base;
+    color: @owl_text;
+    border: 1px solid @owl_overlay;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+/* Inputs */
+entry {
+    background-color: @owl_surface;
+    color: @owl_text;
+    caret-color: @owl_gold;
+    border: 1px solid @owl_overlay;
+    border-radius: 7px;
+    padding: 6px 9px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    transition: border-color 0.18s ease;
+}
+
+entry:focus {
+    border-color: @owl_gold;
+    box-shadow: 0 0 0 1px rgba(224, 175, 104, 0.25);
+}
+
+entry selection {
+    background-color: @owl_hl_high;
+    color: @owl_text;
+}
+
+/* List view */
+listview {
+    background-color: transparent;
+}
+
+listview > row {
+    padding: 4px 8px;
+    margin: 1px 0;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-size: 13px;
+}
+
+listview > row:hover {
+    background-color: @owl_overlay;
+}
+
+listview > row:selected {
+    background-color: @owl_hl_med;
+    color: @owl_text;
+    border: 1px solid @owl_muted;
+    border-left: 3px solid @owl_gold;
+}
+
+/* Tiles (compact) */
+.tile,
+.launcher-tile,
+.launcher-item,
+.item {
+    background-color: @owl_hl_low;
+    color: @owl_text;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    min-height: 32px;
+    padding: 4px 10px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+}
+
+.tile:hover,
+.launcher-tile:hover,
+.launcher-item:hover,
+.item:hover {
+    background-color: @owl_hl_med;
+}
+
+.tile:selected,
+.launcher-tile:selected,
+.launcher-item:selected,
+.item:selected,
+.tile:focus {
+    background-color: @owl_overlay;
+    border-color: @owl_iris;
+}
+
+.tile-icon,
+.item-icon,
+.icon {
+    color: @owl_foam;
+    min-width: 18px;
+    min-height: 18px;
+}
+
+.tile-label,
+.tile-title,
+.item-title,
+.title {
+    color: @owl_text;
+    font-weight: 500;
+}
+
+.tile-description,
+.item-subtitle,
+.subtitle,
+.description {
+    color: @owl_subtle;
+    font-size: 11px;
+}
+
+.shortcut,
+.tile-shortcut,
+.item-shortcut {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background-color: @owl_hl_med;
+    color: @owl_gold;
+}
+
+/* Widgets */
+.widget,
+.weather-widget,
+.music-widget,
+.async-widget {
+    background-color: rgba(36, 40, 59, 0.92);
+    border-radius: 7px;
+    border: 1px solid @owl_hl_high;
+    padding: 6px 9px;
+    margin-bottom: 6px;
+    color: @owl_text;
+}
+
+.weather-widget .temperature {
+    color: @owl_gold;
+    font-weight: 650;
+    font-size: 14px;
+}
+
+.weather-widget .condition {
+    color: @owl_subtle;
+    font-size: 12.5px;
+}
+
+/* Scrollbars */
+scrollbar slider {
+    background-color: @owl_muted;
+    min-width: 6px;
+    border-radius: 10px;
+}
+
+scrollbar slider:hover {
+    background-color: @owl_subtle;
+}
+
+/* Progress Bars */
+progressbar trough {
+    background-color: @owl_surface;
+    border-radius: 4px;
+}
+
+progressbar progress {
+    background-color: @owl_foam;
+    border-radius: 4px;
+}

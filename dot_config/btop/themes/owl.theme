@@ -1,0 +1,119 @@
+# Main background, empty for terminal default, need to be empty if you want transparent background
+theme[main_bg]="#1a1b26"
+# Deep night sky
+
+# Main text color
+theme[main_fg]="#c0caf5"
+# Moon glow
+
+# Title color for boxes
+theme[title]="#565f89"
+# Forest shadows
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#c0caf5"
+# Moon glow
+
+# Background color of selected item in processes box
+theme[selected_bg]="#414868"
+# Owl feathers
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#e0af68"
+# Owl eyes (amber)
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#414868"
+# Owl feathers
+
+# Color of text appearing on top of graphs, i.e uptime and current network graph scaling
+theme[graph_text]="#7aa2f7"
+# Cool blue accent
+
+# Background color of the percentage meters
+theme[meter_bg]="#7aa2f7"
+# Cool blue accent
+
+# Misc colors for processes box including mini cpu graphs, details memory graph and details status text
+theme[proc_misc]="#bb9af7"
+# Soft purple
+
+# Cpu box outline color
+theme[cpu_box]="#f5e0dc"
+# Barn owl cream
+
+# Memory/disks box outline color
+theme[mem_box]="#9ece6a"
+# Moss green
+
+# Net up/down box outline color
+theme[net_box]="#7aa2f7"
+# Cool blue accent
+
+# Processes box outline color
+theme[proc_box]="#f7768e"
+# Owl red
+
+# Box divider line and small boxes line color
+theme[div_line]="#565f89"
+# Forest shadows
+
+# Temperature graph colors
+theme[temp_start]="#f5e0dc"
+# Barn owl cream
+theme[temp_mid]="#e0af68"
+# Owl eyes (amber)
+theme[temp_end]="#f7768e"
+# Owl red
+
+# CPU graph colors
+theme[cpu_start]="#e0af68"
+# Owl eyes (amber)
+theme[cpu_mid]="#f5e0dc"
+# Barn owl cream
+theme[cpu_end]="#f7768e"
+# Owl red
+
+# Mem/Disk free meter
+# all owl red
+theme[free_start]="#f7768e"
+theme[free_mid]="#f7768e"
+theme[free_end]="#f7768e"
+
+# Mem/Disk cached meter
+# all soft purple
+theme[cached_start]="#bb9af7"
+theme[cached_mid]="#bb9af7"
+theme[cached_end]="#bb9af7"
+
+# Mem/Disk available meter
+# all moss green
+theme[available_start]="#9ece6a"
+theme[available_mid]="#9ece6a"
+theme[available_end]="#9ece6a"
+
+# Mem/Disk used meter
+# all barn owl cream
+theme[used_start]="#f5e0dc"
+theme[used_mid]="#f5e0dc"
+theme[used_end]="#f5e0dc"
+
+# Download graph colors
+# green to blue
+theme[download_start]="#9ece6a"
+theme[download_mid]="#7aa2f7"
+theme[download_end]="#7aa2f7"
+
+# Upload graph colors
+theme[upload_start]="#f5e0dc"
+# barn owl cream
+# owl red for mid and end
+theme[upload_mid]="#f7768e"
+theme[upload_end]="#f7768e"
+
+# Process box color gradient for threads, mem and cpu usage
+theme[process_start]="#9ece6a"
+# moss green
+theme[process_mid]="#7aa2f7"
+# cool blue for mid and end
+theme[process_end]="#7aa2f7"

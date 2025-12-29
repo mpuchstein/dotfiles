@@ -143,13 +143,24 @@
 
   # Connect left prompt lines with these symbols. You'll probably want to use the same color
   # as POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND below.
-  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%238F╭─'
-  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%238F├─'
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%238F╰─'
+  # typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%238F╭─'
+  # typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%238F├─'
+  # typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%238F╰─'
   # Connect right prompt lines with these symbols.
-  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX='%238F─╮'
-  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%238F─┤'
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX='%238F─╯'
+  # typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX='%238F─╮'
+  # typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%238F─┤'
+  # typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX='%238F─╯'
+
+  # APEX VOID FRAME - SHARP AND RED
+  # We use #ff0044 (Razor Red) for the frame color
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%F{#ff0044}┌─'
+  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%F{#ff0044}├─'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%F{#ff0044}└─'
+  
+  # Connect the right side too if you use it
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX='%F{#ff0044}─┐'
+  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%F{#ff0044}─┤'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX='%F{#ff0044}─┘'
 
   # Filler between left and right prompt on the first prompt line. You can set it to ' ', '·' or
   # '─'. The last two make it easier to see the alignment between left and right prompt and to
@@ -192,10 +203,13 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
-  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7
+  # typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
+  # typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
+  # Make the OS Icon match the Apex Void aesthetic
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND='#ff0044' # White Icon
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND='#050505' # Razor Red Background
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.
@@ -1835,6 +1849,100 @@
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
   (( ! $+functions[p10k] )) || p10k reload
+
+# ============================================
+  # APEX VOID - LEFT SIDE FIXES
+  # ============================================
+
+  # 1. OS ICON (The Start)
+  # Background: Void (Black)
+  # Foreground: Razor Red (The Logo)
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=0
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=1
+
+  # 2. DIRECTORY (The Path)
+  # Force ALL directory states to Razor Red Background (#ff0044 / color 1)
+  # This kills the blue "Home" icon.
+  typeset -g POWERLEVEL9K_DIR_BACKGROUND=1
+  typeset -g POWERLEVEL9K_DIR_HOME_BACKGROUND=1
+  typeset -g POWERLEVEL9K_DIR_HOME_SUBDIRECTORY_BACKGROUND=1
+  typeset -g POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=1
+  typeset -g POWERLEVEL9K_DIR_ETC_BACKGROUND=1
+  
+  # Text Color: White (Readable on Red)
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=7
+  typeset -g POWERLEVEL9K_DIR_HOME_FOREGROUND=7
+  typeset -g POWERLEVEL9K_DIR_HOME_SUBDIRECTORY_FOREGROUND=7
+  typeset -g POWERLEVEL9K_DIR_DEFAULT_FOREGROUND=7
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=15 # Bright White for the main folder
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
+
+  # 3. SEPARATORS (The "Broken" Look Fix)
+  # Ensure we are using the hard triangle (\uE0B0) 
+  # This makes the transition from Black OS Icon -> Red Dir sharp.
+  typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B0'
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B1'
+  
+  # 4. FRAME COLOR (The Corner Lines)
+  # Make sure the lines (╭─) match the directory color (Red)
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%F{1}╭─'
+  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%F{1}├─'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%F{1}╰─'
+  
+  # 5. PROMPT CHAR (The Chevron ❯)
+  # Success: Electric Cyan
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_FOREGROUND=12
+  # Failure: Razor Red
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_FOREGROUND=1
+
+# ============================================
+  # APEX VOID - RIGHT SIDE OVERRIDES
+  # ============================================
+
+  # 1. KILL THE SEPARATORS (Sharp Angles Only)
+  # We replace the rounded "pills" with sharp arrows or empty space
+  typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B0'  # Solid Triangle >
+  typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\uE0B2' # Solid Triangle <
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B1'
+  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='\uE0B3'
+  
+  # 2. STATUS (The Checkmark / Exit Code)
+  # Success: Toxic Green Text on Black Background (No box)
+  typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=10  # Toxic Green
+  typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=0   # The Void (Black)
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=10
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_BACKGROUND=0
+
+  # Failure: Razor Red Text on Black Background
+  typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=1 # Razor Red
+  typeset -g POWERLEVEL9K_STATUS_ERROR_BACKGROUND=0 # The Void
+  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND=1
+  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_BACKGROUND=0
+
+  # 3. COMMAND DURATION (took 3s)
+  # Background: Black (Void)
+  # Foreground: Warning Gold (Color 11) or Cyan (Color 12)
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=11
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=0
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0 # 3s instead of 3.14s
+
+  # 4. TIME (at 12:00:00)
+  # Background: Black (Void)
+  # Foreground: Pale Red (Color 9) for readability
+  typeset -g POWERLEVEL9K_TIME_FOREGROUND=9 
+  typeset -g POWERLEVEL9K_TIME_BACKGROUND=0
+  typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}' # Simple 24h format
+
+  # 5. BACKGROUND JOBS (If you put things in background)
+  # Electric Cyan on Black
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=12
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=0
+  
+  # 6. CONTEXT (user@hostname) - Only shown via SSH usually
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=12
+  typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=0
 }
 
 # Tell `p10k configure` which file it should overwrite.
