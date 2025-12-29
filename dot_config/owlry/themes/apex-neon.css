@@ -1,66 +1,110 @@
 /*
- * APEX VOID - OWLRY THEME
- * Source: https://gitea.puchstein.bayern/Owlibou/owlry
+ * Owlry - Apex Neon Theme
+ * High-contrast void with razor red and electric cyan accents.
  */
 
 :root {
-    /* 1. THE VOID PALETTE */
-    --owlry-bg: #050505;           /* Pitch Black */
-    --owlry-bg-secondary: #141414; /* Dark Grey Surfaces */
-    --owlry-border: #ff0044;       /* Razor Red Border */
-    
-    /* 2. TEXT */
-    --owlry-text: #ededed;         /* White Signal */
-    --owlry-text-secondary: #737373; /* Muted */
-    
-    /* 3. ACCENTS */
-    --owlry-accent: #ff0044;       /* Main Accent: Red */
-    --owlry-accent-bright: #00eaff; /* Bright Accent: Cyan */
-    
-    /* 4. GEOMETRY (Kill the roundness) */
-    --owlry-border-radius: 0px;
-    --owlry-font-size: 14px;
-    
-    /* 5. BADGES (Functional Colors) */
-    --owlry-badge-app: #00eaff;    /* Cyan */
-    --owlry-badge-cmd: #9d00ff;    /* Purple */
-    --owlry-badge-sys: #ffb700;    /* Gold */
-    --owlry-badge-ssh: #ff0044;    /* Red */
-    --owlry-badge-calc: #00ff99;   /* Green */
-    --owlry-badge-web: #00eaff;    /* Cyan */
+    --owlry-bg: #050505;
+    --owlry-bg-secondary: #141414;
+    --owlry-border: #262626;
+    --owlry-text: #ededed;
+    --owlry-text-secondary: #737373;
+    --owlry-accent: #ff0044;
+    --owlry-accent-bright: #00eaff;
+    --owlry-badge-app: #00eaff;
+    --owlry-badge-cmd: #9d00ff;
+    --owlry-badge-dmenu: #00ff99;
+    --owlry-badge-uuctl: #ffb700;
 }
 
-/* 6. ADVANCED OVERRIDES (The "Target Locked" Logic) */
-
-/* Main Window Glow */
-window {
-    box-shadow: 0 0 10px rgba(255, 0, 68, 0.3); /* Red Glow */
-    border: 2px solid #ff0044;
+.owlry-main {
+    background-color: rgba(5, 5, 5, 0.98);
+    border: 1px solid rgba(38, 38, 38, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85),
+                0 0 0 1px rgba(255, 0, 68, 0.25);
 }
 
-/* Search Bar */
-entry {
-    caret-color: #00eaff; /* Cyan Cursor */
+.owlry-search {
+    background-color: rgba(20, 20, 20, 0.95);
+    border: 2px solid rgba(255, 0, 68, 0.7);
+    color: var(--owlry-text);
+    caret-color: var(--owlry-accent);
 }
 
-/* SELECTION: Black Text on Red Background */
-listview > row:selected {
-    background-color: #ff0044;
-    color: #050505;
-    /* Kill the left border artifact you hated */
-    border: none;
-    outline: none;
+.owlry-search:focus {
+    border-color: var(--owlry-accent);
+    box-shadow: 0 0 0 2px rgba(255, 0, 68, 0.2);
 }
 
-/* Force everything inside the selection to turn Black */
-listview > row:selected label,
-listview > row:selected image {
-    color: #050505;
+.owlry-result-row:hover {
+    background-color: rgba(20, 20, 20, 0.8);
 }
 
-/* 7. WIDGETS (Weather/System) */
-.widget {
-    background-color: #141414;
-    border: 1px solid #262626;
+.owlry-result-row:selected {
+    background-color: rgba(0, 234, 255, 0.2);
+    border-left: 3px solid var(--owlry-accent-bright);
 }
 
+.owlry-result-row:selected .owlry-result-name {
+    color: var(--owlry-text);
+}
+
+.owlry-result-row:selected .owlry-result-icon {
+    color: var(--owlry-text);
+}
+
+.owlry-badge-app {
+    background-color: rgba(0, 234, 255, 0.2);
+    color: var(--owlry-badge-app);
+}
+
+.owlry-badge-cmd {
+    background-color: rgba(157, 0, 255, 0.2);
+    color: var(--owlry-badge-cmd);
+}
+
+.owlry-badge-dmenu {
+    background-color: rgba(0, 255, 153, 0.2);
+    color: var(--owlry-badge-dmenu);
+}
+
+.owlry-badge-uuctl {
+    background-color: rgba(255, 183, 0, 0.2);
+    color: var(--owlry-badge-uuctl);
+}
+
+.owlry-filter-button:checked {
+    background-color: rgba(255, 0, 68, 0.2);
+    color: var(--owlry-accent);
+    border-color: rgba(255, 0, 68, 0.4);
+}
+
+.owlry-filter-app:checked {
+    background-color: rgba(0, 234, 255, 0.2);
+    color: var(--owlry-badge-app);
+    border-color: rgba(0, 234, 255, 0.4);
+}
+
+.owlry-filter-cmd:checked {
+    background-color: rgba(157, 0, 255, 0.2);
+    color: var(--owlry-badge-cmd);
+    border-color: rgba(157, 0, 255, 0.4);
+}
+
+.owlry-filter-uuctl:checked {
+    background-color: rgba(255, 183, 0, 0.2);
+    color: var(--owlry-badge-uuctl);
+    border-color: rgba(255, 183, 0, 0.4);
+}
+
+scrollbar slider {
+    background-color: rgba(38, 38, 38, 0.6);
+}
+
+scrollbar slider:hover {
+    background-color: rgba(115, 115, 115, 0.6);
+}
+
+scrollbar slider:active {
+    background-color: var(--owlry-accent);
+}
