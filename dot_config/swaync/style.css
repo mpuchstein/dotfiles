@@ -1,26 +1,22 @@
-@define-color rp-base #191724;
-@define-color rp-surface #1f1d2e;
-@define-color rp-overlay #26233a;
-@define-color rp-hl-low #21202e;
-@define-color rp-hl-med #403d52;
-@define-color rp-hl-high #524f67;
+@define-color rp-base #050505;
+@define-color rp-surface #141414;
+@define-color rp-overlay #262626;
+@define-color rp-hl-low #141414;
+@define-color rp-hl-med #262626;
+@define-color rp-hl-high #404040;
 
-@define-color rp-muted #6e6a86;
-@define-color rp-subtle #908caa;
-@define-color rp-text #e0def4;
+@define-color rp-muted #404040;
+@define-color rp-subtle #404040;
+@define-color rp-text #ededed;
 
-@define-color rp-love #eb6f92;
-@define-color rp-gold #f6c177;
-@define-color rp-rose #ebbcba;
-@define-color rp-pine #31748f;
-@define-color rp-foam #9ccfd8;
-@define-color rp-iris #c4a7e7;
+@define-color rp-love #ff0044;
+@define-color rp-gold #ffb700;
+@define-color rp-rose #ff80bf;
+@define-color rp-pine #00ff99;
+@define-color rp-foam #00eaff;
+@define-color rp-iris #9d00ff;
 
-/* To use Rosé Pine Moon, replace:
-rp-base: #232136; rp-surface: #2a273f; rp-overlay: #393552;
-rp-hl-low: #2a283e; rp-hl-med: #44415a; rp-hl-high: #56526e;
-rp-text: #e0def4; rp-subtle: #908caa; accents same.
-For Dawn (light), you’ll likely also want to invert contrasts. */
+/* Apex Neon palette */
 
 @define-color cc-bg @rp-surface;
 @define-color noti-border-color @rp-hl-high;
@@ -30,13 +26,13 @@ For Dawn (light), you’ll likely also want to invert contrasts. */
 @define-color noti-bg-focus alpha(@rp-hl-high, 0.6);
 @define-color text-color @rp-text;
 @define-color text-color-disabled @rp-subtle;
-@define-color bg-selected @rp-iris;
+@define-color bg-selected @rp-foam;
 
-    {
-    font-family: JetBrainsMono NFP;
-    font-weight: bold;
-    font-size: 14px;
-    }
+* {
+  font-family: JetBrainsMono NFP;
+  font-weight: bold;
+  font-size: 14px;
+}
 
 .control-center .notification-row:focus,
 .control-center .notification-row:hover {
