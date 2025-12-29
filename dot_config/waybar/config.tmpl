@@ -8,10 +8,10 @@
   "layer": "top",
   "position": "left",
   "output": "{{ $primary_output }}",
-  "width": 95,
-  "spacing": 6,
-  "margin-top": 6,
-  "margin-bottom": 6,
+  "width": 90,
+  "spacing": 4,
+  "margin-top": 0,
+  "margin-bottom": 0,
 
   "modules-left": [
     "clock",
@@ -28,8 +28,7 @@
     "memory",
     "disk#root",
     "network",
-    "temperature#cpu",
-    "temperature#gpu_hotspot"
+    "group/temps"
   ],
 
   "modules-right": [
@@ -37,17 +36,20 @@
     "custom/hyprsunset",
     "gamemode",
     "privacy",
-    "wireplumber#source",
-    "wireplumber#sink",
+    "group/volume",
     "tray",
+    {{- if .chezmoi.config.data.tags.bluetooth }}
     "bluetooth",
+    {{- end }}
+    {{- if .chezmoi.config.data.tags.laptop }}
     "power-profiles-daemon",
     "battery"
+    {{- end }}
   ],
 
   "hyprland/window": {
     "format": "{title}",
-    "max-length": 28,
+    "max-length": 18,
     "icon": true,
     "icon-size": 18,
     "separate-outputs": false
@@ -86,8 +88,8 @@
 
   "network": {
     "interval": 3,
-    "format-wifi": " {essid}%",
-    "format-ethernet": " {ifname}",
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "",
     "tooltip-format-wifi": "{signalStrength}\n {bandwidthUpBytes}\n {bandwidthDownBytes}",
     "tooltip-format-ethernet": " {bandwidthUpBytes}\n {bandwidthDownBytes}",
     "format-disconnected": ""
@@ -197,23 +199,26 @@
 
 
   "group/temps": {
-    "orientation": "horizontal",
+    "orientation": "vertical",
     "drawer": {
       "transition-duration": 300,
       "transition-left-to-right": true,
       "click-to-reveal": true
     },
     "modules": [
-      "custom/temps-wrap",        // leader, always visible
+      "custom/temps-cycle",        // leader, always visible
       "temperature#cpu",
       "temperature#gpu_hotspot",
       "temperature#nvme"
     ]
   },
 
-  "custom/temps-wrap": {
-    "format": "",
-    "tooltip-format": "Temperatures"
+  "custom/temps-cycle": {
+    "exec": "$HOME/.config/waybar/scripts/temps-cycle.sh",
+    "return-type": "json",
+    "interval": 3,
+    "format": "{text}",
+    "tooltip": true
   },
 
   "temperature#cpu": {
@@ -221,8 +226,8 @@
     "input-filename": "temp1_input",
     "interval": 5,
     "critical-threshold": 85,
-    "format": " CPU: {temperatureC}°C",
-    "format-critical": " CPU: {temperatureC}°C ",
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C ",
     "tooltip-format": "CPU Tctl: {temperatureC}°C"
   },
 
@@ -241,8 +246,8 @@
     "input-filename": "temp2_input",
     "interval": 5,
     "critical-threshold": 110,
-    "format": "  GPU: {temperatureC}°C",
-    "format-critical": "  GPU: {temperatureC}°C ",
+    "format": " {temperatureC}°C",
+    "format-critical": " {temperatureC}°C ",
     "tooltip-format": "GPU junction: {temperatureC}°C"
   },
 
@@ -297,5 +302,13 @@
     "tooltip": true,
     "format": "{text}",
     "on-click": "kitty --hold alhp.utils -j"
+  },
+
+  "group/volume": {
+    "orientation": "vertical",
+    "modules": [
+      "wireplumber#source",
+      "wireplumber#sink"
+    ]
   }
 }

@@ -1,13 +1,10 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This is a chezmoi dotfiles source tree. Key paths:
-- `dot_config/` maps to `~/.config/` (e.g., `dot_config/hypr/`, `dot_config/nvim/`, `dot_config/waybar/`).
-- `dot_local/` maps to `~/.local/` (app data, scripts, etc.).
-- `dot_profile.tmpl` renders to `~/.profile`.
-- `.chezmoiscripts/` contains chezmoi hooks (e.g., `run_onchange_*` scripts).
-- Host-specific variants use `##hostname.<name>` (e.g., `hyprpaper.conf##hostname.owlenlap01`).
-- `dot_config/waybar/waybar.wiki/` and `dot_config/hypr/hyprland.wiki/` are mirrored docs with `dot_git/` metadata; treat them as upstream mirrors unless intentionally updating.
+This is a chezmoi dotfiles source tree scoped to Waybar. The current directory maps to `~/.config/waybar/` on apply.
+- `dot_config/waybar/` contains Waybar config, style, and module files.
+- `dot_config/waybar/waybar.wiki/` is a mirrored upstream doc set with `dot_git/` metadata; avoid editing unless intentionally updating the mirror.
+- Host-specific variants use `##hostname.<name>` suffixes (e.g., `config##hostname.laptop`).
 
 ## Chezmoi Config (chezmoi.toml)
 - Source of truth: `~/.config/chezmoi/chezmoi.toml` (not tracked here).
@@ -46,21 +43,28 @@ This is a chezmoi dotfiles source tree. Key paths:
   ```
 
 ## Build, Test, and Development Commands
-There is no build system; apply and verify changes with chezmoi:
+There is no build system. Use chezmoi to preview and apply changes:
 - `chezmoi diff` preview pending changes.
-- `chezmoi apply` render and apply to `$HOME`.
+- `chezmoi apply` render and apply files to `$HOME`.
 - `chezmoi status` show managed file status.
-After applying, restart the affected app (e.g., reload Hyprland/Waybar) to validate.
+After applying, restart Waybar to validate changes.
 
 ## Coding Style & Naming Conventions
-- Match the existing file’s formatting; don’t reflow unrelated sections.
-- Lua configs in `dot_config/nvim/` use 2‑space indents and include `dot_config/nvim/dot_stylua.toml` and `dot_config/nvim/selene.toml` for format/lint settings.
-- Use chezmoi prefixes: `dot_` for dotfiles, `executable_` for executable files, `symlink_` for symlinks, `private_` for restricted‑permission files, and `.tmpl` for Go templates.
+- Match existing file formatting; avoid reflowing unrelated sections.
+- Prefer ASCII unless the file already uses Unicode.
+- Use chezmoi naming conventions: `dot_` for dotfiles, `executable_` for executables, `private_` for restricted files, `.tmpl` for Go templates, `symlink_` for symlinks.
+- Keep module names descriptive and aligned with Waybar’s config keys.
 
 ## Testing Guidelines
 No automated tests are defined. Validate by:
 - Running `chezmoi diff` and `chezmoi apply`.
-- Smoke‑testing the specific tool you changed (e.g., open Neovim, restart Waybar, reload Hyprland).
+- Smoke-testing Waybar (reload or restart) to confirm layout and modules.
 
 ## Commit & Pull Request Guidelines
-This repository has no commits yet, so there is no established commit message convention. Use short, imperative subjects and include a scope when helpful (e.g., `hypr: adjust keybinds`). For PRs, include a clear summary, affected paths, and screenshots for visual/UI changes.
+The repository has no established Git history. Use short, imperative commit subjects and include a scope when helpful (e.g., `waybar: tweak clock format`). For pull requests, include:
+- A concise summary of changes.
+- Affected paths (e.g., `dot_config/waybar/config`).
+- Screenshots for visual/UI changes.
+
+## Notes for Contributors
+Avoid editing unrelated dotfiles unless requested. If you touch mirrored docs or host-specific files, call it out explicitly in your summary.

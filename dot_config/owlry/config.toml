@@ -1,0 +1,77 @@
+# Owlry Configuration
+# Copy to ~/.config/owlry/config.toml
+
+[general]
+show_icons = true
+max_results = 10
+terminal_command = "kitty" # Auto-detected if not set
+
+# Launch wrapper for app execution (auto-detected if not set)
+# Examples:
+#   "uwsm app --"              # For uwsm sessions
+#   "hyprctl dispatch exec --" # For Hyprland
+#   ""                         # Direct execution
+# launch_wrapper = "uwsm app --"
+
+[appearance]
+width = 600
+height = 400
+font_size = 14
+border_radius = 12
+
+# Theme: "owl" for built-in dark theme, or leave unset for GTK default
+theme = "owl"
+
+# Individual color overrides (CSS color values)
+# [appearance.colors]
+# background = "#1a1b26"
+# background_secondary = "#24283b"
+# border = "#414868"
+# text = "#c0caf5"
+# text_secondary = "#565f89"
+# accent = "#7aa2f7"
+# accent_bright = "#89b4fa"
+# badge_app = "#9ece6a"
+# badge_calc = "#e0af68"
+# badge_cmd = "#7aa2f7"
+# badge_dmenu = "#bb9af7"
+# badge_uuctl = "#f7768e"
+
+[providers]
+applications = true
+commands = true
+uuctl = true
+
+# Calculator provider (type "= 5+3" or "calc 5+3")
+calculator = true
+
+# Frecency: boost frequently/recently used items in search results
+frecency = true
+frecency_weight = 0.3 # 0.0 = disabled, 1.0 = strong boost
+
+# Web search provider (type "? query" or "web query")
+websearch = true
+# Options: google, duckduckgo, bing, startpage, searxng, brave, ecosia
+# Or custom URL with {query} placeholder, e.g. "https://search.example.com/?q={query}"
+search_engine = "duckduckgo"
+
+# System commands (shutdown, reboot, lock, suspend, hibernate, logout, BIOS)
+system = true
+
+# SSH connections from ~/.ssh/config
+ssh = true
+
+# Clipboard history (requires cliphist)
+clipboard = true
+
+# Browser bookmarks (Chrome, Chromium, Brave, Edge, Vivaldi)
+bookmarks = true
+
+# Emoji picker (copies to clipboard)
+emoji = true
+
+# Custom scripts from ~/.config/owlry/scripts/
+scripts = true
+
+# File search (requires fd or locate, trigger with "/ pattern" or "find pattern")
+files = true

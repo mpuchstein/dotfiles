@@ -1,0 +1,40 @@
+# --- General ---
+keep-open=yes
+save-position-on-quit=yes
+geometry=50%:50%
+
+# --- UI (uosc support) ---
+osd-bar=no
+border=no
+
+# --- Video ---
+# Smooth motion handling
+video-sync=display-resample
+interpolation=yes
+tscale=oversample
+
+# --- Hardware & Quality (Chezmoi) ---
+{{- if .chezmoi.config.data.tags.desktop }}
+profile=high-quality
+vo=gpu-next
+gpu-api=vulkan
+hwdec=vaapi
+{{- else }}
+vo=gpu-next
+hwdec=auto-safe
+{{- end }}
+
+# --- Languages ---
+# English, German, French, Japanese
+alang=eng,en,deu,de,fra,fr,jpn,jp
+slang=eng,en,deu,de,fra,fr
+
+# --- Subtitles ---
+sub-auto=fuzzy
+sub-font-size=48
+
+# --- Screenshots ---
+screenshot-format=png
+screenshot-high-bit-depth=yes
+screenshot-png-compression=7
+screenshot-directory=~/Pictures/Screenshots

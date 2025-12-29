@@ -1,0 +1,24 @@
+# --- Video & Quality ---
+{{- if .chezmoi.config.data.tags.desktop }}
+profile=high-quality
+vo=gpu-next
+gpu-api=vulkan
+hwdec=vaapi
+{{- else }}
+vo=gpu-next
+hwdec=auto-safe
+{{- end }}
+
+# --- Motion ---
+video-sync=display-resample
+interpolation=yes
+tscale=oversample
+
+# --- Window ---
+geometry=50%:50%
+
+# --- Screenshots ---
+screenshot-format=png
+screenshot-high-bit-depth=yes
+screenshot-png-compression=7
+screenshot-directory=~/Pictures/Screenshots

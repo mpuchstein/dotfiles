@@ -13,12 +13,28 @@
 @define-color hl_low  #21202e;
 @define-color hl_med  #403d52;
 @define-color hl_high #524f67;
+@define-color bar_alpha rgba(25, 23, 36, 0.65);
+@define-color surface_alpha rgba(31, 29, 46, 0.82);
+@define-color overlay_alpha rgba(38, 35, 58, 0.9);
 
 /* Bar */
 window#waybar {
-  background: @base;
+  background: @bar_alpha;
   color: @text;
-  border-right: 1px solid @hl_low;
+  border: 0;
+}
+
+/* Extra breathing room for the first/last pill in each section */
+#left > :first-child,
+#center > :first-child,
+#right > :first-child {
+  margin-top: 8px;
+}
+
+#left > :last-child,
+#center > :last-child,
+#right > :last-child {
+  margin-bottom: 8px;
 }
 
 /* Typography */
@@ -37,7 +53,7 @@ window#waybar {
 }
 
 #workspaces button {
-  background: @surface;
+  background: @surface_alpha;
   color: @text;
   border: 1px solid @hl_low;
   border-radius: 6px;
@@ -46,7 +62,7 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  background: @overlay;
+  background: @overlay_alpha;
 }
 
 #workspaces button.active {
@@ -74,18 +90,18 @@ window#waybar {
 #battery,
 #power-profiles-daemon,
 #bluetooth,
-#group-temps,
 #tray,
 #temperature,
 #custom-swaync,
+#custom-temps-cycle,
 #custom-hyprsunset,
 #custom-alhp {
-  background: @surface;
+  background: @surface_alpha;
   color: @text;
   border: 1px solid @hl_low;
   border-radius: 8px;
   padding: 3px 6px;
-  margin: 2px 4px;
+  margin: 2px 3px;
 }
 
 /* Universal hover effects - FIXED */
@@ -102,13 +118,13 @@ window#waybar {
 #battery:hover,
 #power-profiles-daemon:hover,
 #bluetooth:hover,
-#group-temps:hover,
 #tray:hover,
 #temperature:hover,
 #custom-swaync:hover,
+#custom-temps-cycle:hover,
 #custom-hyprsunset:hover,
 #custom-alhp:hover {
-  background: @overlay;
+  background: @overlay_alpha;
 }
 
 /* Window title */
@@ -138,16 +154,8 @@ window#waybar {
   border-left: 3px solid @pine;
 }
 
-#temperature.gpu_edge {
-  border-left: 3px solid @iris;
-}
-
 #temperature.gpu_hotspot {
   border-left: 3px solid @rose;
-}
-
-#temperature.gpu_mem {
-  border-left: 3px solid @foam;
 }
 
 #temperature.nvme {
@@ -272,33 +280,25 @@ window#waybar {
   border-left: 3px solid @pine;
 }
 
-/* Temps group: outer pill + compact rows */
-#group-temps {
-  border-left: 3px solid @rose;
-}
-
-#group-temps > * {
+/* Group wrappers (no extra padding to avoid width growth) */
+#group-temps,
+#group-volume {
   background: transparent;
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-#custom-temps-wrap {
-  padding: 4px 6px;
-  border-radius: 6px;
+#custom-temps-cycle {
+  border-left: 3px solid @rose;
 }
 
 #group-temps #temperature {
-  background: transparent;
-  color: @text;
   margin: 2px 0;
-  padding: 4px 6px;
-  border-radius: 6px;
 }
 
 #group-temps #temperature:hover {
-  background: @overlay;
+  background: @overlay_alpha;
 }
 
 /* Temperature modules within group - maintain specific colors */
@@ -312,10 +312,6 @@ window#waybar {
 
 #group-temps #temperature.gpu_hotspot {
   border-left: 3px solid @rose;
-}
-
-#group-temps #temperature.gpu2_edge {
-  border-left: 3px solid @foam;
 }
 
 #group-temps #temperature.nvme {
@@ -338,6 +334,15 @@ window#waybar {
 
 #tray > .needs-attention {
   border-left: 3px solid @love;
+}
+
+#group-volume #wireplumber {
+  margin: 1px 0;
+  padding: 2px 4px;
+}
+
+#group-volume #wireplumber:hover {
+  background: @overlay_alpha;
 }
 
 /* Tooltips */
@@ -372,7 +377,7 @@ menuitem,
 
 menuitem:hover,
 .menuitem:hover {
-  background: @overlay;
+  background: @overlay_alpha;
 }
 
 menuitem:disabled,
