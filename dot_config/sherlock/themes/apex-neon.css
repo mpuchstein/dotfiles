@@ -1,0 +1,125 @@
+/* * APEX NEON - SHERLOCK THEME (PARSER COMPLIANT) */
+
+/* 1. PALETTE DEFINITIONS */
+@define-color apex_base          #050505;
+@define-color apex_surface       #141414;
+@define-color apex_overlay       #262626;
+@define-color apex_muted         #404040;
+@define-color apex_text          #ededed;
+@define-color apex_love          #ff0044;
+@define-color apex_foam          #00eaff;
+@define-color apex_gold          #ffb700; 
+
+/* 2. WINDOW & INPUT */
+window {
+    background-color: @apex_base;
+    color: @apex_text;
+    border: 2px solid @apex_love;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+entry {
+    background-color: @apex_surface;
+    color: @apex_text;
+    caret-color: @apex_love;
+    border: 1px solid @apex_overlay;
+    border-radius: 7px;
+    padding: 6px 9px;
+    margin-bottom: 6px;
+}
+
+entry:focus {
+    border-color: @apex_love;
+    box-shadow: 0 0 10px rgba(255, 0, 68, 0.2);
+}
+
+entry selection {
+    background-color: @apex_foam;
+    color: #050505;
+}
+
+/* 3. LIST & SELECTION */
+listview { 
+    background-color: transparent; 
+}
+
+/* The actual row selection - Electric Cyan */
+listview > row:selected {
+    background-color: @apex_foam;
+    color: #050505;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+}
+
+/* 4. TILES (The Items) */
+.tile, .launcher-tile, .launcher-item, .item {
+    background-color: @apex_surface;
+    color: @apex_text;
+    border-radius: 7px;
+    padding: 4px 10px;
+    margin-bottom: 4px;
+}
+
+/* When the ROW is selected, make the TILE transparent so Cyan shows through */
+listview > row:selected .tile, 
+listview > row:selected .launcher-tile, 
+listview > row:selected .item {
+    background-color: transparent;
+    color: #050505;
+}
+
+/* Force TEXT Black on selection */
+listview > row:selected label,
+listview > row:selected .title,
+listview > row:selected .description,
+listview > row:selected .subtitle {
+    color: #050505;
+}
+
+/* Force ICONS Black on selection */
+listview > row:selected image,
+listview > row:selected .icon {
+    color: #050505;
+}
+
+/* 5. WIDGETS (Weather Fix without !important) */
+.widget, .weather-widget, .music-widget {
+    background-color: @apex_surface;
+    border: 1px solid @apex_overlay;
+    color: @apex_text;
+    border-radius: 7px;
+}
+
+/* Specific overrides for weather internals */
+.weather-widget box {
+    background-color: transparent;
+}
+
+.weather-widget label {
+    color: @apex_text;
+}
+
+/* Temperature Cyan */
+.weather-widget .temperature {
+    color: @apex_foam;
+    font-weight: 800;
+}
+
+.weather-widget .condition {
+    color: @apex_muted;
+}
+
+/* 6. SCROLLBARS */
+scrollbar slider {
+    background-color: @apex_overlay;
+    min-width: 6px;
+    border-radius: 10px;
+}
+scrollbar slider:hover { background-color: @apex_love; }
+
+progressbar progress {
+    background-color: @apex_love;
+    border-radius: 4px;
+}

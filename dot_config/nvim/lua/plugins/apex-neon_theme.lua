@@ -23,7 +23,7 @@ return {
 						blue = "#00eaff",
 						purple = "#9d00ff",
 						magenta = "#ff80bf",
-						comment = "#525252",
+						comment = "#404040",
 					},
 				},
 			},

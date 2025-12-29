@@ -1,72 +1,66 @@
 /*
- * Apex Void - Owlry Theme
- * High contrast, pitch black, aggressive neon accents.
+ * APEX VOID - OWLRY THEME
+ * Source: https://gitea.puchstein.bayern/Owlibou/owlry
  */
 
 :root {
-    /* The Void */
-    --owlry-bg: #050505;
-    --owlry-bg-secondary: #141414;
+    /* 1. THE VOID PALETTE */
+    --owlry-bg: #050505;           /* Pitch Black */
+    --owlry-bg-secondary: #141414; /* Dark Grey Surfaces */
+    --owlry-border: #ff0044;       /* Razor Red Border */
     
-    /* Aggressive Borders */
-    --owlry-border: #ff0044; 
+    /* 2. TEXT */
+    --owlry-text: #ededed;         /* White Signal */
+    --owlry-text-secondary: #737373; /* Muted */
     
-    /* The Signal */
-    --owlry-text: #ededed;
-    --owlry-text-secondary: #737373;
+    /* 3. ACCENTS */
+    --owlry-accent: #ff0044;       /* Main Accent: Red */
+    --owlry-accent-bright: #00eaff; /* Bright Accent: Cyan */
     
-    /* Accents */
-    --owlry-accent: #ff0044;        /* Razor Red */
-    --owlry-accent-bright: #00eaff; /* Electric Cyan */
+    /* 4. GEOMETRY (Kill the roundness) */
+    --owlry-border-radius: 0px;
+    --owlry-font-size: 14px;
     
-    /* Badges - Functional Neon */
-    --owlry-badge-app: #00eaff;     /* Cyan */
-    --owlry-badge-cmd: #9d00ff;     /* Void Purple */
-    --owlry-badge-dmenu: #00ff99;   /* Toxic Green */
-    --owlry-badge-uuctl: #ffb700;   /* Warning Gold */
+    /* 5. BADGES (Functional Colors) */
+    --owlry-badge-app: #00eaff;    /* Cyan */
+    --owlry-badge-cmd: #9d00ff;    /* Purple */
+    --owlry-badge-sys: #ffb700;    /* Gold */
+    --owlry-badge-ssh: #ff0044;    /* Red */
+    --owlry-badge-calc: #00ff99;   /* Green */
+    --owlry-badge-web: #00eaff;    /* Cyan */
 }
 
-.owlry-main {
-    background-color: var(--owlry-bg);
-    /* Glowing Red Border */
-    border: 1px solid var(--owlry-border);
-    box-shadow: 0 0 15px rgba(255, 0, 68, 0.2); 
+/* 6. ADVANCED OVERRIDES (The "Target Locked" Logic) */
+
+/* Main Window Glow */
+window {
+    box-shadow: 0 0 10px rgba(255, 0, 68, 0.3); /* Red Glow */
+    border: 2px solid #ff0044;
 }
 
-.owlry-search {
-    background-color: var(--owlry-bg-secondary);
+/* Search Bar */
+entry {
+    caret-color: #00eaff; /* Cyan Cursor */
+}
+
+/* SELECTION: Black Text on Red Background */
+listview > row:selected {
+    background-color: #ff0044;
+    color: #050505;
+    /* Kill the left border artifact you hated */
+    border: none;
+    outline: none;
+}
+
+/* Force everything inside the selection to turn Black */
+listview > row:selected label,
+listview > row:selected image {
+    color: #050505;
+}
+
+/* 7. WIDGETS (Weather/System) */
+.widget {
+    background-color: #141414;
     border: 1px solid #262626;
-    color: var(--owlry-text);
-    caret-color: var(--owlry-accent-bright);
 }
 
-.owlry-search:focus {
-    border-color: var(--owlry-accent-bright);
-    box-shadow: 0 0 10px rgba(0, 234, 255, 0.1);
-}
-
-.owlry-result-row:hover {
-    background-color: #1a1a1a;
-}
-
-.owlry-result-row:selected {
-    background-color: rgba(255, 0, 68, 0.1);
-    border-left: 3px solid var(--owlry-accent);
-}
-
-.owlry-result-row:selected .owlry-result-name {
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.owlry-result-row:selected .owlry-result-icon {
-    color: var(--owlry-accent-bright);
-}
-
-/* Scrollbar - minimal and dark */
-scrollbar slider {
-    background-color: #262626;
-}
-scrollbar slider:active {
-    background-color: var(--owlry-accent);
-}

@@ -151,7 +151,7 @@
   # typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%238F─┤'
   # typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX='%238F─╯'
 
-  # APEX VOID FRAME - SHARP AND RED
+  # APEX NEON FRAME - SHARP AND RED
   # We use #ff0044 (Razor Red) for the frame color
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%F{#ff0044}┌─'
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%F{#ff0044}├─'
@@ -207,7 +207,7 @@
   # typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
-  # Make the OS Icon match the Apex Void aesthetic
+  # Make the OS Icon match the Apex Neon aesthetic
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND='#ff0044' # White Icon
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND='#050505' # Razor Red Background
 
@@ -1851,7 +1851,7 @@
   (( ! $+functions[p10k] )) || p10k reload
 
 # ============================================
-  # APEX VOID - LEFT SIDE FIXES
+  # APEX NEON - LEFT SIDE FIXES
   # ============================================
 
   # 1. OS ICON (The Start)
@@ -1896,7 +1896,7 @@
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_FOREGROUND=1
 
 # ============================================
-  # APEX VOID - RIGHT SIDE OVERRIDES
+  # APEX NEON - RIGHT SIDE OVERRIDES
   # ============================================
 
   # 1. KILL THE SEPARATORS (Sharp Angles Only)

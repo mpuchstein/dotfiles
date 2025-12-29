@@ -1,4 +1,4 @@
-# APEX VOID - BTOP THEME
+# APEX NEON - BTOP THEME
 # Bashtop theme with #050505 background and Razor Red accents
 
 theme[main_bg]="#050505"
@@ -13,10 +13,10 @@ theme[title]="#ededed"
 theme[hi_fg]="#ff0044"
 
 # Background color of selected item in processes box
-theme[selected_bg]="#262626"
+theme[selected_bg]="#00eaff"
 
 # Foreground color of selected item in processes box
-theme[selected_fg]="#ff0044"
+theme[selected_fg]="#050505"
 
 # Color of inactive/disabled text
 theme[inactive_fg]="#404040"
