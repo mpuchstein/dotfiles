@@ -1,21 +1,22 @@
-@define-color base #050505;
-@define-color surface #141414;
-@define-color overlay #262626;
-@define-color text #ededed;
-@define-color muted #404040;
-@define-color subtle #404040;
-@define-color love #ff0044;
-@define-color gold #ffb700;
-@define-color rose #ff80bf;
-@define-color pine #00ff99;
-@define-color foam #00eaff;
-@define-color iris #9d00ff;
+@define-color base #050505;              /* Void Black */
+@define-color surface #141414;           /* Dark Surface */
+@define-color overlay #262626;           /* Light Surface */
+@define-color text #ededed;              /* Stark White */
+@define-color muted #737373;             /* Muted Text (spec) */
+
+@define-color love #ff0044;              /* Razor Red */
+@define-color foam #00eaff;              /* Electric Cyan */
+@define-color pine #00ff99;              /* Toxic Green */
+@define-color gold #ffb700;              /* Warning Gold */
+@define-color iris #9d00ff;              /* Void Purple */
+
 @define-color hl_low  #141414;
 @define-color hl_med  #262626;
-@define-color hl_high #404040;
+@define-color hl_high #262626;           /* keep borders “light surface”, not random gray */
+
 @define-color bar_alpha rgba(5, 5, 5, 0.65);
 @define-color surface_alpha rgba(20, 20, 20, 0.82);
-@define-color overlay_alpha rgba(38, 38, 38, 0.9);
+@define-color overlay_alpha rgba(38, 38, 38, 0.92);
 
 /* Bar */
 window#waybar {
@@ -27,20 +28,15 @@ window#waybar {
 /* Extra breathing room for the first/last pill in each section */
 #left > :first-child,
 #center > :first-child,
-#right > :first-child {
-  margin-top: 8px;
-}
+#right > :first-child { margin-top: 8px; }
 
 #left > :last-child,
 #center > :last-child,
-#right > :last-child {
-  margin-bottom: 8px;
-}
+#right > :last-child { margin-bottom: 8px; }
 
 /* Typography */
 * {
-  font-family:
-    "InconsolataGo Nerd Font Mono", "InconsolataGo Nerd Font", monospace;
+  font-family: "InconsolataGo Nerd Font Mono", "InconsolataGo Nerd Font", monospace;
   font-size: 11px;
 }
 
@@ -52,31 +48,38 @@ window#waybar {
   font-size: 10px;
 }
 
+/* Default workspace = neutral surface */
 #workspaces button {
   background: @surface_alpha;
-  color: @text;
-  border: 1px solid @hl_low;
+  color: @muted;                 /* inactive should look “off” */
+  border: 1px solid @overlay;    /* light surface border */
   border-radius: 6px;
   margin: 2px;
   padding: 3px 6px;
 }
 
+/* Hover = cyan tech highlight */
 #workspaces button:hover {
   background: @overlay_alpha;
-}
-
-#workspaces button.active {
-  background: @hl_med;
-  border-color: @hl_high;
+  border-color: @foam;
   color: @text;
 }
 
+/* Active = razor red "target locked" */
+#workspaces button.active {
+  background: @love;
+  color: @base;                  /* spec: black text on red */
+  border-color: @love;
+}
+
+/* Urgent = still red, but let it glow harder */
 #workspaces button.urgent {
   background: @love;
   color: @base;
+  box-shadow: 0 0 6px rgba(255, 0, 68, 0.55);
 }
 
-/* Shared pill look for ALL modules - FIXED */
+/* Shared pill look for ALL modules */
 #window,
 #cpu,
 #memory,
@@ -98,13 +101,13 @@ window#waybar {
 #custom-alhp {
   background: @surface_alpha;
   color: @text;
-  border: 1px solid @hl_low;
+  border: 1px solid @overlay;
   border-radius: 8px;
   padding: 3px 6px;
   margin: 2px 3px;
 }
 
-/* Universal hover effects - FIXED */
+/* Universal hover = cyan border "scanline" effect */
 #window:hover,
 #cpu:hover,
 #memory:hover,
@@ -125,162 +128,82 @@ window#waybar {
 #custom-hyprsunset:hover,
 #custom-alhp:hover {
   background: @overlay_alpha;
+  border-color: @foam;
 }
 
-/* Window title */
-#window {
-  border-left: 3px solid @iris;
-}
+/* Focus/primary module accents (Apex-Neon logic) */
+#window { border-left: 3px solid @love; }        /* focus = Razor Red */
 
-/* Accents for metrics */
-#cpu {
-  border-left: 3px solid @pine;
-}
+/* Metrics: make them "dashboard semantics" */
+#cpu    { border-left: 3px solid @pine; }        /* success/ok */
+#memory { border-left: 3px solid @iris; }        /* special */
+#disk   { border-left: 3px solid @foam; }        /* info/tech */
+#network{ border-left: 3px solid @foam; }        /* network = cyan (tech accent) */
 
-#memory {
-  border-left: 3px solid @iris;
-}
-
-#disk {
-  border-left: 3px solid @foam;
-}
-
-#network {
-  border-left: 3px solid @gold;
-}
-
-/* Temperature modules - individual styling for standalone use */
-#temperature.cpu {
-  border-left: 3px solid @pine;
-}
-
-#temperature.gpu_hotspot {
-  border-left: 3px solid @rose;
-}
-
-#temperature.nvme {
-  border-left: 3px solid @gold;
-}
+/* Temperature modules */
+#temperature.cpu         { border-left: 3px solid @pine; }
+#temperature.gpu_hotspot { border-left: 3px solid @love; }  /* hot = red, not pink */
+#temperature.nvme        { border-left: 3px solid @gold; }
 
 #temperature.critical {
-  background: @hl_med;
-  color: @love;
+  background: @love;
+  color: @base;                 /* black on red */
   border-left-color: @love;
+  border-color: @love;
 }
 
 /* WirePlumber / audio */
-#wireplumber {
-  border-left: 3px solid @gold;
-}
-
+#wireplumber { border-left: 3px solid @gold; }
 #wireplumber.muted {
   color: @muted;
-  border-left-color: @hl_high;
-}
-
-#wireplumber.microphone {
-  border-left-color: @gold;
-}
-
-#wireplumber.microphone.muted {
-  border-left-color: @hl_high;
-  color: @muted;
+  border-left-color: @overlay;
 }
 
 /* Privacy states */
-#privacy.screencast {
-  border-left: 3px solid @rose;
-}
-
-#privacy.microphone {
-  border-left: 3px solid @gold;
-}
-
-#privacy.camera {
-  border-left: 3px solid @iris;
-}
+#privacy.screencast { border-left: 3px solid @foam; }   /* "active tech" */
+#privacy.microphone { border-left: 3px solid @gold; }
+#privacy.camera     { border-left: 3px solid @iris; }
 
 /* Idle inhibitor */
-#idle_inhibitor.activated {
-  border-left: 3px solid @foam;
-}
-
-#idle_inhibitor.deactivated {
-  border-left: 3px solid @hl_high;
-}
+#idle_inhibitor.activated   { border-left: 3px solid @foam; }
+#idle_inhibitor.deactivated { border-left: 3px solid @overlay; color: @muted; }
 
 /* Gamemode */
-#gamemode {
-  border-left: 3px solid @gold;
-}
+#gamemode { border-left: 3px solid @gold; }
 
 /* Clock */
-#clock {
-  border-left: 3px solid @foam;
-}
+#clock { border-left: 3px solid @foam; }
 
 /* Battery */
-#battery {
-  border-left: 3px solid @foam;
-}
-
-#battery.warning {
-  border-left-color: @gold;
-}
-
-#battery.critical {
-  border-left-color: @love;
-  color: @love;
-}
+#battery { border-left: 3px solid @foam; }
+#battery.warning  { border-left-color: @gold; }
+#battery.critical { border-left-color: @love; color: @love; }
 
 /* Power profiles */
-#power-profiles-daemon {
-  border-left: 3px solid @gold;
-}
-
-#power-profiles-daemon.performance {
-  border-left-color: @love;
-}
-
-#power-profiles-daemon.balanced {
-  border-left-color: @foam;
-}
-
-#power-profiles-daemon.power-saver {
-  border-left-color: @pine;
-}
+#power-profiles-daemon { border-left: 3px solid @gold; }
+#power-profiles-daemon.performance { border-left-color: @love; }
+#power-profiles-daemon.balanced    { border-left-color: @foam; }
+#power-profiles-daemon.power-saver { border-left-color: @pine; }
 
 /* Bluetooth */
-#bluetooth {
-  border-left: 3px solid @iris;
-}
-
+#bluetooth { border-left: 3px solid @iris; }
 #bluetooth.off,
 #bluetooth.disabled {
   color: @muted;
-  border-left-color: @hl_high;
+  border-left-color: @overlay;
 }
 
 /* Notifications */
-#custom-swaync {
-  border-left: 3px solid @iris;
-}
-
-#custom-swaync.dnd {
-  border-left-color: @gold;
-}
+#custom-swaync { border-left: 3px solid @iris; }
+#custom-swaync.dnd { border-left-color: @gold; }
 
 /* Night shift */
-#custom-hyprsunset {
-  border-left: 3px solid @rose;
-}
+#custom-hyprsunset { border-left: 3px solid @foam; } /* tech accent instead of rose */
 
-/* ALHP custom module - FIXED */
-#custom-alhp {
-  border-left: 3px solid @pine;
-}
+/* ALHP custom module */
+#custom-alhp { border-left: 3px solid @pine; }
 
-/* Group wrappers (no extra padding to avoid width growth) */
+/* Group wrappers */
 #group-temps,
 #group-volume {
   background: transparent;
@@ -289,68 +212,43 @@ window#waybar {
   padding: 0;
 }
 
-#custom-temps-cycle {
-  border-left: 3px solid @rose;
-}
+#custom-temps-cycle { border-left: 3px solid @foam; }
 
-#group-temps #temperature {
-  margin: 2px 0;
-}
+#group-temps #temperature { margin: 2px 0; }
+#group-temps #temperature:hover { background: @overlay_alpha; border-color: @foam; }
 
-#group-temps #temperature:hover {
-  background: @overlay_alpha;
-}
-
-/* Temperature modules within group - maintain specific colors */
-#group-temps #temperature.cpu {
-  border-left: 3px solid @pine;
-}
-
-#group-temps #temperature.gpu_edge {
-  border-left: 3px solid @iris;
-}
-
-#group-temps #temperature.gpu_hotspot {
-  border-left: 3px solid @rose;
-}
-
-#group-temps #temperature.nvme {
-  border-left: 3px solid @gold;
-}
+/* Preserve semantics within group */
+#group-temps #temperature.cpu         { border-left: 3px solid @pine; }
+#group-temps #temperature.gpu_edge    { border-left: 3px solid @iris; }
+#group-temps #temperature.gpu_hotspot { border-left: 3px solid @love; }
+#group-temps #temperature.nvme        { border-left: 3px solid @gold; }
 
 #group-temps #temperature.critical {
-  background: @hl_med;
-  color: @text;
+  background: @love;
+  color: @base;
 }
 
 /* Tray */
-#tray {
-  border-left: 3px solid @iris;
-}
-
-#tray > .passive {
-  opacity: 0.7;
-}
-
+#tray { border-left: 3px solid @iris; }
+#tray > .passive { opacity: 0.7; }
 #tray > .needs-attention {
   border-left: 3px solid @love;
+  box-shadow: 0 0 6px rgba(255, 0, 68, 0.55);
 }
 
+/* Volume group sizing */
 #group-volume #wireplumber {
   margin: 1px 0;
   padding: 2px 4px;
 }
-
-#group-volume #wireplumber:hover {
-  background: @overlay_alpha;
-}
+#group-volume #wireplumber:hover { background: @overlay_alpha; border-color: @foam; }
 
 /* Tooltips */
 tooltip,
 window#waybar tooltip {
   background: @surface;
   color: @text;
-  border: 1px solid @hl_low;
+  border: 1px solid @overlay;
   border-radius: 8px;
   padding: 6px 8px;
 }
@@ -362,7 +260,7 @@ popover,
 .popover {
   background: @surface;
   color: @text;
-  border: 1px solid @hl_low;
+  border: 1px solid @overlay;
   border-radius: 8px;
   padding: 6px 8px;
 }
@@ -378,16 +276,16 @@ menuitem,
 menuitem:hover,
 .menuitem:hover {
   background: @overlay_alpha;
+  border: 1px solid @foam;
 }
 
 menuitem:disabled,
-.menuitem:disabled {
-  color: @muted;
-}
+.menuitem:disabled { color: @muted; }
 
 menu separator,
 .menu separator {
-  background: @hl_low;
+  background: @overlay;
   min-height: 1px;
   margin: 6px 0;
 }
+

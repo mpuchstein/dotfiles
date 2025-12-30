@@ -12,7 +12,6 @@ zmodule utility
 zmodule fzf
 zmodule ssh
 zmodule git
-zmodule romkatv/powerlevel10k --use degit
 zmodule joke/zim-yq
 zmodule joke/zim-kubectl
 zmodule https://github.com/fdellwing/zsh-bat.git
