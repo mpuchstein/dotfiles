@@ -1,0 +1,10 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "/home/mpuchstein/Dev/Themes/apex/dist/gemini/apex-neon.json"
+  }
+}

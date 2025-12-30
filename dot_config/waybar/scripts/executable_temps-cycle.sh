@@ -3,6 +3,14 @@ set -euo pipefail
 
 cycle_seconds=3
 
+# Critical thresholds (deg C) to match module semantics
+cpu_warn=80
+cpu_crit=85
+gpu_warn=100
+gpu_crit=110
+nvme_warn=75
+nvme_crit=85
+
 resolve_hwmon_file() {
   local base="$1" file="$2" sub
   if [[ -r "$base/$file" ]]; then
@@ -55,35 +63,61 @@ gpu_path="/sys/devices/pci0000:00/0000:00:01.1/0000:10:00.0/0000:11:00.0/0000:12
 nvme_path="/sys/devices/pci0000:00/0000:00:02.2/0000:23:00.0/nvme/nvme0/hwmon"
 
 labels=()
+keys=()
 icons=()
 values=()
+warn=()
+crit=()
 
 if temp=$(read_temp "$cpu_path" "temp1_input" "k10temp"); then
   labels+=("CPU")
+  keys+=("cpu")
   icons+=("")
   values+=("$temp")
+  warn+=("$cpu_warn")
+  crit+=("$cpu_crit")
 fi
 
 if temp=$(read_temp "$gpu_path" "temp2_input" "amdgpu"); then
   labels+=("GPU")
+  keys+=("gpu_hotspot")
   icons+=("")
   values+=("$temp")
+  warn+=("$gpu_warn")
+  crit+=("$gpu_crit")
 fi
 
 if temp=$(read_temp "$nvme_path" "temp1_input" "nvme"); then
   labels+=("NVMe")
+  keys+=("nvme")
   icons+=("")
   values+=("$temp")
+  warn+=("$nvme_warn")
+  crit+=("$nvme_crit")
 fi
 
 count=${#values[@]}
 if (( count == 0 )); then
-  printf '{"text":" --","tooltip":"No temp sensors found"}\n'
+  jq -nc --arg text " --" --arg tooltip "No temp sensors found" \
+    '{text:$text, tooltip:$tooltip, class:["down"]}'
   exit 0
 fi
 
 idx=$(( ($(date +%s) / cycle_seconds) % count ))
-text="${icons[idx]} ${values[idx]}°C"
+val=${values[idx]}
+key=${keys[idx]}
+warn_threshold=${warn[idx]}
+critical_threshold=${crit[idx]}
+
+is_warning=false
+is_critical=false
+if (( val >= critical_threshold )); then
+  is_critical=true
+elif (( val >= warn_threshold )); then
+  is_warning=true
+fi
+
+text="${icons[idx]} ${val}°C"
 
 tooltip=""
 for i in "${!values[@]}"; do
@@ -93,4 +127,10 @@ for i in "${!values[@]}"; do
   tooltip+="${labels[i]}: ${values[i]}°C"
 done
 
-printf '{"text":"%s","tooltip":"%s"}\n' "$text" "$tooltip"
+jq -nc \
+  --arg text "$text" \
+  --arg tooltip "$tooltip" \
+  --arg key "$key" \
+  --argjson is_warning "$is_warning" \
+  --argjson is_critical "$is_critical" \
+  '{text:$text, tooltip:$tooltip, class: ([$key] + (if $is_critical then ["critical"] elif $is_warning then ["warning"] else [] end)) }'

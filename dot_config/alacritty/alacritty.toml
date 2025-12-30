@@ -1,12 +1,12 @@
 [general]
-import = [
-"/home/mpuchstein/.config/alacritty/themes/themes/github_dark.toml"
-]
+import = ["~/.config/alacritty/themes/apex-neon.toml"]
+
 live_config_reload = true
 ipc_socket = true
 
 [window]
 opacity = 0.7
+padding = { x = 4, y = 4 }
 
 [font]
 normal = { family = "Inconsolata Nerd Font Mono", style = "Regular" }
@@ -14,3 +14,6 @@ size = 9
 
 [mouse]
 hide_when_typing = true
+
+[cursor]
+style = { shape = "Beam", blinking = "Off" }

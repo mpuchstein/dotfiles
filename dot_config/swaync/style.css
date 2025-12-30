@@ -1,252 +1,201 @@
-@define-color rp-base #050505;
-@define-color rp-surface #141414;
-@define-color rp-overlay #262626;
-@define-color rp-hl-low #141414;
-@define-color rp-hl-med #262626;
-@define-color rp-hl-high #404040;
+/* Apex Neon for SwayNotificationCenter
+   State over decoration. If it isn't important, it doesn't glow. */
 
-@define-color rp-muted #404040;
-@define-color rp-subtle #404040;
-@define-color rp-text #ededed;
+@define-color base   #050505;  /* Void */
+@define-color surface #141414; /* Panel */
+@define-color overlay #262626; /* Border */
+@define-color text   #ededed;  /* Foreground */
+@define-color muted  #737373;  /* Subtext */
 
-@define-color rp-love #ff0044;
-@define-color rp-gold #ffb700;
-@define-color rp-rose #ff80bf;
-@define-color rp-pine #00ff99;
-@define-color rp-foam #00eaff;
-@define-color rp-iris #9d00ff;
-
-/* Apex Neon palette */
-
-@define-color cc-bg @rp-surface;
-@define-color noti-border-color @rp-hl-high;
-@define-color noti-bg @rp-overlay;
-@define-color noti-bg-darker @rp-hl-low;
-@define-color noti-bg-hover @rp-hl-med;
-@define-color noti-bg-focus alpha(@rp-hl-high, 0.6);
-@define-color text-color @rp-text;
-@define-color text-color-disabled @rp-subtle;
-@define-color bg-selected @rp-foam;
+@define-color red    #ff0044;  /* Active intent / destructive */
+@define-color cyan   #00eaff;  /* Info / hover */
+@define-color green  #00ff99;  /* Enabled / OK */
+@define-color purple #9d00ff;  /* Special mode */
+@define-color alert  #ff8899;  /* Critical (distinct from "you are here" red) */
 
 * {
-  font-family: JetBrainsMono NFP;
-  font-weight: bold;
-  font-size: 14px;
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+  font-size: 12px;
+  color: @text;
 }
 
-.control-center .notification-row:focus,
-.control-center .notification-row:hover {
-opacity: 1;
-background: @noti-bg-darker;
-}
-
-.notification-row {
-outline: none;
-margin: 20px;
-padding: 0;
-}
-
-.notification {
-background: transparent;
-margin: 0px;
-}
-
-.notification-content {
-background: @cc-bg;
-padding: 7px;
-border-radius: 0px;
-border: 2px solid @noti-border-color;
-margin: 0;
-}
-
-.close-button {
-background: @rp-gold;
-color: @cc-bg;
-text-shadow: none;
-padding: 0;
-border-radius: 0px;
-margin-top: 5px;
-margin-right: 5px;
-}
-
-.close-button:hover {
-box-shadow: none;
-background: @rp-rose;
-color: @cc-bg;
-transition: all .15s ease-in-out;
-border: none;
-}
-
-.notification-action {
-color: @text-color;
-border: 2px solid @noti-border-color;
-border-top: none;
-border-radius: 0px;
-background: @rp-base;
-}
-
-.notification-default-action:hover,
-.notification-action:hover {
-color: @text-color;
-background: @noti-bg-hover;
-}
-
-.summary {
-padding-top: 7px;
-font-size: 13px;
-color: @text-color;
-}
-
-.time {
-font-size: 11px;
-color: @rp-gold;
-margin-right: 24px;
-}
-
-.body {
-font-size: 12px;
-color: @text-color;
+/* ===== Windows ===== */
+.control-center,
+.notification-window {
+  background-color: rgba(5, 5, 5, 0.92);
 }
 
 .control-center {
-background: @cc-bg;
-border: 2px solid @noti-border-color;
-border-radius: 0px;
+  border: 2px solid @overlay;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.70);
 }
 
-.control-center-list {
-background: transparent;
+.notification-window {
+  border: 2px solid @overlay;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.70);
 }
 
-.control-center-list-placeholder {
-opacity: .5;
-}
-
-.floating-notifications {
-background: transparent;
-}
-
-.blank-window {
-background: alpha(@rp-base, 0.1);
-}
-
+/* ===== Title row ===== */
 .widget-title {
-color: @text-color;
-background: @noti-bg-darker;
-padding: 5px 10px;
-margin: 10px 10px 5px 10px;
-font-size: 1.5rem;
-border-radius: 5px;
+  margin-bottom: 8px;
 }
 
-.widget-title > button {
-font-size: 1rem;
-color: @text-color;
-text-shadow: none;
-background: @noti-bg;
-box-shadow: none;
-border-radius: 5px;
+.widget-title label {
+  font-size: 15px;
+  font-weight: 800;
 }
 
-.widget-title > button:hover {
-background: @rp-gold;
-color: @cc-bg;
+.widget-title button {
+  background-color: @surface;
+  border: 1px solid @overlay;
+  border-radius: 10px;
+  padding: 6px 10px;
 }
 
+.widget-title button:hover {
+  border-color: @red;
+}
+
+.widget-title button:active {
+  background-color: @red;
+  color: @base; /* text turns black on red, non-negotiable */
+}
+
+/* ===== DND ===== */
 .widget-dnd {
-background: @noti-bg-darker;
-padding: 5px 10px;
-margin: 5px 10px 10px 10px;
-border-radius: 5px;
-font-size: large;
-color: @text-color;
+  background-color: @surface;
+  border: 1px solid @overlay;
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
 }
 
-.widget-dnd > switch {
-border-radius: 4px;
-background: @rp-muted;
+.widget-dnd label {
+  font-weight: 700;
 }
 
-.widget-dnd > switch:checked {
-background: @rp-gold;
-border: 1px solid @rp-gold;
+.widget-dnd switch {
+  background-color: @overlay;
+  border-radius: 999px;
+  padding: 3px;
 }
 
-.widget-dnd > switch slider {
-background: @cc-bg;
-border-radius: 5px;
+.widget-dnd switch slider {
+  background-color: @text;
+  border-radius: 999px;
+  min-width: 18px;
+  min-height: 18px;
 }
 
-.widget-dnd > switch:checked slider {
-background: @cc-bg;
-border-radius: 5px;
+.widget-dnd switch:checked {
+  background-color: @purple;
 }
 
-.widget-label {
-margin: 10px 10px 5px 10px;
+.widget-dnd switch:checked slider {
+  background-color: @base;
 }
 
-.widget-label > label {
-font-size: 1rem;
-color: @text-color;
+/* ===== Notifications list: remove "giant grey slab" ===== */
+.widget-notifications {
+  background-color: transparent;
 }
 
-.widget-mpris {
-color: @text-color;
-background: @noti-bg-darker;
-padding: 5px 10px 0px 0px;
-margin: 5px 10px 5px 10px;
-border-radius: 0px;
+.notification-group,
+.notification-group-headers,
+.notification-group-icon {
+  background-color: transparent;
 }
 
-.widget-mpris > box > button {
-border-radius: 5px;
+/* ===== Notification card ===== */
+.notification-row {
+  background-color: transparent;
+  margin: 0 0 8px 0;
+  outline: none;
 }
 
-.widget-mpris-player {
-padding: 5px 10px;
-margin: 10px;
+.notification {
+  background-color: @surface;
+  border: 1px solid @overlay;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.60);
 }
 
-.widget-mpris-title {
-font-weight: 700;
-font-size: 1.25rem;
+.notification-row:hover .notification {
+  border-color: @cyan;
 }
 
-.widget-mpris-subtitle {
-font-size: 1.1rem;
-color: @text-color-disabled;
+.notification-row:focus .notification {
+  border-color: @red;
 }
 
-.widget-buttons-grid {
-font-size: x-large;
-padding: 5px;
-margin: 5px 10px 10px 10px;
-border-radius: 5px;
-background: @noti-bg-darker;
+/* Urgency */
+.notification.critical {
+  border-color: @alert;
+  box-shadow: 0 0 0 1px @alert;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button {
-margin: 3px;
-background: @cc-bg;
-border-radius: 5px;
-color: @text-color;
-border: 1px solid @noti-border-color;
+.image {
+  border-radius: 10px;
+  margin-right: 8px;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-background: @rp-gold;
-color: @cc-bg;
+.summary {
+  font-weight: 800;
+  font-size: 13px;
 }
 
-.widget-menubar > box > .menu-button-bar > button {
-border: none;
-background: transparent;
-color: @text-color;
+.body {
+  color: @muted;
+  margin-top: 2px;
 }
 
-.topbar-buttons > button {
-border: none;
-background: transparent;
-color: @text-color;
+.time {
+  color: @cyan;
+  font-weight: 700;
+}
+
+/* Notification actions */
+.notification-action {
+  background-color: @overlay;
+  border-radius: 10px;
+  padding: 5px 8px;
+  margin-top: 6px;
+}
+
+.notification-action:hover {
+  box-shadow: inset 0 0 0 1px @cyan;
+}
+
+.notification-action:active {
+  background-color: @cyan;
+  color: @base;
+}
+
+/* Close button */
+.close-button {
+  background-color: @overlay;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.close-button:hover {
+  background-color: @red;
+  color: @base;
+}
+
+.close-button:active {
+  background-color: @red;
+  color: @base;
+}
+
+/* ===== Popup notifications container (safe even if class names differ) ===== */
+.floating-notifications.background {
+  background-color: transparent;
+  padding: 0;
 }

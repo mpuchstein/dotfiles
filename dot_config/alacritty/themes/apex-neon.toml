@@ -1,0 +1,63 @@
+# APEX NEON — Alacritty theme (colors only)
+
+[colors.primary]
+background = "#050505"
+foreground = "#ededed"
+dim_foreground = "#737373"
+bright_foreground = "#ffffff"
+
+[colors.cursor]
+text = "#050505"
+cursor = "#ff0044"
+
+[colors.vi_mode_cursor]
+text = "#050505"
+cursor = "#00eaff"
+
+[colors.selection]
+text = "#050505"
+background = "#ff0044"
+
+[colors.search.matches]
+foreground = "#050505"
+background = "#ff0044"
+
+[colors.search.focused_match]
+foreground = "#050505"
+background = "#ffb700"
+
+[colors.hints.start]
+foreground = "#050505"
+background = "#ffb700"
+
+[colors.hints.end]
+foreground = "#050505"
+background = "#00eaff"
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#ededed"
+background = "#141414"
+
+[colors.normal]
+black = "#050505"
+red = "#ff0044"
+green = "#00ff99"
+yellow = "#ffb700"
+blue = "#00eaff"
+magenta = "#9d00ff"
+cyan = "#00eaff"
+white = "#ededed"
+
+[colors.bright]
+black = "#262626"
+red = "#ff8899"
+green = "#2bffb2"
+yellow = "#ffd24d"
+blue = "#5af3ff"
+magenta = "#c84dff"
+cyan = "#5af3ff"
+white = "#ffffff"

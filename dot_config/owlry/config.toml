@@ -1,28 +1,60 @@
 # Owlry Configuration
-# Copy to ~/.config/owlry/config.toml
+# Copy to: ~/.config/owlry/config.toml
+#
+# File Locations (XDG Base Directory compliant):
+# ┌─────────────────────────────────────────────────────────────────────┐
+# │ Config:  ~/.config/owlry/config.toml        Main configuration     │
+# │ Themes:  ~/.config/owlry/themes/*.css       Custom theme files     │
+# │ Style:   ~/.config/owlry/style.css          CSS overrides          │
+# │ Plugins: ~/.config/owlry/plugins/           User Lua/Rune plugins  │
+# │ Scripts: ~/.local/share/owlry/scripts/      Executable scripts     │
+# │ Data:    ~/.local/share/owlry/frecency.json Usage history          │
+# └─────────────────────────────────────────────────────────────────────┘
+#
+# System Plugin Locations:
+# ┌─────────────────────────────────────────────────────────────────────┐
+# │ Native:   /usr/lib/owlry/plugins/*.so       Installed plugins      │
+# │ Runtimes: /usr/lib/owlry/runtimes/*.so      Lua/Rune runtimes      │
+# └─────────────────────────────────────────────────────────────────────┘
+
+# ═══════════════════════════════════════════════════════════════════════
+# GENERAL
+# ═══════════════════════════════════════════════════════════════════════
 
 [general]
 show_icons = true
-max_results = 10
-terminal_command = "kitty" # Auto-detected if not set
+max_results = 100
 
-# Launch wrapper for app execution (auto-detected if not set)
-# Examples:
-#   "uwsm app --"              # For uwsm sessions
-#   "hyprctl dispatch exec --" # For Hyprland
-#   ""                         # Direct execution
+# Terminal emulator for SSH, scripts, etc.
+# Auto-detection order: $TERMINAL → xdg-terminal-exec → DE-native → Wayland → X11 → xterm
+# Uncomment to override:
+# terminal_command = "kitty"
+
+# Launch wrapper for app execution (auto-detected for uwsm/Hyprland)
+# Examples: "uwsm app --", "hyprctl dispatch exec --", ""
 # launch_wrapper = "uwsm app --"
 
+# Header tabs - providers shown as toggle buttons (Ctrl+1, Ctrl+2, etc.)
+# Values: app, cmd, uuctl, bookmark, calc, clip, dmenu, emoji, file, script, ssh, sys, web
+tabs = ["app", "cmd", "uuctl"]
+
+# ═══════════════════════════════════════════════════════════════════════
+# APPEARANCE
+# ═══════════════════════════════════════════════════════════════════════
+
 [appearance]
-width = 600
-height = 400
+width = 850
+height = 650
 font_size = 14
 border_radius = 12
 
-# Theme: "owl" for built-in dark theme, or leave unset for GTK default
+# Theme name - loads ~/.config/owlry/themes/{name}.css
+# Built-in: owl, catppuccin-mocha, dracula, gruvbox-dark, nord,
+#           one-dark, rose-pine, solarized-dark, tokyo-night
+# Or leave unset for GTK default
 theme = "apex-neon"
 
-# Individual color overrides (CSS color values)
+# Color overrides (applied on top of theme)
 # [appearance.colors]
 # background = "#1a1b26"
 # background_secondary = "#24283b"
@@ -31,47 +63,58 @@ theme = "apex-neon"
 # text_secondary = "#565f89"
 # accent = "#7aa2f7"
 # accent_bright = "#89b4fa"
-# badge_app = "#9ece6a"
-# badge_calc = "#e0af68"
-# badge_cmd = "#7aa2f7"
-# badge_dmenu = "#bb9af7"
-# badge_uuctl = "#f7768e"
+
+# ═══════════════════════════════════════════════════════════════════════
+# PLUGINS
+# ═══════════════════════════════════════════════════════════════════════
+#
+# All installed plugins are loaded by default. Use 'disabled' to blacklist.
+# Plugin IDs: calculator, system, ssh, clipboard, emoji, scripts, bookmarks,
+#             websearch, filesearch, systemd, weather, media, pomodoro
+
+[plugins]
+# Plugins to disable (by ID)
+disabled = []
+
+# Examples:
+# disabled = ["emoji", "pomodoro"]     # Disable specific plugins
+# disabled = ["weather", "media"]      # Disable widget plugins
+
+# ─────────────────────────────────────────────────────────────────────────
+# Per-plugin configuration via [plugins.<name>] sections
+# ─────────────────────────────────────────────────────────────────────────
+
+# Weather widget plugin
+[plugins.weather]
+provider = "open-meteo" # wttr.in (default), openweathermap, open-meteo
+location = ""           # City name, "lat,lon", or empty for auto-detect
+# api_key = ""          # Required for OpenWeatherMap
+
+# Pomodoro timer plugin
+[plugins.pomodoro]
+work_mins = 25 # Work session duration
+break_mins = 5 # Break duration
+
+# ═══════════════════════════════════════════════════════════════════════
+# CORE PROVIDERS
+# ═══════════════════════════════════════════════════════════════════════
+#
+# These are built into the core binary, not plugins.
 
 [providers]
-applications = true
-commands = true
-uuctl = true
+# Core providers (always available)
+applications = true # .desktop applications from XDG dirs
+commands = true     # Executables from $PATH
 
-# Calculator provider (type "= 5+3" or "calc 5+3")
-calculator = true
-
-# Frecency: boost frequently/recently used items in search results
+# Frecency - boost frequently/recently used items
+# Data stored in: ~/.local/share/owlry/frecency.json
 frecency = true
 frecency_weight = 0.3 # 0.0 = disabled, 1.0 = strong boost
 
-# Web search provider (type "? query" or "web query")
-websearch = true
-# Options: google, duckduckgo, bing, startpage, searxng, brave, ecosia
-# Or custom URL with {query} placeholder, e.g. "https://search.example.com/?q={query}"
+# Web Search settings
 search_engine = "duckduckgo"
+# Options: google, duckduckgo, bing, startpage, searxng, brave, ecosia
 
-# System commands (shutdown, reboot, lock, suspend, hibernate, logout, BIOS)
-system = true
-
-# SSH connections from ~/.ssh/config
-ssh = true
-
-# Clipboard history (requires cliphist)
-clipboard = true
-
-# Browser bookmarks (Chrome, Chromium, Brave, Edge, Vivaldi)
-bookmarks = true
-
-# Emoji picker (copies to clipboard)
-emoji = true
-
-# Custom scripts from ~/.config/owlry/scripts/
-scripts = true
-
-# File search (requires fd or locate, trigger with "/ pattern" or "find pattern")
-files = true
+# File Search settings
+file_search_max_results = 50
+# file_search_paths = ["/home", "/etc"]  # Custom paths (default: $HOME)
