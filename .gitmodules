@@ -1,0 +1,9 @@
+[submodule "dot_local/share/docs/external_chezmoi-docs"]
+	path = dot_local/share/docs/external_chezmoi-docs
+	url = https://github.com/twpayne/chezmoi.git
+[submodule "dot_local/share/docs/external_hyprland.wiki"]
+	path = dot_local/share/docs/external_hyprland.wiki
+	url = https://github.com/hyprwm/hyprland-wiki.git
+[submodule "dot_local/share/docs/external_waybar.wiki"]
+	path = dot_local/share/docs/external_waybar.wiki
+	url = https://github.com/Alexays/Waybar.wiki.git

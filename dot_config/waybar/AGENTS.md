@@ -3,7 +3,6 @@
 ## Project Structure & Module Organization
 This is a chezmoi dotfiles source tree scoped to Waybar. The current directory maps to `~/.config/waybar/` on apply.
 - `dot_config/waybar/` contains Waybar config, style, and module files.
-- `dot_config/waybar/waybar.wiki/` is a mirrored upstream doc set with `dot_git/` metadata; avoid editing unless intentionally updating the mirror.
 - Host-specific variants use `##hostname.<name>` suffixes (e.g., `config##hostname.laptop`).
 
 ## Chezmoi Config (chezmoi.toml)

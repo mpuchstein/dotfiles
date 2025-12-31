@@ -7,7 +7,6 @@ This directory is the Hyprland portion of a chezmoi dotfiles source tree. Key pa
 - `dot_profile.tmpl` renders to `~/.profile`.
 - `.chezmoiscripts/` holds chezmoi hooks such as `run_onchange_*`.
 - Host-specific variants use `##hostname.<name>` (e.g., `hyprpaper.conf##hostname.owlenlap01`).
-- `dot_config/hypr/hyprland.wiki/` is a mirrored docs subtree; treat it as upstream unless intentionally updating.
 
 Hyprland configuration lives here in `hyprland.conf`, with modular includes under `hyprland.d/` and related configs like `hypridle.conf`, `hyprlock.conf.tmpl`, and `hyprpaper.conf.tmpl`.
 
@@ -72,4 +71,3 @@ No established Git history. Use concise, imperative commit subjects with optiona
 - Screenshots for visible UI changes.
 
 ## Agent-Specific Notes
-When editing mirrored docs under `dot_config/hypr/hyprland.wiki/`, treat them as upstream mirrors unless explicitly asked to update.

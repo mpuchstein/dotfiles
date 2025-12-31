@@ -22,8 +22,16 @@ The directory structure follows standard `chezmoi` conventions:
     *   **`zsh/`**: Zsh configuration, including `dot_zshrc` (mapped to `~/.config/zsh/.zshrc`).
     *   **`waybar/`**: Waybar configuration and styles.
 *   **`dot_local/`**: Maps to `~/.local/`. Contains scripts and local data.
+    *   **`dot_local/share/docs/`**: Local docs area populated by git submodules using the `external_` attribute (renders to `~/.local/share/docs/`).
 *   **`.chezmoiscripts/`**: Contains scripts that run when `chezmoi apply` is executed (e.g., `run_onchange_...`).
 *   **`dot_profile.tmpl`**: A template that renders to `~/.profile`, handling environment variables. It uses tags (e.g., `dev`, `desktop`) to conditionally include configurations.
+
+## Documentation
+
+*   **Chezmoi docs:** `dot_local/share/docs/external_chezmoi-docs` (sparse checkout `assets/chezmoi.io`) renders to `~/.local/share/docs/chezmoi-docs`.
+*   **Hyprland wiki:** `dot_local/share/docs/external_hyprland.wiki` (sparse checkout `content`) renders to `~/.local/share/docs/hyprland.wiki`.
+*   **Waybar wiki:** `dot_local/share/docs/external_waybar.wiki` renders to `~/.local/share/docs/waybar.wiki`.
+*   **Waybar man pages:** Not stored in the repo; use `man 5 waybar` and `man 5 waybar-<module>`.
 
 ## Usage
 

@@ -7,7 +7,13 @@ This is a chezmoi dotfiles source tree. Key paths:
 - `dot_profile.tmpl` renders to `~/.profile`.
 - `.chezmoiscripts/` contains chezmoi hooks (e.g., `run_onchange_*` scripts).
 - Host-specific variants use `##hostname.<name>` (e.g., `hyprpaper.conf##hostname.owlenlap01`).
-- `dot_config/waybar/waybar.wiki/` and `dot_config/hypr/hyprland.wiki/` are mirrored docs with `dot_git/` metadata; treat them as upstream mirrors unless intentionally updating.
+
+## Documentation
+- Docs live under `dot_local/share/docs/` as git submodules and use the `external_` attribute so chezmoi does not interpret their contents.
+- `dot_local/share/docs/external_chezmoi-docs` (sparse checkout `assets/chezmoi.io`) renders to `~/.local/share/docs/chezmoi-docs`.
+- `dot_local/share/docs/external_hyprland.wiki` (sparse checkout `content`) renders to `~/.local/share/docs/hyprland.wiki`.
+- `dot_local/share/docs/external_waybar.wiki` renders to `~/.local/share/docs/waybar.wiki`.
+- Waybar manual pages are not stored in the repo; use `man 5 waybar` and `man 5 waybar-<module>` for module docs.
 
 ## Chezmoi Config (chezmoi.toml)
 - Source of truth: `~/.config/chezmoi/chezmoi.toml` (not tracked here).

@@ -2,19 +2,11 @@ splash = true
 splash_offset = 2.0
 ipc = true
 
-{{- $preloads := dict -}}
-{{- range .monitors -}}
-  {{- if .wallpaper -}}
-    {{- $_ := set $preloads .wallpaper 1 -}}
-  {{- end -}}
-{{- end -}}
-
-{{- range $path, $_ := $preloads }}
-preload = {{ $path }}
-{{- end }}
-
 {{- range .monitors }}
   {{- if .wallpaper }}
-wallpaper = {{ .name }}, {{ .wallpaper }}
+wallpaper {
+  monitor = {{ .name }}
+  path = {{ .wallpaper }}
+}
   {{- end }}
 {{- end }}
