@@ -1,0 +1,147 @@
+/* Apex Aeon — SwayNC Theme */
+/* DNA: State over Decoration */
+
+@define-color void #f5f5f5;
+@define-color stark #0a0a0a;
+@define-color razor #ff0044;
+@define-color tech #007a88;
+@define-color toxic #00b377;
+@define-color amber #d18f00;
+@define-color alert #ff4d6d;
+
+@define-color panel #e8e8e8;
+@define-color border #737373;
+@define-color stealth #a0a0a0;
+@define-color dim #737373;
+
+/* SwayNC Specific Variables */
+@define-color noti-bg @panel;
+@define-color noti-fg @stark;
+@define-color noti-border-color @border;
+@define-color noti-bg-hover @border;
+@define-color noti-bg-focus @border;
+@define-color noti-bg-critical @razor;
+@define-color noti-fg-critical @void;
+
+@define-color mpris-bg @panel;
+@define-color mpris-fg @stark;
+
+@define-color bg-selected @razor;
+@define-color fg-selected @void;
+
+/* Base Structure */
+* {
+  font-family: "GeistMono Nerd Font";
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.control-center {
+  background: @void;
+  border: 2px solid @razor;
+  border-radius: 0;
+  margin: 10px;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.notification {
+  background: @noti-bg;
+  border: 1px solid @noti-border-color;
+  border-radius: 0;
+  margin: 5px;
+  padding: 10px;
+}
+
+.notification-content {
+  background: transparent;
+}
+
+.notification-default-action:hover {
+  background: @noti-bg-hover;
+}
+
+.notification-critical {
+  background: @noti-bg-critical;
+  color: @noti-fg-critical;
+}
+
+.notification-critical .notification-content {
+  color: @noti-fg-critical;
+}
+
+.notification-group {
+  background: transparent;
+}
+
+.notification-group-headers {
+  color: @dim;
+}
+
+.notification-group-icon {
+  color: @razor;
+}
+
+.mpris {
+  background: @mpris-bg;
+  border: 1px solid @border;
+  border-radius: 0;
+  margin: 5px;
+}
+
+.mpris-title {
+  color: @stark;
+  font-weight: bold;
+}
+
+.mpris-subtitle {
+  color: @dim;
+}
+
+.widget-title {
+  color: @razor;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.widget-label {
+  color: @stark;
+}
+
+.widget-dnd {
+  color: @tech;
+}
+
+.widget-mpris {
+  background: transparent;
+}
+
+.widget-buttons-grid {
+  background: @panel;
+  padding: 10px;
+  margin: 5px;
+}
+
+.widget-buttons-grid > button {
+  background: @void;
+  border: 1px solid @border;
+  border-radius: 0;
+  color: @stark;
+}
+
+.widget-buttons-grid > button:hover {
+  background: @razor;
+  color: @void;
+}
+
+.widget-menubar > button {
+  background: transparent;
+  color: @stark;
+}
+
+.widget-menubar > button:hover {
+  background: @razor;
+  color: @void;
+}
