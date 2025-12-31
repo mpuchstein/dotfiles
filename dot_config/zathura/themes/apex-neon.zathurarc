@@ -1,0 +1,46 @@
+# Apex Neon — Zathura Theme
+# DNA: State over Decoration
+
+# Core
+set default-bg              "#050505"
+set default-fg              "#ededed"
+
+# Status Bar
+set statusbar-bg            "#141414"
+set statusbar-fg            "#ededed"
+
+# Input Bar
+set inputbar-bg             "#141414"
+set inputbar-fg             "#ededed"
+
+# Completion
+set completion-bg           "#141414"
+set completion-fg           "#ededed"
+set completion-group-bg     "#262626"
+set completion-group-fg     "#737373"
+set completion-highlight-bg "#ff0044"
+set completion-highlight-fg "#050505"
+
+# Notifications
+set notification-bg         "#141414"
+set notification-fg         "#ededed"
+set notification-error-bg   "#ff8899"
+set notification-error-fg   "#050505"
+set notification-warning-bg "#ffb700"
+set notification-warning-fg "#050505"
+
+# Selection & Highlight
+set highlight-color         "rgba(ff0044, 0.5)"
+set highlight-active-color  "rgba(ff0044, 0.8)"
+
+# Recolor (Dark Mode for PDFs)
+# In Neon (Dark), we want dark paper (background) and light ink (foreground).
+# In Aeon (Light), we want light paper and dark ink (standard).
+set recolor-lightcolor      "#050505"
+set recolor-darkcolor       "#ededed"
+
+# Default recolor state
+# Ideally, only true for dark themes, but Zathura config is static.
+# Users can toggle with Ctrl+R.
+set recolor                 "false"
+set recolor-keephue         "true"

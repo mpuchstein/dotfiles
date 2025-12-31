@@ -37,7 +37,7 @@ brush-smooth-history-size = 0
 
 # Font to use for text annotations
 [font]
-family = "InconsolataGo Nerd Font Mono"
+family = "GeistMono Nerd Font"
 style = "Regular"
 
 # Custom colours for the colour palette

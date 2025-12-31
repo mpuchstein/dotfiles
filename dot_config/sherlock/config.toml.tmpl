@@ -44,7 +44,7 @@ exec_inplace = "control-return"
 
 [files]
 config = "/home/mpuchstein/.config/sherlock/config.toml"
-css = "/home/mpuchstein/.config/sherlock/themes/apex-neon.css"
+css = "{{ .chezmoi.homeDir }}/.config/sherlock/themes/{{ .chezmoi.config.data.theme }}.css"
 # css = "/home/mpuchstein/.config/sherlock/themes/rose-pine_v3.css"
 fallback = "/home/mpuchstein/.config/sherlock/fallback.json"
 alias = "/home/mpuchstein/.config/sherlock/sherlock_alias.json"

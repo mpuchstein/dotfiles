@@ -31,9 +31,8 @@
 
 /* Base Structure */
 * {
-  font-family: "GeistMono Nerd Font";
+  font-family: "JetBrainsMono Nerd Font";
   font-weight: 500;
-  font-size: 12px;
 }
 
 .control-center {
@@ -103,7 +102,7 @@
 .widget-title {
   color: @razor;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .widget-label {

@@ -45,7 +45,7 @@ window,
 .root {
   background-color: var(--rp-base);
   color: var(--rp-text);
-  font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font",
+  font-family: "GeistMono Nerd Font", "FiraCode Nerd Font",
                "Iosevka", system-ui, sans-serif;
 }
 
@@ -257,4 +257,3 @@ scrollbar slider {
 .info-label {
   color: var(--rp-foam);
 }
-

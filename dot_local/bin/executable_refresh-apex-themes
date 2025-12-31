@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+apex_dist="${APEX_DIST_DIR:-$HOME/Dev/Themes/apex/dist}"
+
+if [[ ! -d "$apex_dist" ]]; then
+  echo "apex dist not found: $apex_dist" >&2
+  exit 1
+fi
+
+source_dir="${CHEZMOI_SOURCE_DIR:-}"
+if [[ -z "$source_dir" ]] && command -v chezmoi >/dev/null 2>&1; then
+  source_dir="$(chezmoi source-path 2>/dev/null || true)"
+fi
+if [[ -z "$source_dir" ]] && [[ -d "./dot_config" ]]; then
+  source_dir="$(pwd)"
+fi
+if [[ -z "$source_dir" ]]; then
+  echo "could not determine chezmoi source dir (set CHEZMOI_SOURCE_DIR)" >&2
+  exit 1
+fi
+
+mkdir -p "$source_dir/dot_config/alacritty/themes"
+cp "$apex_dist/alacritty/"*.toml "$source_dir/dot_config/alacritty/themes/"
+
+mkdir -p "$source_dir/dot_config/btop/themes"
+cp "$apex_dist/btop/"*.theme "$source_dir/dot_config/btop/themes/"
+
+mkdir -p "$source_dir/dot_config/fuzzel/themes"
+for src in "$apex_dist"/fuzzel/*-fuzzel.ini; do
+  base="$(basename "$src" -fuzzel.ini)"
+  cp "$src" "$source_dir/dot_config/fuzzel/themes/${base}.ini"
+done
+
+mkdir -p "$source_dir/dot_config/gtk-4.0"
+cp "$apex_dist/gtk4/gtk.css" "$source_dir/dot_config/gtk-4.0/gtk.css"
+
+mkdir -p "$source_dir/dot_gemini/themes"
+cp "$apex_dist/gemini/"*.json "$source_dir/dot_gemini/themes/"
+
+mkdir -p "$source_dir/dot_config/ghostty/themes"
+cp "$apex_dist/ghostty/"* "$source_dir/dot_config/ghostty/themes/"
+
+mkdir -p "$source_dir/dot_config/hypr/hyprland.d"
+for src in "$apex_dist"/hyprland/*-colors.conf; do
+  base="$(basename "$src" -colors.conf)"
+  cp "$src" "$source_dir/dot_config/hypr/hyprland.d/theme-${base}.conf"
+done
+
+mkdir -p "$source_dir/dot_config/kitty/themes"
+cp "$apex_dist/kitty/"*.conf "$source_dir/dot_config/kitty/themes/"
+
+mkdir -p "$source_dir/dot_config/nvim/colors"
+cp "$apex_dist/nvim/colors/"*.lua "$source_dir/dot_config/nvim/colors/"
+
+mkdir -p "$source_dir/dot_config/owlry/themes"
+cp "$apex_dist/owlry/"*.css "$source_dir/dot_config/owlry/themes/"
+
+mkdir -p "$source_dir/dot_config/sherlock/themes"
+cp "$apex_dist/sherlock/"*.css "$source_dir/dot_config/sherlock/themes/"
+
+mkdir -p "$source_dir/dot_config/spicetify/private_Themes/apex-neon"
+cp "$apex_dist/spicetify/apex-neon-color.ini" "$source_dir/dot_config/spicetify/private_Themes/apex-neon/color.ini"
+cp "$apex_dist/spicetify/apex-neon-user.css" "$source_dir/dot_config/spicetify/private_Themes/apex-neon/user.css"
+
+mkdir -p "$source_dir/dot_config/spicetify/private_Themes/apex-aeon"
+cp "$apex_dist/spicetify/apex-aeon-color.ini" "$source_dir/dot_config/spicetify/private_Themes/apex-aeon/color.ini"
+cp "$apex_dist/spicetify/apex-aeon-user.css" "$source_dir/dot_config/spicetify/private_Themes/apex-aeon/user.css"
+
+mkdir -p "$source_dir/dot_config/swaync/themes"
+for src in "$apex_dist"/swaync/*-style.css; do
+  base="$(basename "$src" -style.css)"
+  cp "$src" "$source_dir/dot_config/swaync/themes/${base}.css"
+done
+
+mkdir -p "$source_dir/dot_config/waybar/themes"
+for src in "$apex_dist"/waybar/*-colors.css; do
+  base="$(basename "$src" -colors.css)"
+  cp "$src" "$source_dir/dot_config/waybar/themes/${base}.css"
+done
+
+mkdir -p "$source_dir/dot_config/wezterm/colors"
+cp "$apex_dist/wezterm/"*.toml "$source_dir/dot_config/wezterm/colors/"
+
+mkdir -p "$source_dir/dot_config/zathura/themes"
+for src in "$apex_dist"/zathura/*-zathurarc; do
+  base="$(basename "$src" -zathurarc)"
+  cp "$src" "$source_dir/dot_config/zathura/themes/${base}.zathurarc"
+done
+
+mkdir -p "$source_dir/dot_config/zed/themes"
+cp "$apex_dist/zed/"*.json "$source_dir/dot_config/zed/themes/"
+
+mkdir -p "$source_dir/dot_config/zsh"
+for src in "$apex_dist"/zsh/*.zsh-theme; do
+  base="$(basename "$src" .zsh-theme)"
+  cp "$src" "$source_dir/dot_config/zsh/${base}.zsh"
+done
+
+printf "Refreshed apex themes from %s -> %s\n" "$apex_dist" "$source_dir"

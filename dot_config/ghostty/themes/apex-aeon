@@ -1,0 +1,26 @@
+# Apex Aeon - Ghostty theme
+# DNA: State over Decoration
+
+background = #f5f5f5
+foreground = #0a0a0a
+
+cursor-color = #ff0044
+selection-background = #ff0044
+selection-foreground = #0a0a0a
+
+palette = 0=#0a0a0a
+palette = 1=#ff0044
+palette = 2=#00b377
+palette = 3=#d18f00
+palette = 4=#007a88
+palette = 5=#7a3cff
+palette = 6=#007a88
+palette = 7=#f5f5f5
+palette = 8=#737373
+palette = 9=#ff4d6d
+palette = 10=#33d6a6
+palette = 11=#ffbf40
+palette = 12=#33bccc
+palette = 13=#a680ff
+palette = 14=#33bccc
+palette = 15=#ffffff

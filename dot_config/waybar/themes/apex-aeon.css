@@ -1,0 +1,25 @@
+/* Apex Aeon — Waybar Color Palette */
+/* DNA: State over Decoration */
+
+@define-color void #f5f5f5;
+@define-color stark #0a0a0a;
+@define-color razor #ff0044;
+@define-color tech #007a88;
+@define-color toxic #00b377;
+@define-color amber #d18f00;
+@define-color sacred #7a3cff;
+@define-color alert #ff4d6d;
+
+@define-color panel #e8e8e8;
+@define-color border #737373;
+@define-color stealth #a0a0a0;
+@define-color dim #737373;
+
+/* Semantic mappings for easier integration */
+@define-color background @void;
+@define-color foreground @stark;
+@define-color accent @razor;
+@define-color info @tech;
+@define-color success @toxic;
+@define-color warning @amber;
+@define-color error @alert;

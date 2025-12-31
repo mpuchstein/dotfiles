@@ -1,0 +1,35 @@
+# APEX NEON - WezTerm color scheme
+# Spec-accurate: color = state, not decoration
+
+[colors]
+foreground = "#ededed"
+background = "#050505"
+
+cursor_bg = "#ff0044"
+cursor_border = "#ff0044"
+cursor_fg = "#050505"
+
+selection_bg = "#ff0044"
+selection_fg = "#050505"
+
+ansi = [
+  "#050505",
+  "#ff0044",
+  "#00ff99",
+  "#ffb700",
+  "#00eaff",
+  "#9d00ff",
+  "#00eaff",
+  "#ededed",
+]
+
+brights = [
+  "#737373",
+  "#ff8899",
+  "#2bffb2",
+  "#ffd24d",
+  "#5af3ff",
+  "#c84dff",
+  "#5af3ff",
+  "#ffffff",
+]

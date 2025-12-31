@@ -1,4 +1,4 @@
-# Apex Neon — Predator Cockpit (Zsh) — v1
+# Apex Aeon — Predator Cockpit (Zsh) — v1
 # Two-bus design:
 #   [precmd radar]  -> after-action + context bursts (event-driven)
 #   [promptline]    -> LEFT: identity + territory
@@ -10,18 +10,18 @@ setopt no_beep
 zmodload zsh/datetime 2>/dev/null
 
 # -----------------------------------------------------------------------------
-# 1) PALETTE (Apex Neon DNA)
+# 1) PALETTE (Apex Aeon DNA)
 # -----------------------------------------------------------------------------
 typeset -gA C
-C[VOID]="#050505"
-C[WHITE]="#ededed"
+C[VOID]="#f5f5f5"
+C[WHITE]="#0a0a0a"
 C[MUTED]="#737373"
 C[RAZOR]="#ff0044"
-C[CYAN]="#00eaff"
-C[GOLD]="#ffb700"
-C[OK]="#00ff99"
-C[PURPLE]="#9d00ff"
-C[ALERT]="#ff8899"
+C[CYAN]="#007a88"
+C[GOLD]="#d18f00"
+C[OK]="#00b377"
+C[PURPLE]="#7a3cff"
+C[ALERT]="#ff4d6d"
 
 # -----------------------------------------------------------------------------
 # 2) ICONS / GLYPHS (Nerd Font optional)

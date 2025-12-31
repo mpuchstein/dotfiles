@@ -1,7 +1,7 @@
 
 
 /*
- * Owlry - Apex Neon Theme
+ * Owlry - Apex Aeon Theme
  * "State over Decoration."
  *
  * A high-contrast theme built for focus and clinical clarity.
@@ -9,52 +9,52 @@
  *
  * Author: S0wlz (Owlibou)
  *
- * Usage: Set theme = "apex-neon" in config.toml
+ * Usage: Set theme = "apex-aeon" in config.toml
  */
 
 :root {
     /* Core surfaces */
-    --owlry-bg: #050505;
-    --owlry-bg-secondary: #141414;
-    --owlry-border: #262626;
-    --owlry-text: #ededed;
+    --owlry-bg: #f5f5f5;
+    --owlry-bg-secondary: #e8e8e8;
+    --owlry-border: #737373;
+    --owlry-text: #0a0a0a;
     --owlry-text-secondary: #737373;
 
     /* The Predator - primary accent */
     --owlry-accent: #ff0044;
-    --owlry-accent-bright: #ff8899;
+    --owlry-accent-bright: #ff4d6d;
 
     /* Provider badges - mapped to Apex semantics */
-    --owlry-badge-app: #00eaff;        /* Cyan: apps are informational */
-    --owlry-badge-bookmark: #ffb700;   /* Yellow: bookmarks need attention */
-    --owlry-badge-calc: #ffd24d;       /* Bright Yellow: calculator results */
-    --owlry-badge-clip: #9d00ff;       /* Purple: clipboard is special */
-    --owlry-badge-cmd: #9d00ff;        /* Purple: commands are elevated */
-    --owlry-badge-dmenu: #00ff99;      /* Green: dmenu is success/pipe */
-    --owlry-badge-emoji: #c84dff;      /* Bright Purple: emoji is special */
-    --owlry-badge-file: #5af3ff;       /* Bright Cyan: file search is active info */
-    --owlry-badge-script: #2bffb2;     /* Bright Green: scripts execute successfully */
-    --owlry-badge-ssh: #00eaff;        /* Cyan: SSH is technical/info */
+    --owlry-badge-app: #007a88;        /* Cyan: apps are informational */
+    --owlry-badge-bookmark: #d18f00;   /* Yellow: bookmarks need attention */
+    --owlry-badge-calc: #ffbf40;       /* Bright Yellow: calculator results */
+    --owlry-badge-clip: #7a3cff;       /* Purple: clipboard is special */
+    --owlry-badge-cmd: #7a3cff;        /* Purple: commands are elevated */
+    --owlry-badge-dmenu: #00b377;      /* Green: dmenu is success/pipe */
+    --owlry-badge-emoji: #a680ff;      /* Bright Purple: emoji is special */
+    --owlry-badge-file: #33bccc;       /* Bright Cyan: file search is active info */
+    --owlry-badge-script: #33d6a6;     /* Bright Green: scripts execute successfully */
+    --owlry-badge-ssh: #007a88;        /* Cyan: SSH is technical/info */
     --owlry-badge-sys: #ff0044;        /* Red: system actions are critical */
-    --owlry-badge-uuctl: #ffb700;      /* Yellow: uuctl requires attention */
-    --owlry-badge-web: #00eaff;        /* Cyan: web is informational */
+    --owlry-badge-uuctl: #d18f00;      /* Yellow: uuctl requires attention */
+    --owlry-badge-web: #007a88;        /* Cyan: web is informational */
 
     /* Widget badges */
-    --owlry-badge-media: #c84dff;      /* Bright Purple: media is special */
-    --owlry-badge-weather: #5af3ff;    /* Bright Cyan: weather is active info */
-    --owlry-badge-pomo: #ff8899;       /* Alert Red: pomodoro demands attention */
+    --owlry-badge-media: #a680ff;      /* Bright Purple: media is special */
+    --owlry-badge-weather: #33bccc;    /* Bright Cyan: weather is active info */
+    --owlry-badge-pomo: #ff4d6d;       /* Alert Red: pomodoro demands attention */
 }
 
 .owlry-main {
-    background-color: rgba(5, 5, 5, 0.98);
-    border: 1px solid rgba(38, 38, 38, 0.8);
+    background-color: rgba(245, 245, 245, 0.98);
+    border: 1px solid rgba(115, 115, 115, 0.8);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8),
                 0 0 0 1px rgba(255, 0, 68, 0.1);
 }
 
 .owlry-search {
-    background-color: rgba(20, 20, 20, 0.9);
-    border: 2px solid rgba(38, 38, 38, 0.8);
+    background-color: rgba(232, 232, 232, 0.9);
+    border: 2px solid rgba(115, 115, 115, 0.8);
     color: var(--owlry-text);
     caret-color: var(--owlry-accent);
 }
@@ -65,7 +65,7 @@
 }
 
 .owlry-result-row:hover {
-    background-color: rgba(20, 20, 20, 0.8);
+    background-color: rgba(232, 232, 232, 0.8);
 }
 
 .owlry-result-row:selected {
@@ -83,52 +83,52 @@
 
 /* Provider badges - styled per Apex semantics */
 .owlry-badge-app {
-    background-color: rgba(0, 234, 255, 0.15);
+    background-color: rgba(0, 122, 136, 0.15);
     color: var(--owlry-badge-app);
 }
 
 .owlry-badge-bookmark {
-    background-color: rgba(255, 183, 0, 0.15);
+    background-color: rgba(209, 143, 0, 0.15);
     color: var(--owlry-badge-bookmark);
 }
 
 .owlry-badge-calc {
-    background-color: rgba(255, 210, 77, 0.15);
+    background-color: rgba(255, 191, 64, 0.15);
     color: var(--owlry-badge-calc);
 }
 
 .owlry-badge-clip {
-    background-color: rgba(157, 0, 255, 0.15);
+    background-color: rgba(122, 60, 255, 0.15);
     color: var(--owlry-badge-clip);
 }
 
 .owlry-badge-cmd {
-    background-color: rgba(157, 0, 255, 0.15);
+    background-color: rgba(122, 60, 255, 0.15);
     color: var(--owlry-badge-cmd);
 }
 
 .owlry-badge-dmenu {
-    background-color: rgba(0, 255, 153, 0.15);
+    background-color: rgba(0, 179, 119, 0.15);
     color: var(--owlry-badge-dmenu);
 }
 
 .owlry-badge-emoji {
-    background-color: rgba(200, 77, 255, 0.15);
+    background-color: rgba(166, 128, 255, 0.15);
     color: var(--owlry-badge-emoji);
 }
 
 .owlry-badge-file {
-    background-color: rgba(90, 243, 255, 0.15);
+    background-color: rgba(51, 188, 204, 0.15);
     color: var(--owlry-badge-file);
 }
 
 .owlry-badge-script {
-    background-color: rgba(43, 255, 178, 0.15);
+    background-color: rgba(51, 214, 166, 0.15);
     color: var(--owlry-badge-script);
 }
 
 .owlry-badge-ssh {
-    background-color: rgba(0, 234, 255, 0.15);
+    background-color: rgba(0, 122, 136, 0.15);
     color: var(--owlry-badge-ssh);
 }
 
@@ -138,28 +138,28 @@
 }
 
 .owlry-badge-uuctl {
-    background-color: rgba(255, 183, 0, 0.15);
+    background-color: rgba(209, 143, 0, 0.15);
     color: var(--owlry-badge-uuctl);
 }
 
 .owlry-badge-web {
-    background-color: rgba(0, 234, 255, 0.15);
+    background-color: rgba(0, 122, 136, 0.15);
     color: var(--owlry-badge-web);
 }
 
 /* Widget badges */
 .owlry-badge-media {
-    background-color: rgba(200, 77, 255, 0.15);
+    background-color: rgba(166, 128, 255, 0.15);
     color: var(--owlry-badge-media);
 }
 
 .owlry-badge-weather {
-    background-color: rgba(90, 243, 255, 0.15);
+    background-color: rgba(51, 188, 204, 0.15);
     color: var(--owlry-badge-weather);
 }
 
 .owlry-badge-pomo {
-    background-color: rgba(255, 136, 153, 0.15);
+    background-color: rgba(255, 77, 109, 0.15);
     color: var(--owlry-badge-pomo);
 }
 

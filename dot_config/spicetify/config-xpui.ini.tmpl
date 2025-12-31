@@ -1,7 +1,7 @@
 [Setting]
 spotify_path           = $HOME/.local/share/spotify-launcher/install/usr/share/spotify/
-current_theme          = apex-neon
-color_scheme           = apex-neon
+current_theme          = {{ .chezmoi.config.data.theme }}
+color_scheme           = {{ .chezmoi.config.data.theme }}
 inject_theme_js        = 1
 replace_colors         = 1
 always_enable_devtools = 0

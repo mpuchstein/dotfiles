@@ -1,0 +1,25 @@
+/* Apex Neon — Waybar Color Palette */
+/* DNA: State over Decoration */
+
+@define-color void #050505;
+@define-color stark #ededed;
+@define-color razor #ff0044;
+@define-color tech #00eaff;
+@define-color toxic #00ff99;
+@define-color amber #ffb700;
+@define-color sacred #9d00ff;
+@define-color alert #ff8899;
+
+@define-color panel #141414;
+@define-color border #262626;
+@define-color stealth #404040;
+@define-color dim #737373;
+
+/* Semantic mappings for easier integration */
+@define-color background @void;
+@define-color foreground @stark;
+@define-color accent @razor;
+@define-color info @tech;
+@define-color success @toxic;
+@define-color warning @amber;
+@define-color error @alert;

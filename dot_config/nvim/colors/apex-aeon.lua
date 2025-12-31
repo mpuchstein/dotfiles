@@ -1,36 +1,36 @@
--- Apex Neon: Standalone Theme Engine
+-- Apex Aeon: Standalone Theme Engine
 -- Philosophy: State over Decoration. Red is Presence. Cyan is Data.
 
 local M = {}
 
 M.palette = {
   -- The Void
-  void = "#050505", -- Background
-  panel = "#141414", -- Dark Surface (Statusline/Gutter)
-  border = "#262626", -- Muted Border
-  stealth = "#404040", -- Comments / Ignored
+  void = "#f5f5f5", -- Background
+  panel = "#e8e8e8", -- Dark Surface (Statusline/Gutter)
+  border = "#737373", -- Muted Border
+  stealth = "#a0a0a0", -- Comments / Ignored
 
   -- The Signal
-  text = "#ededed", -- Stark White
+  text = "#0a0a0a", -- Stark White
   dim = "#737373", -- Muted Text
 
   -- The Hunter (Presence)
   razor = "#ff0044", -- PRIMARY: Cursor, Current Match, Active Border
-  alert = "#ff8899", -- ERROR: Readable text on Red
+  alert = "#ff4d6d", -- ERROR: Readable text on Red
 
   -- The HUD (Data)
-  tech = "#00eaff", -- INFO: Selection, Search Match, Constants
-  toxic = "#00ff99", -- SUCCESS: Strings
-  amber = "#ffb700", -- WARNING: Types, Search
-  azure = "#0088cc", -- STRUCT: Functions (Deep Blue)
-  sacred = "#9d00ff", -- SPECIAL: Keywords, Root
+  tech = "#007a88", -- INFO: Selection, Search Match, Constants
+  toxic = "#00b377", -- SUCCESS: Strings
+  amber = "#d18f00", -- WARNING: Types, Search
+  azure = "#005577", -- STRUCT: Functions (Deep Blue)
+  sacred = "#7a3cff", -- SPECIAL: Keywords, Root
 }
 
 function M.load()
   vim.cmd "hi clear"
   if vim.fn.exists "syntax_on" then vim.cmd "syntax reset" end
-  vim.o.background = "dark"
-  vim.g.colors_name = "apex-neon"
+  vim.o.background = "light"
+  vim.g.colors_name = "apex-aeon"
 
   local p = M.palette
   local groups = {

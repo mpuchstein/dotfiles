@@ -3,6 +3,7 @@
   "name": "Apex",
   "author": "S0wlz (Owlibou)",
   "themes": [
+    
     {
       "name": "Apex Neon",
       "appearance": "dark",
@@ -137,7 +138,7 @@
         "terminal.ansi.magenta": "#9d00ff",
         "terminal.ansi.cyan": "#00eaff",
         "terminal.ansi.white": "#ededed",
-        "terminal.ansi.bright_black": "#262626",
+        "terminal.ansi.bright_black": "#737373",
         "terminal.ansi.bright_red": "#ff8899",
         "terminal.ansi.bright_green": "#2bffb2",
         "terminal.ansi.bright_yellow": "#ffd24d",
@@ -314,6 +315,7 @@
         }
       }
     },
+    
     {
       "name": "Apex Aeon",
       "appearance": "light",
@@ -324,7 +326,7 @@
         "elevated_surface.background": "#ffffff",
         "panel.background": "#e8e8e8",
         "panel.focused_border": "#ff0044",
-        "panel.indent_guide": "#a0a0a066",
+        "panel.indent_guide": "#73737366",
         "panel.indent_guide_active": "#737373aa",
         "panel.indent_guide_hover": "#737373cc",
         "tab_bar.background": "#e8e8e8",
@@ -358,14 +360,14 @@
           "#d18f00"
         ],
         "element.background": "#ffffff",
-        "element.hover": "#e8e8e8",
-        "element.active": "#e8e8e8",
-        "element.selected": "#e8e8e8",
+        "element.hover": "#737373",
+        "element.active": "#737373",
+        "element.selected": "#737373",
         "element.disabled": "#e8e8e8",
         "ghost_element.background": null,
-        "ghost_element.hover": "#a0a0a033",
-        "ghost_element.active": "#a0a0a044",
-        "ghost_element.selected": "#a0a0a033",
+        "ghost_element.hover": "#73737366",
+        "ghost_element.active": "#73737388",
+        "ghost_element.selected": "#73737366",
         "ghost_element.disabled": null,
         "drop_target.background": "#33bccc22",
         "editor.background": "#f5f5f5",
@@ -376,14 +378,14 @@
         "editor.highlighted_line.background": "#e8e8e8",
         "editor.line_number": "#737373",
         "editor.active_line_number": "#ff0044",
-        "editor.wrap_guide": "#e8e8e8",
-        "editor.active_wrap_guide": "#a0a0a0",
-        "editor.indent_guide": "#a0a0a066",
+        "editor.wrap_guide": "#737373",
+        "editor.active_wrap_guide": "#737373",
+        "editor.indent_guide": "#73737366",
         "editor.indent_guide_active": "#737373aa",
-        "editor.invisible": "#a0a0a088",
+        "editor.invisible": "#73737388",
         "editor.document_highlight.read_background": "#007a881a",
         "editor.document_highlight.write_background": "#ff00441a",
-        "editor.document_highlight.bracket_background": "#a0a0a033",
+        "editor.document_highlight.bracket_background": "#73737366",
         "search.match_background": "#33bccc44",
         "scrollbar.track.background": "#f5f5f5",
         "scrollbar.track.border": "#f5f5f5",
@@ -431,10 +433,10 @@
         "conflict.border": "#ff4d6d",
         "ignored": "#737373",
         "ignored.background": "#7373731a",
-        "ignored.border": "#a0a0a0",
+        "ignored.border": "#737373",
         "hidden": "#737373",
         "hidden.background": "#7373731a",
-        "hidden.border": "#a0a0a0",
+        "hidden.border": "#737373",
         "terminal.background": "#f5f5f5",
         "terminal.foreground": "#0a0a0a",
         "terminal.bright_foreground": "#0a0a0a",
@@ -625,5 +627,6 @@
         }
       }
     }
+    
   ]
 }

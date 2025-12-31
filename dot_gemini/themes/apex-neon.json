@@ -1,0 +1,24 @@
+{
+  "name": "Apex Neon",
+  "type": "custom",
+  "Background": "#050505",
+  "Foreground": "#ededed",
+  "LightBlue": "#5af3ff",
+  "AccentBlue": "#00eaff",
+  "AccentPurple": "#9d00ff",
+  "AccentCyan": "#5af3ff",
+  "AccentGreen": "#00ff99",
+  "AccentYellow": "#ffb700",
+  "AccentRed": "#ff0044",
+  "Comment": "#737373",
+  "Gray": "#404040",
+  "DiffAdded": "#00ff99",
+  "DiffRemoved": "#ff0044",
+  "DiffModified": "#ffb700",
+  "text": {
+    "primary": "#ededed",
+    "secondary": "#737373",
+    "accent": "#00eaff",
+    "response": "#ededed"
+  }
+}

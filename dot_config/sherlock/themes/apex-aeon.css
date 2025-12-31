@@ -1,15 +1,15 @@
 
-/* Apex Neon - Sherlock Theme (Parser Compliant) */
+/* Apex Aeon - Sherlock Theme (Parser Compliant) */
 
 /* 1. PALETTE DEFINITIONS */
-@define-color apex_base          #050505;
-@define-color apex_surface       #141414;
-@define-color apex_overlay       #262626;
-@define-color apex_muted         #404040;
-@define-color apex_text          #ededed;
+@define-color apex_base          #f5f5f5;
+@define-color apex_surface       #e8e8e8;
+@define-color apex_overlay       #737373;
+@define-color apex_muted         #a0a0a0;
+@define-color apex_text          #0a0a0a;
 @define-color apex_love          #ff0044;
-@define-color apex_foam          #00eaff;
-@define-color apex_gold          #ffb700;
+@define-color apex_foam          #007a88;
+@define-color apex_gold          #d18f00;
 
 /* 2. WINDOW & INPUT */
 window {
@@ -37,7 +37,7 @@ entry:focus {
 
 entry selection {
     background-color: @apex_foam;
-    color: #050505;
+    color: #0a0a0a;
 }
 
 /* 3. LIST & SELECTION */
@@ -48,7 +48,7 @@ listview {
 /* The actual row selection - Informational */
 listview > row:selected {
     background-color: @apex_foam;
-    color: #050505;
+    color: #0a0a0a;
     border-radius: 7px;
     border: none;
     outline: none;
@@ -68,7 +68,7 @@ listview > row:selected .tile,
 listview > row:selected .launcher-tile,
 listview > row:selected .item {
     background-color: transparent;
-    color: #050505;
+    color: #0a0a0a;
 }
 
 /* Force TEXT on selection */
@@ -76,13 +76,13 @@ listview > row:selected label,
 listview > row:selected .title,
 listview > row:selected .description,
 listview > row:selected .subtitle {
-    color: #050505;
+    color: #0a0a0a;
 }
 
 /* Force ICONS on selection */
 listview > row:selected image,
 listview > row:selected .icon {
-    color: #050505;
+    color: #0a0a0a;
 }
 
 /* 5. WIDGETS (Weather Fix without !important) */

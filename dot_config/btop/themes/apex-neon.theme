@@ -1,0 +1,89 @@
+# Apex Neon — Btop Theme
+# DNA: State over Decoration
+
+# Main background, empty for terminal default, black for dark themes
+theme[main_bg]="#050505"
+
+# Main text color
+theme[main_fg]="#ededed"
+
+# Title color for boxes
+theme[title]="#ededed"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#ff0044"
+
+# Background color of selected item in processes box
+theme[selected_bg]="#ff0044"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#050505"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#737373"
+
+# Color of text appearing on top of graphs, i.e. usage percentage
+theme[graph_text]="#737373"
+
+# Background color of the percentage meters
+theme[meter_bg]="#141414"
+
+# Misc colors for processes box including mini cpu graphs, used memory percentage, and entries filter
+theme[proc_misc]="#00eaff"
+
+# Cpu box outline color
+theme[cpu_box]="#262626"
+
+# Memory box outline color
+theme[mem_box]="#262626"
+
+# Net box outline color
+theme[net_box]="#262626"
+
+# Processes box outline color
+theme[proc_box]="#262626"
+
+# Box divider line and small boxes line color
+theme[div_line]="#262626"
+
+# Temperature graph colors
+theme[temp_start]="#00eaff"
+theme[temp_mid]="#9d00ff"
+theme[temp_end]="#ff0044"
+
+# CPU graph colors
+theme[cpu_start]="#00eaff"
+theme[cpu_mid]="#9d00ff"
+theme[cpu_end]="#ff0044"
+
+# Mem graph colors
+theme[free_start]="#00ff99"
+theme[free_mid]="#ffb700"
+theme[free_end]="#ff0044"
+
+theme[cached_start]="#00eaff"
+theme[cached_mid]="#9d00ff"
+theme[cached_end]="#ff0044"
+
+theme[available_start]="#00ff99"
+theme[available_mid]="#ffb700"
+theme[available_end]="#ff0044"
+
+theme[used_start]="#00eaff"
+theme[used_mid]="#9d00ff"
+theme[used_end]="#ff0044"
+
+# Download graph colors
+theme[download_start]="#00eaff"
+theme[download_mid]="#9d00ff"
+theme[download_end]="#ff0044"
+
+# Upload graph colors
+theme[upload_start]="#00eaff"
+theme[upload_mid]="#9d00ff"
+theme[upload_end]="#ff0044"
+
+# Process path color
+theme[process_start]="#00eaff"
+theme[process_mid]="#9d00ff"
+theme[process_end]="#ff0044"

@@ -1,0 +1,243 @@
+@import "themes/{{ .chezmoi.config.data.theme }}.css";
+
+@define-color bar_bg alpha(@background, 0.85);
+@define-color pill_bg alpha(@panel, 0.9);
+@define-color pill_hover alpha(@panel, 0.98);
+@define-color alert_shadow alpha(@error, 0.45);
+
+/* Bar */
+window#waybar {
+  background: @bar_bg;
+  color: @foreground;
+  border-bottom: 1px solid @border;
+}
+
+/* Extra breathing room for the first/last pill in each section */
+#left > :first-child,
+#center > :first-child,
+#right > :first-child { margin-top: 6px; }
+
+#left > :last-child,
+#center > :last-child,
+#right > :last-child { margin-bottom: 6px; }
+
+/* Typography */
+* {
+  font-family: "GeistMono Nerd Font", monospace;
+  font-size: 11px;
+}
+
+/* Workspaces */
+#workspaces {
+  margin: 0;
+  padding: 2px 3px;
+  background: transparent;
+  font-size: 10px;
+}
+
+#workspaces button {
+  background: @pill_bg;
+  color: @dim;
+  border: 1px solid @border;
+  border-radius: 5px;
+  margin: 1px;
+  padding: 2px 5px;
+}
+
+#workspaces button:hover {
+  background: @pill_hover;
+  border-color: @accent;
+  color: @foreground;
+}
+
+#workspaces button.active {
+  background: @accent;
+  color: @background;
+  border-color: @accent;
+}
+
+#workspaces button.urgent {
+  background: @error;
+  color: @background;
+  border-color: @error;
+  box-shadow: 0 0 6px @alert_shadow;
+}
+
+/* Shared pill look for ALL modules */
+#cpu,
+#memory,
+#disk,
+#network,
+#privacy,
+#wireplumber,
+#clock,
+#idle_inhibitor,
+#gamemode,
+#battery,
+#power-profiles-daemon,
+#bluetooth,
+#tray,
+#temperature,
+#custom-swaync,
+#custom-temps-cycle,
+#custom-hyprsunset,
+#custom-alhp {
+  background: @pill_bg;
+  color: @foreground;
+  border: 1px solid @border;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: 2px 2px;
+}
+
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#privacy:hover,
+#wireplumber:hover,
+#clock:hover,
+#idle_inhibitor:hover,
+#gamemode:hover,
+#battery:hover,
+#power-profiles-daemon:hover,
+#bluetooth:hover,
+#tray:hover,
+#temperature:hover,
+#custom-swaync:hover,
+#custom-temps-cycle:hover,
+#custom-hyprsunset:hover,
+#custom-alhp:hover {
+  background: @pill_hover;
+  border-color: @accent;
+}
+
+/* State-driven styling: low urgency = border, high urgency = full pill */
+#cpu.warning,
+#memory.warning,
+#disk.warning,
+#battery.warning,
+#temperature.warning,
+#custom-temps-cycle.warning {
+  border-color: @warning;
+}
+
+#custom-alhp.stale,
+#wireplumber.muted {
+  border-color: @warning;
+}
+
+#custom-swaync.unread {
+  border-color: @info;
+}
+
+#idle_inhibitor.activated { border-color: @info; }
+
+#privacy { border-color: @sacred; }
+#privacy-item,
+#privacy-item.screenshare,
+#privacy-item.audio-in,
+#privacy-item.audio-out { color: @sacred; }
+
+#cpu.critical,
+#memory.critical,
+#disk.critical,
+#battery.critical,
+#network.disconnected,
+#network.disabled,
+#temperature.critical,
+#custom-temps-cycle.critical,
+#custom-alhp.bad,
+#custom-alhp.down {
+  background: @error;
+  color: @background;
+  border-color: @error;
+}
+
+#wireplumber.muted { color: @dim; }
+#idle_inhibitor.deactivated { color: @dim; }
+
+/* Group wrappers */
+#group-temps,
+#group-volume {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#custom-temps-cycle.down { color: @dim; }
+
+#group-temps #temperature { margin: 1px 0; }
+#group-temps #temperature:hover { background: @pill_hover; border-color: @accent; }
+
+#group-temps #temperature.critical {
+  background: @error;
+  color: @background;
+  border-color: @error;
+}
+
+#group-temps #temperature.warning { border-color: @warning; }
+
+/* Tray */
+#tray > .passive { opacity: 0.7; }
+#tray > .needs-attention {
+  background: @error;
+  color: @background;
+  border: 1px solid @error;
+  box-shadow: 0 0 6px @alert_shadow;
+}
+
+/* Volume group sizing */
+#group-volume #wireplumber {
+  margin: 1px 0;
+  padding: 2px 3px;
+}
+#group-volume #wireplumber:hover { background: @pill_hover; border-color: @accent; }
+
+/* Tooltips */
+tooltip,
+window#waybar tooltip {
+  background: @panel;
+  color: @foreground;
+  border: 1px solid @border;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+/* Popup menus */
+menu,
+.menu,
+popover,
+.popover {
+  background: @panel;
+  color: @foreground;
+  border: 1px solid @border;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+menuitem,
+.menuitem {
+  background: transparent;
+  color: @foreground;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+menuitem:hover,
+.menuitem:hover {
+  background: @pill_hover;
+  border-color: @accent;
+}
+
+menuitem:disabled,
+.menuitem:disabled { color: @dim; }
+
+menu separator,
+.menu separator {
+  background: @border;
+  min-height: 1px;
+  margin: 6px 0;
+}

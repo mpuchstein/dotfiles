@@ -1,0 +1,26 @@
+# Apex Neon - Ghostty theme
+# DNA: State over Decoration
+
+background = #050505
+foreground = #ededed
+
+cursor-color = #ff0044
+selection-background = #ff0044
+selection-foreground = #050505
+
+palette = 0=#050505
+palette = 1=#ff0044
+palette = 2=#00ff99
+palette = 3=#ffb700
+palette = 4=#00eaff
+palette = 5=#9d00ff
+palette = 6=#00eaff
+palette = 7=#ededed
+palette = 8=#737373
+palette = 9=#ff8899
+palette = 10=#2bffb2
+palette = 11=#ffd24d
+palette = 12=#5af3ff
+palette = 13=#c84dff
+palette = 14=#5af3ff
+palette = 15=#ffffff
