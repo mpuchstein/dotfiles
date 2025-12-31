@@ -32,6 +32,7 @@ The directory structure follows standard `chezmoi` conventions:
 *   **Hyprland wiki:** `dot_local/share/docs/external_hyprland.wiki` (sparse checkout `content`) renders to `~/.local/share/docs/hyprland.wiki`.
 *   **Waybar wiki:** `dot_local/share/docs/external_waybar.wiki` renders to `~/.local/share/docs/waybar.wiki`.
 *   **Waybar man pages:** Not stored in the repo; use `man 5 waybar` and `man 5 waybar-<module>`.
+*   **Ghostty docs:** Available locally at `/usr/share/ghostty`.
 
 ## Usage
 

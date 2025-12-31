@@ -14,6 +14,7 @@ This is a chezmoi dotfiles source tree. Key paths:
 - `dot_local/share/docs/external_hyprland.wiki` (sparse checkout `content`) renders to `~/.local/share/docs/hyprland.wiki`.
 - `dot_local/share/docs/external_waybar.wiki` renders to `~/.local/share/docs/waybar.wiki`.
 - Waybar manual pages are not stored in the repo; use `man 5 waybar` and `man 5 waybar-<module>` for module docs.
+- Ghostty docs are available locally at `/usr/share/ghostty`.
 
 ## Chezmoi Config (chezmoi.toml)
 - Source of truth: `~/.config/chezmoi/chezmoi.toml` (not tracked here).
