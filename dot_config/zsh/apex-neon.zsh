@@ -190,10 +190,12 @@ apex_git_update() {
 
   # Upstream (earned ✓)
   if command git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
-    local counts
+    local counts behind ahead
     counts="$(command git rev-list --left-right --count @{u}...HEAD 2>/dev/null)" || return
-    apex_git_behind="${counts%% *}"
-    apex_git_ahead="${counts##* }"
+    local IFS=$' \t'
+    read -r behind ahead <<<"$counts"
+    apex_git_behind="${behind:-0}"
+    apex_git_ahead="${ahead:-0}"
 
     if (( apex_git_dirty_wt == 0 && apex_git_dirty_ix == 0 )) && [[ -z "$apex_git_op" ]]; then
       [[ "$apex_git_behind" == "0" && "$apex_git_ahead" == "0" ]] && apex_git_up_ok=1
