@@ -54,7 +54,9 @@ APEX[SHOW_VCS]=1
 APEX[SHOW_INTEL]=1
 APEX[SHOW_JOBS]=1
 APEX[SHOW_RO]=1
-APEX[GIT_AHEAD_BEHIND]=0
+APEX[GIT_AHEAD_BEHIND]=1
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${C[MUTED]}"
 
 # Ops commands (also match wrappers like sudo/doas/command)
 APEX[OPS_RE]='^((sudo|doas|command)[[:space:]]+)*((pacman|yay|paru|apt|dnf|brew|systemctl|docker|kubectl|helm|git))([[:space:]]|$)'
@@ -482,4 +484,3 @@ build_prompt() {
 
 PROMPT='$(build_prompt)'
 RPROMPT='$(build_rprompt)'
-
