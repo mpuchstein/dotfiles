@@ -1,0 +1,12 @@
+[Unit]
+Description=Randomize wallpapers every 60 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=60min
+AccuracySec=1min
+Persistent=true
+Unit=awww-manager-random.service
+
+[Install]
+WantedBy=timers.target

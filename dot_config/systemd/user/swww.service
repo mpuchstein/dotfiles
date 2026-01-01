@@ -6,7 +6,7 @@ After=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/swww-daemon
-ExecStartPost=%h/.local/bin/set-wallpapers
+ExecStartPost=%h/.local/bin/awww-manager.py apply
 Restart=on-failure
 RestartSec=1
 

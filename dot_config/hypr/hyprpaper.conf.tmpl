@@ -3,10 +3,8 @@ splash_offset = 2.0
 ipc = true
 
 {{- range .monitors }}
-  {{- if .wallpaper }}
 wallpaper {
   monitor = {{ .name }}
-  path = {{ .wallpaper }}
+  path = ~/.config/wallpaper/{{ .name | lower }}/current
 }
-  {{- end }}
 {{- end }}

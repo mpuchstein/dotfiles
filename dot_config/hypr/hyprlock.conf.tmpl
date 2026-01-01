@@ -1,13 +1,6 @@
-{{- $lock_bg := "" -}}
-{{- with (index .chezmoi.config.data "lockscreen-wallpaper") -}}
-  {{- $lock_bg = . -}}
-{{- end -}}
-{{- if eq $lock_bg "" -}}
-  {{- range .monitors -}}
-    {{- if index . "primary" -}}
-      {{- $lock_bg = .wallpaper -}}
-    {{- end -}}
-  {{- end -}}
+{{- $lock_bg := (index .chezmoi.config.data "lockscreen-wallpaper") -}}
+{{- if not $lock_bg -}}
+  {{- $lock_bg = "~/.config/wallpaper/lockscreen/current" -}}
 {{- end -}}
 general {
   hide_cursor = true

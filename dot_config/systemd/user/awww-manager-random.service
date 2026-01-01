@@ -1,0 +1,8 @@
+[Unit]
+Description=Randomize wallpapers via awww-manager
+After=graphical-session.target swww.service
+Wants=swww.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/awww-manager.py random
