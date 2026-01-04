@@ -32,6 +32,10 @@ function M.load()
   vim.o.background = "dark"
   vim.g.colors_name = "apex-neon"
 
+  -- Transparency: 80% opaque for floating UI
+  vim.o.winblend = 20
+  vim.o.pumblend = 20
+
   local p = M.palette
   local groups = {
     -- CANVAS & UI -----------------------------------------------------------

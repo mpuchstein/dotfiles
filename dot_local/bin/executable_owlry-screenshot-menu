@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+printf '%s\n' \
+  "grimblast --notify copy screen" \
+  "grimblast --notify copy output" \
+  "grimblast --notify copy area" \
+  "grimblast --notify edit screen" \
+  "grimblast --notify edit output" \
+  "grimblast --notify edit area" \
+  | owlry -m dmenu -p "Screenshot" \
+  | sh

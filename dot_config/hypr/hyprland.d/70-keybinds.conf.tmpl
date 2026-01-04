@@ -35,6 +35,9 @@ $lockcmd = loginctl lock-session
 
 $mainMod = SUPER
 
+# Ghostty quick terminal via GlobalShortcuts portal.
+bind = $mainMod, Backspace, global, com.mitchellh.ghostty:toggle_quick_terminal
+
 # Launchers
 bind = $mainMod, Return, exec, $terminal
 bind = $mainMod SHIFT, Return, exec, $term_tmux
@@ -52,12 +55,19 @@ bind = $mainMod, C, exec, $clipman
 bind = $mainMod, R, exec, $pwdmgr
 bind = $mainMod, F4, exec, $soundctl
 
+# Communication
+bind = $mainMod, A, exec, hypr-element-toggle
+bind = $mainMod, D, exec, hypr-comms-toggle
+
+# Mail
+bind = $mainMod SHIFT, A, exec, hypr-mail-toggle
+
+# Gaming
+bind = $mainMod, S, exec, hypr-steam-toggle
+
 # Notifications
 bind = $mainMod, Grave, exec, $notcenter
 bind = $mainMod SHIFT, Grave, exec, $notdnd
-bind = $mainMod, A, exec, $nothide
-bind = $mainMod SHIFT, A, exec, $notclose
-bind = $mainMod CTRL, A, exec, $notcloseall
 
 # Session
 bind = $mainMod, Pause, exec, $lockcmd
@@ -71,8 +81,8 @@ bind = $mainMod SHIFT, F, fullscreen
 bind = $mainMod, I, pin
 
 # Special workspaces
-bind = $mainMod, S, togglespecialworkspace          # show/hide special workspace
-bind = $mainMod SHIFT, S, movetoworkspace, special  # move to the special workspace
+bind = $mainMod SHIFT, Space, togglespecialworkspace          # show/hide special workspace
+bind = $mainMod CTRL, Space, movetoworkspace, special          # move to the special workspace
 bind = $mainMod, N, togglespecialworkspace, keepass
 
 # Master layout
@@ -175,10 +185,6 @@ bindl = , XF86AudioPlay, exec, playerctl play-pause
 bindl = , XF86AudioPrev, exec, playerctl previous
 
 # Screenshot and recording controls
-bind = , Print, exec, grimblast --notify copy output
-bind = CTRL, Print, exec, grimblast --notify edit output
-bind = $mainMod, Print, exec, grimblast --notify edit area
-bind = ALT_L, Print, exec, grimblast --notify copy screen
-bind = ALT_L SHIFT, Print, exec, grimblast --notify edit screen
-
+bind = , Print, exec, grimblast --notify copy screen
+bind = $mainMod, Print, exec, owlry-screenshot-menu
 bind = SHIFT, Print, exec, uwsm app -- ghostty --class=scrrec -e wf-recorder -f ~/Videos/scrrec.mkv -y -g "$(slurp)"

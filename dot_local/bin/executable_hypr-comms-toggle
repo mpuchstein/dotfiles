@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+comms_ws="name:comms"
+comms_name="comms"
+
+active_name=""
+if json="$(hyprctl -j activeworkspace 2>/dev/null)"; then
+  if command -v jq >/dev/null 2>&1; then
+    active_name="$(printf '%s' "$json" | jq -r '.name // empty')"
+  else
+    active_name="$(printf '%s' "$json" | sed -n 's/.*"name":"\\([^"]*\\)".*/\\1/p')"
+  fi
+fi
+
+if [[ -z "$active_name" ]]; then
+  active_name="$(hyprctl activeworkspace 2>/dev/null | sed -n 's/.*(\\(.*\\)).*/\\1/p' | head -n1)"
+fi
+
+if [[ "$active_name" == "$comms_name" || "$active_name" == "$comms_ws" ]]; then
+  hyprctl dispatch workspace previous
+else
+  hyprctl dispatch moveworkspacetomonitor "$comms_ws" current
+  hyprctl dispatch workspace "$comms_ws"
+fi

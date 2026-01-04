@@ -34,6 +34,8 @@ max_results = 100
 # Examples: "uwsm app --", "hyprctl dispatch exec --", ""
 # launch_wrapper = "uwsm app --"
 
+use_uwsm = true
+
 # Header tabs - providers shown as toggle buttons (Ctrl+1, Ctrl+2, etc.)
 # Values: app, cmd, uuctl, bookmark, calc, clip, dmenu, emoji, file, script, ssh, sys, web
 tabs = ["app", "cmd", "uuctl"]
@@ -74,7 +76,7 @@ theme = "{{ .chezmoi.config.data.theme }}"
 
 [plugins]
 # Plugins to disable (by ID)
-disabled = []
+disabled = [ "filesearch" ]
 
 # Examples:
 # disabled = ["emoji", "pomodoro"]     # Disable specific plugins

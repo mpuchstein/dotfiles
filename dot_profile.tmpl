@@ -39,7 +39,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 {{- if (index $tags "desktop") }}
 export ROCM_PATH=/opt/rocm
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
-export HIP_VISIBLE_DEVICES=1
+# export HIP_VISIBLE_DEVICES=1
 export LD_LIBRARY_PATH=/opt/rocm/lib:$LD_LIBRARY_PATH
 {{- end }}
 
