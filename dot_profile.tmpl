@@ -45,4 +45,5 @@ export LD_LIBRARY_PATH=/opt/rocm/lib:$LD_LIBRARY_PATH
 
 {{- if (index $tags "dev") }}
 export UV_CACHE_DIR="{{ .chezmoi.homeDir }}/Dev/uv/uv-cache/"
+export SCIKIT_LEARN_DATA="$HOME/Dev/Jupyter/ml-course/.sklearn_data"
 {{- end }}
