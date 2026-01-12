@@ -15,6 +15,7 @@ $clipman = uwsm app -- owlry -m clipboard
 
 $browser = uwsm app -- firefox
 $browserprv = uwsm app -- firefox --private-window
+$browsernewinst = uwsm app -- firefox --new-instance
 $altbrowser = uwsm app -- chromium
 
 $taskman = uwsm app -- owlry -m uuctl
@@ -36,7 +37,7 @@ $lockcmd = loginctl lock-session
 $mainMod = SUPER
 
 # Ghostty quick terminal via GlobalShortcuts portal.
-bind = $mainMod, Backspace, global, com.mitchellh.ghostty:toggle_quick_terminal
+bind = $mainMod, Backspace, global, com.mitchellh.ghostty:LOGO+BackSpace
 
 # Launchers
 bind = $mainMod, Return, exec, $terminal
@@ -49,6 +50,7 @@ bind = $mainMod CTRL, E, exec, $alteditor
 bind = $mainMod, W, exec, $browser
 bind = $mainMod SHIFT, W, exec, $browserprv
 bind = $mainMod CTRL, W, exec, $altbrowser
+bind = $mainMod ALT, W, exec, $browsernewinst
 bind = $mainMod, Space, exec, $launcher
 bind = $mainMod, X, exec, $taskman
 bind = $mainMod, C, exec, $clipman

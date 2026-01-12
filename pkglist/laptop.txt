@@ -1,0 +1,4 @@
+brightnessctl
+network-manager-applet
+power-profiles-daemon
+upower

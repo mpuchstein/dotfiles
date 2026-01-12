@@ -1,37 +1,41 @@
 {{- $tags := .chezmoi.config.data.tags -}}
-{{- if not (index $tags "cs2") -}}
+{{ if not (index $tags "cs2") -}}
 .local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg
-{{- end -}}
-{{- if not (index $tags "pipewire") -}}
+{{ end -}}
+{{ if not (index $tags "pipewire") -}}
 .config/pipewire/**
-{{- end -}}
-{{- if not (index $tags "hyprland") -}}
+{{ end -}}
+{{ if not (index $tags "hyprland") -}}
 .config/autostart/swayosd-server.desktop
 .config/autostart/waybar.desktop
 .config/hypr/**
-{{- end -}}
+{{ end -}}
 
-{{- if not (index $tags "dev") -}}
+{{ if not (index $tags "niri") -}}
+.config/niri/**
+{{ end -}}
+
+{{ if not (index $tags "dev") -}}
 .config/autostart/jetbrains-toolbox.desktop
-{{- end -}}
+{{ end -}}
 
-{{- if not (index $tags "entertainment") -}}
+{{ if not (index $tags "entertainment") -}}
 .config/autostart/jellyfin-mpv-shim.desktop
 .config/spicetify/**
-{{- end -}}
+{{ end -}}
 
-{{- if not (index $tags "laptop") -}}
+{{ if not (index $tags "laptop") -}}
 .config/autostart/nm-applet.desktop
-{{- end -}}
+{{ end -}}
 
-{{- if not (index $tags "desktop") -}}
+{{ if not (index $tags "desktop") -}}
 .config/autostart/info.mumble.Mumble.desktop
 .config/autostart/vesktop.desktop
 .config/autostart/steam.desktop
 .config/MangoHud/**
-{{- end -}}
+{{ end -}}
 
-
+pkglist/
 
 AGENTS.md
 GEMINI.md

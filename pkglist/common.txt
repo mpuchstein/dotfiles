@@ -1,0 +1,15 @@
+bat
+btop
+chezmoi
+curl
+eza
+fd
+fzf
+git
+jq
+neovim
+otf-geist-mono-nerd
+ripgrep
+tmux
+zoxide
+zsh

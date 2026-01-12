@@ -1,0 +1,14 @@
+jetbrains-toolbox
+ollama
+pandoc-cli
+texlive-basic
+texlive-bibtexextra
+texlive-bin
+texlive-fontsrecommended
+texlive-latex
+texlive-latexextra
+texlive-luatex
+texlive-xetex
+uv
+zathura
+zathura-pdf-mupdf
