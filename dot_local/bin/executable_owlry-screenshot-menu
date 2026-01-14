@@ -9,4 +9,4 @@ printf '%s\n' \
   "grimblast --notify edit output" \
   "grimblast --notify edit area" \
   | owlry -m dmenu -p "Screenshot" \
-  | sh
+  | { read -r cmd && sleep 0.2 && sh -c "$cmd"; }
