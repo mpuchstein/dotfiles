@@ -1,0 +1,31 @@
+#!/bin/sh
+set -eu
+
+node_name="input_usb_condenser_to_mixer"
+
+if ! command -v pw-cli >/dev/null 2>&1; then
+  printf 'pw-cli not found in PATH.\n' >&2
+  exit 1
+fi
+
+if ! command -v wpctl >/dev/null 2>&1; then
+  printf 'wpctl not found in PATH.\n' >&2
+  exit 1
+fi
+
+node_id=$(
+  pw-cli info "$node_name" 2>/dev/null | awk -F' = ' '
+    /object.id/ {
+      gsub(/"/, "", $2)
+      print $2
+      exit
+    }
+  '
+)
+
+if [ -z "${node_id:-}" ]; then
+  printf 'Unable to resolve node "%s".\n' "$node_name" >&2
+  exit 1
+fi
+
+wpctl set-mute "$node_id" toggle

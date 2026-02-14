@@ -1,0 +1,90 @@
+#!/bin/sh
+set -eu
+
+processed_name="processed_mic_output"
+raw_name="raw_mic_output"
+action="${1:-toggle}"
+
+case "$action" in
+  --status|-s)
+    action="status"
+    ;;
+  --help|-h)
+    printf 'Usage: %s [--status]\n' "$0"
+    exit 0
+    ;;
+  toggle|"")
+    action="toggle"
+    ;;
+  *)
+    printf 'Unknown option: %s\n' "$action" >&2
+    exit 2
+    ;;
+esac
+
+if ! command -v pw-cli >/dev/null 2>&1; then
+  printf 'pw-cli not found in PATH.\n' >&2
+  exit 1
+fi
+
+if ! command -v wpctl >/dev/null 2>&1; then
+  printf 'wpctl not found in PATH.\n' >&2
+  exit 1
+fi
+
+get_node_id() {
+  pw-cli info "$1" 2>/dev/null | awk -F' = ' '
+    /object.id/ {
+      gsub(/"/, "", $2)
+      print $2
+      exit
+    }
+  '
+}
+
+processed_id="$(get_node_id "$processed_name")"
+raw_id="$(get_node_id "$raw_name")"
+
+if [ -z "${processed_id:-}" ] || [ -z "${raw_id:-}" ]; then
+  printf 'Unable to resolve "%s" or "%s".\n' "$processed_name" "$raw_name" >&2
+  exit 1
+fi
+
+default_id="$(
+  wpctl status 2>/dev/null | awk '
+    $1 == "Sources:" || $2 == "Sources:" { in_sources = 1; next }
+    in_sources && ($1 == "Sinks:" || $2 == "Sinks:") { exit }
+    in_sources && match($0, /\\* ([0-9]+)\\./, m) { print m[1]; exit }
+  '
+)"
+
+if [ "$action" = "status" ]; then
+  if [ -z "${default_id:-}" ]; then
+    printf 'unknown\n'
+    exit 1
+  fi
+
+  if [ "$default_id" = "$processed_id" ]; then
+    printf 'processed\n'
+    exit 0
+  fi
+
+  if [ "$default_id" = "$raw_id" ]; then
+    printf 'raw\n'
+    exit 0
+  fi
+
+  printf 'other:%s\n' "$default_id"
+  exit 0
+fi
+
+if [ -z "${default_id:-}" ]; then
+  wpctl set-default "$processed_id"
+  exit 0
+fi
+
+if [ "$default_id" = "$processed_id" ]; then
+  wpctl set-default "$raw_id"
+else
+  wpctl set-default "$processed_id"
+fi

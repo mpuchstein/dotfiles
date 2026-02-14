@@ -127,6 +127,15 @@
     "icon-size": 16
   },
 
+  "custom/mic-usb": {
+    "exec": "mic-usb-status",
+    "return-type": "json",
+    "interval": 2,
+    "format": " {text}",
+    "tooltip": true,
+    "on-click": "mic-toggle-usb"
+  },
+
   "wireplumber#source": {
     "node-type": "Audio/Source",
     "format": " {volume}%",
@@ -327,6 +336,7 @@
   "group/volume": {
     "orientation": "vertical",
     "modules": [
+      "custom/mic-usb",
       "wireplumber#source",
       "wireplumber#sink"
     ]

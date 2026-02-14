@@ -1,3 +1,0 @@
-alhp-utils
-libnotify
-waybar

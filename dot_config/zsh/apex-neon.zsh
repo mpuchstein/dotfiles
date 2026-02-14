@@ -82,10 +82,15 @@ typeset -g  apex_in_git=0
 typeset -g  apex_git_branch=""
 typeset -g  apex_git_dirty_wt=0
 typeset -g  apex_git_dirty_ix=0
+typeset -g  apex_git_untracked=0
+typeset -g  apex_git_conflict=0
 typeset -g  apex_git_op=""
 typeset -g  apex_git_up_ok=0
 typeset -g  apex_git_ahead=0
 typeset -g  apex_git_behind=0
+typeset -g  apex_git_stash=0
+typeset -g  apex_git_root=""
+typeset -g  apex_git_dir=""
 
 # Radar previous snapshots (transition detection)
 typeset -g  apex_prev_in_git=-1
@@ -123,6 +128,50 @@ apex__project_sig() {
   [[ -n "$s" ]] && print -r -- "$s"
 }
 
+apex__escape_prompt() {
+  local s="$1"
+  s="${s//\\%/%%}"
+  print -r -- "$s"
+}
+
+apex__now_float() {
+  if [[ -n "${EPOCHREALTIME:-}" ]]; then
+    print -r -- "$EPOCHREALTIME"
+  elif [[ -n "${EPOCHSECONDS:-}" ]]; then
+    print -r -- "${EPOCHSECONDS}.0"
+  else
+    print -r -- "0.0"
+  fi
+}
+
+apex__find_git_root() {
+  local dir="$PWD"
+  local git_root=""
+  local git_dir=""
+
+  while [[ -n "$dir" ]]; do
+    if [[ -d "$dir/.git" ]]; then
+      git_root="$dir"
+      git_dir="$dir/.git"
+      break
+    elif [[ -f "$dir/.git" ]]; then
+      local line
+      line="$(<"$dir/.git")"
+      if [[ "$line" == gitdir:* ]]; then
+        git_root="$dir"
+        git_dir="${line#gitdir: }"
+        [[ "$git_dir" != /* ]] && git_dir="$dir/$git_dir"
+        break
+      fi
+    fi
+
+    [[ "$dir" == "/" ]] && break
+    dir="${dir:h}"
+  done
+
+  [[ -n "$git_root" ]] && print -r -- "${git_root}|${git_dir}"
+}
+
 # -----------------------------------------------------------------------------
 # 6) INTEL (sticky; updated each prompt)
 # -----------------------------------------------------------------------------
@@ -143,6 +192,8 @@ apex_update_intel() {
     apex_mode_sig="nix"
   elif [[ -n "$DIRENV_DIR" ]]; then
     apex_mode_sig="direnv"
+  elif [[ -f /run/.containerenv || -f /.dockerenv ]]; then
+    apex_mode_sig="ctr"
   else
     apex_mode_sig=""
   fi
@@ -164,39 +215,101 @@ apex_git_update() {
   apex_git_branch=""
   apex_git_dirty_wt=0
   apex_git_dirty_ix=0
+  apex_git_untracked=0
+  apex_git_conflict=0
   apex_git_op=""
   apex_git_up_ok=0
   apex_git_ahead=0
   apex_git_behind=0
+  apex_git_stash=0
 
-  command git rev-parse --is-inside-work-tree &>/dev/null || return
+  local status_out
+  status_out="$(command git status --porcelain=2 --branch 2>/dev/null)" || {
+    apex_git_root=""
+    apex_git_dir=""
+    return
+  }
   apex_in_git=1
 
-  apex_git_branch="$(
-    command git symbolic-ref --quiet --short HEAD 2>/dev/null \
-      || command git rev-parse --short HEAD 2>/dev/null
-  )"
+  if (( apex_pwd_changed )) || [[ -z "$apex_git_root" ]]; then
+    local root_info
+    root_info="$(apex__find_git_root)"
+    if [[ -n "$root_info" ]]; then
+      apex_git_root="${root_info%%|*}"
+      apex_git_dir="${root_info#*|}"
+    else
+      apex_git_root=""
+      apex_git_dir=""
+    fi
+  fi
 
-  local gd; gd="$(command git rev-parse --git-dir 2>/dev/null)" || return
-  [[ -d "$gd/rebase-apply" || -d "$gd/rebase-merge" ]] && apex_git_op="rebase"
-  [[ -f "$gd/MERGE_HEAD" ]] && apex_git_op="merge"
-  [[ -f "$gd/CHERRY_PICK_HEAD" ]] && apex_git_op="cherry-pick"
-  [[ -f "$gd/BISECT_LOG" ]] && apex_git_op="bisect"
+  local branch_head="" branch_oid="" upstream=""
+  local xy="" ix="" wt=""
+  local line
+  while IFS= read -r line; do
+    case "$line" in
+      \#\ branch.head\ *)
+        branch_head="${line#\# branch.head }"
+        ;;
+      \#\ branch.oid\ *)
+        branch_oid="${line#\# branch.oid }"
+        ;;
+      \#\ branch.upstream\ *)
+        upstream="${line#\# branch.upstream }"
+        ;;
+      \#\ branch.ab\ *)
+        local ab a b
+        ab="${line#\# branch.ab }"
+        IFS=' ' read -r a b <<<"$ab"
+        a="${a#+}"
+        b="${b#-}"
+        apex_git_ahead="${a:-0}"
+        apex_git_behind="${b:-0}"
+        ;;
+      1\ *|2\ *)
+        xy="${line[3,4]}"
+        ix="${xy[1]}"
+        wt="${xy[2]}"
+        [[ "$ix" != "." ]] && apex_git_dirty_ix=1
+        [[ "$wt" != "." ]] && apex_git_dirty_wt=1
+        ;;
+      u\ *)
+        apex_git_conflict=1
+        apex_git_dirty_ix=1
+        apex_git_dirty_wt=1
+        ;;
+      \?\ *)
+        apex_git_untracked=1
+        ;;
+    esac
+  done <<<"$status_out"
 
-  # Dirty markers
-  command git diff --quiet --ignore-submodules -- 2>/dev/null || apex_git_dirty_wt=1
-  command git diff --cached --quiet --ignore-submodules -- 2>/dev/null || apex_git_dirty_ix=1
+  if [[ -n "$branch_head" && "$branch_head" != "(detached)" && "$branch_head" != "HEAD" ]]; then
+    apex_git_branch="$branch_head"
+  elif [[ -n "$branch_oid" ]]; then
+    apex_git_branch="${branch_oid[1,7]}"
+  fi
 
-  # Upstream (earned ✓)
-  if command git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
-    local counts behind ahead
-    counts="$(command git rev-list --left-right --count @{u}...HEAD 2>/dev/null)" || return
-    local IFS=$' \t'
-    read -r behind ahead <<<"$counts"
-    apex_git_behind="${behind:-0}"
-    apex_git_ahead="${ahead:-0}"
+  if [[ -n "$apex_git_dir" ]]; then
+    [[ -d "$apex_git_dir/rebase-apply" || -d "$apex_git_dir/rebase-merge" ]] && apex_git_op="rebase"
+    [[ -f "$apex_git_dir/MERGE_HEAD" ]] && apex_git_op="merge"
+    [[ -f "$apex_git_dir/CHERRY_PICK_HEAD" ]] && apex_git_op="cherry-pick"
+    [[ -f "$apex_git_dir/BISECT_LOG" ]] && apex_git_op="bisect"
 
-    if (( apex_git_dirty_wt == 0 && apex_git_dirty_ix == 0 )) && [[ -z "$apex_git_op" ]]; then
+    if [[ -f "$apex_git_dir/logs/refs/stash" ]]; then
+      local -a stash_lines
+      stash_lines=(${(f)"$(<"$apex_git_dir/logs/refs/stash")"})
+      apex_git_stash=$#stash_lines
+    elif [[ -f "$apex_git_dir/refs/stash" ]]; then
+      apex_git_stash=1
+    fi
+  fi
+
+  (( apex_git_conflict )) && apex_git_op="conflict"
+
+  if [[ -n "$upstream" && "$upstream" != "(gone)" ]]; then
+    if (( apex_git_dirty_wt == 0 && apex_git_dirty_ix == 0 && apex_git_untracked == 0 && apex_git_conflict == 0 && apex_git_stash == 0 )) \
+      && [[ -z "$apex_git_op" ]]; then
       [[ "$apex_git_behind" == "0" && "$apex_git_ahead" == "0" ]] && apex_git_up_ok=1
     fi
   fi
@@ -248,18 +361,22 @@ apex_intel_r() {
 apex_vcs_r() {
   (( APEX[SHOW_VCS] )) || return 0
   (( apex_in_git )) || return 0
+  local branch; branch="$(apex__escape_prompt "$apex_git_branch")"
 
   if [[ -n "$apex_git_op" ]]; then
-    print -n "%F{${C[ALERT]}}${I[GIT]} ${apex_git_branch} ${apex_git_op}%f"
+    print -n "%F{${C[ALERT]}}${I[GIT]} ${branch} ${apex_git_op}%f"
     return 0
   fi
 
-  print -n "%F{${C[CYAN]}}${I[GIT]} ${apex_git_branch}%f"
+  print -n "%F{${C[CYAN]}}${I[GIT]} ${branch}%f"
 
   local mark=""
   (( apex_git_dirty_ix )) && mark+="+"
   (( apex_git_dirty_wt )) && mark+="!"
+  (( apex_git_untracked )) && mark+="?"
   [[ -n "$mark" ]] && print -n "%F{${C[GOLD]}} ${mark}%f"
+
+  (( apex_git_stash > 0 )) && print -n "%F{${C[MUTED]}} s${apex_git_stash}%f"
 
   (( apex_git_up_ok )) && print -n "%F{${C[OK]}} ✓%f"
 
@@ -270,15 +387,23 @@ apex_vcs_r() {
 }
 
 apex_friction_r() {
-  if (( APEX[SHOW_RO] )) && [[ ! -w . ]]; then
-    print -n "%F{${C[GOLD]}}${I[ROOT]} ro%f"
-    return 0
+  if (( APEX[SHOW_RO] )); then
+    local ro=0
+    [[ ! -w . ]] && ro=1
+    if (( apex_in_git )) && [[ -n "$apex_git_root" && ! -w "$apex_git_root" ]]; then
+      ro=1
+    fi
+    if (( ro )); then
+      print -n "%F{${C[GOLD]}}${I[ROOT]} ro%f"
+      return 0
+    fi
   fi
 
   if (( APEX[SHOW_JOBS] )); then
-    local jc
-    jc=$(jobs -p 2>/dev/null | wc -l | tr -d ' ')
-    if [[ -n "$jc" && "$jc" != "0" ]]; then
+    local -a job_pids
+    job_pids=(${(f)"$(jobs -p 2>/dev/null)"})
+    local jc=$#job_pids
+    if (( jc > 0 )); then
       print -n "%F{${C[MUTED]}}${I[JOBS]} ${jc}%f"
       return 0
     fi
@@ -313,6 +438,7 @@ apex_radar_aar() {
   (( show )) || return 0
 
   local short; short="$(apex__short_cmd "$cmd")"
+  short="$(apex__escape_prompt "$short")"
 
   local dur_color="${C[MUTED]}"
   (( ms >= ${APEX[SLOW_HARD_MS]} )) && dur_color="${C[GOLD]}"
@@ -388,10 +514,11 @@ apex_radar_context_burst() {
 
   # Git first
   if (( apex_in_git )); then
+    local branch; branch="$(apex__escape_prompt "$apex_git_branch")"
     if [[ -n "$apex_git_op" ]]; then
-      out+="%F{${C[ALERT]}}${I[GIT]} ${apex_git_branch} ${apex_git_op}%f"
+      out+="%F{${C[ALERT]}}${I[GIT]} ${branch} ${apex_git_op}%f"
     else
-      out+="%F{${C[CYAN]}}${I[GIT]} ${apex_git_branch}%f"
+      out+="%F{${C[CYAN]}}${I[GIT]} ${branch}%f"
     fi
   fi
 
@@ -417,7 +544,7 @@ apex_radar_context_burst() {
 # -----------------------------------------------------------------------------
 apex_preexec_hook() {
   apex_has_run_cmd=1
-  apex_cmd_start=${EPOCHREALTIME:-$EPOCHSECONDS}
+  apex_cmd_start="$(apex__now_float)"
   apex_last_cmd="$1"
 }
 
@@ -436,9 +563,14 @@ apex_precmd_hook() {
   (( apex_has_run_cmd )) && ran=1
 
   if (( ran )); then
-    local now=${EPOCHREALTIME:-$EPOCHSECONDS}
-    local -i ms
-    ms=$(( (now - apex_cmd_start) * 1000 ))
+    local now; now="$(apex__now_float)"
+    local -i ms=0
+    local -F delta=0.0
+    if [[ -n "$now" ]]; then
+      delta=$(( now - apex_cmd_start ))
+      (( delta < 0 )) && delta=0
+      ms=$(( delta * 1000 ))
+    fi
 
     # Show time if: slow OR ops OR failed.
     local dur=""

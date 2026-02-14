@@ -81,7 +81,8 @@ window#waybar {
 #custom-swaync,
 #custom-temps-cycle,
 #custom-hyprsunset,
-#custom-alhp {
+#custom-alhp,
+#custom-mic-usb {
   background: @pill_bg;
   color: @foreground;
   border: 1px solid @border;
@@ -107,7 +108,8 @@ window#waybar {
 #custom-swaync:hover,
 #custom-temps-cycle:hover,
 #custom-hyprsunset:hover,
-#custom-alhp:hover {
+#custom-alhp:hover,
+#custom-mic-usb:hover {
   background: @pill_hover;
   border-color: @accent;
 }
@@ -123,7 +125,8 @@ window#waybar {
 }
 
 #custom-alhp.stale,
-#wireplumber.muted {
+#wireplumber.muted,
+#custom-mic-usb.mic-usb-muted {
   border-color: @warning;
 }
 
@@ -154,8 +157,11 @@ window#waybar {
   border-color: @error;
 }
 
-#wireplumber.muted { color: @dim; }
+#wireplumber.muted,
+#custom-mic-usb.mic-usb-muted { color: @dim; }
 #idle_inhibitor.deactivated { color: @dim; }
+#custom-mic-usb.mic-usb-unknown,
+#custom-mic-usb.mic-unavailable { border-color: @error; color: @error; }
 
 /* Group wrappers */
 #group-temps,
@@ -194,6 +200,11 @@ window#waybar {
   padding: 2px 3px;
 }
 #group-volume #wireplumber:hover { background: @pill_hover; border-color: @accent; }
+#group-volume #custom-mic-usb {
+  margin: 1px 0;
+  padding: 2px 3px;
+}
+#group-volume #custom-mic-usb:hover { background: @pill_hover; border-color: @accent; }
 
 /* Tooltips */
 tooltip,

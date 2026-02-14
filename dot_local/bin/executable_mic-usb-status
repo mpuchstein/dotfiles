@@ -1,0 +1,60 @@
+#!/bin/sh
+set -eu
+
+node_name="input_usb_condenser_to_mixer"
+
+json_escape() {
+  printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'
+}
+
+if ! command -v pw-cli >/dev/null 2>&1; then
+  printf '{"text":"USB","tooltip":"pw-cli not found","class":"mic-unavailable"}\n'
+  exit 0
+fi
+
+if ! pw-cli info "$node_name" >/dev/null 2>&1; then
+  printf '{"text":"USB","tooltip":"%s missing","class":"mic-unavailable"}\n' \
+    "$(json_escape "$node_name")"
+  exit 0
+fi
+
+if ! command -v wpctl >/dev/null 2>&1; then
+  printf '{"text":"USB","tooltip":"wpctl not found","class":"mic-unavailable"}\n'
+  exit 0
+fi
+
+node_id=$(
+  pw-cli info "$node_name" 2>/dev/null | awk -F' = ' '
+    /object.id/ {
+      gsub(/"/, "", $2)
+      print $2
+      exit
+    }
+  '
+)
+
+if [ -z "${node_id:-}" ]; then
+  printf '{"text":"USB","tooltip":"%s missing","class":"mic-unavailable"}\n' \
+    "$(json_escape "$node_name")"
+  exit 0
+fi
+
+status=$(wpctl get-volume "$node_id" 2>/dev/null || true)
+
+class="mic-usb-unknown"
+tooltip="USB Condenser state unknown"
+
+case "$status" in
+  *MUTED*|*muted*)
+    class="mic-usb-muted"
+    tooltip="USB Condenser muted"
+    ;;
+  Volume:*)
+    class="mic-usb-live"
+    tooltip="USB Condenser live"
+    ;;
+esac
+
+printf '{"text":"USB","tooltip":"%s","class":"%s"}\n' \
+  "$(json_escape "$tooltip")" \
+  "$(json_escape "$class")"
