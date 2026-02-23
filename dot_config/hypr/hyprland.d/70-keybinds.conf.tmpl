@@ -19,7 +19,7 @@ $browsernewinst = uwsm app -- firefox --new-instance
 $altbrowser = uwsm app -- chromium
 
 $taskman = uwsm app -- owlry -m uuctl
-$pwdmgr = uwsm app -- keepassxc
+$pwdmgr = uwsm app -- bitwarden-desktop
 $soundctl = uwsm app -- pwvucontrol
 
 $notcenter = uwsm app -- swaync-client -t -sw
@@ -28,7 +28,7 @@ $nothide = uwsm app -- swaync-client --hide-latest
 $notclose = uwsm app -- swaync-client --close-latest
 $notcloseall = uwsm app -- swaync-client --close-all
 
-$lockcmd = loginctl lock-session
+$lockcmd = swaylock -f
 
 ##############################################
 ################## KEYBINDS ##################
@@ -86,7 +86,7 @@ bind = $mainMod, I, pin
 # Special workspaces
 bind = $mainMod SHIFT, Space, togglespecialworkspace          # show/hide special workspace
 bind = $mainMod CTRL, Space, movetoworkspace, special          # move to the special workspace
-bind = $mainMod, N, togglespecialworkspace, keepass
+bind = $mainMod, N, togglespecialworkspace, passwordmgr
 
 # Master layout
 bind = $mainMod, Tab, layoutmsg, swapwithmaster

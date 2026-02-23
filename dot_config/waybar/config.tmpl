@@ -1,8 +1,15 @@
+{{- $tags := .chezmoi.config.data.tags -}}
 {{- $primary_output := "eDP-1" -}}
 {{- range .monitors -}}
   {{- if index . "primary" -}}
     {{- $primary_output = .name -}}
   {{- end -}}
+{{- end -}}
+{{- $workspace_module := "" -}}
+{{- if $tags.niri -}}
+  {{- $workspace_module = "niri/workspaces" -}}
+{{- else if $tags.hyprland -}}
+  {{- $workspace_module = "hyprland/workspaces" -}}
 {{- end -}}
 {
   "layer": "top",
@@ -16,8 +23,8 @@
   "modules-left": [
     "clock",
     "custom/swaync",
-    "custom/alhp",
-    "hyprland/workspaces"
+    "custom/alhp"{{- if $workspace_module }},
+    "{{ $workspace_module }}"{{- end }}
   ],
 
   "modules-center": [
@@ -30,7 +37,9 @@
 
   "modules-right": [
     "idle_inhibitor",
+    {{- if $tags.hyprland }}
     "custom/hyprsunset",
+    {{- end }}
     "gamemode",
     "privacy",
     "group/volume",
@@ -44,6 +53,12 @@
     {{- end }}
   ],
 
+  {{- if $tags.niri }}
+  "niri/workspaces": {
+    "format": "{value}",
+    "all-outputs": true
+  },
+  {{- else if $tags.hyprland }}
   "hyprland/workspaces": {
     "format": "{icon}",
     "all-outputs": true,
@@ -69,6 +84,7 @@
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
+  {{- end }}
 
   "cpu": {
     "interval": 2,
@@ -310,6 +326,7 @@
     "on-click-middle": "swaync-client -C"
   },
 
+  {{- if $tags.hyprland }}
   "custom/hyprsunset": {
     "format": "SUN",
     "tooltip": true,
@@ -322,6 +339,7 @@
 
     "interval": 0
   },
+  {{- end }}
 
   "custom/alhp": {
     "id": "custom-alhp",

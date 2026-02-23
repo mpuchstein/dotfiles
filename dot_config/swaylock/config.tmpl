@@ -1,0 +1,57 @@
+{{- $lock_bg := (index .chezmoi.config.data "lockscreen-wallpaper") -}}
+{{- if not $lock_bg -}}
+  {{- $lock_bg = "~/.config/wallpaper/lockscreen/current" -}}
+{{- end -}}
+{{- $theme := .chezmoi.config.data.theme -}}
+
+{{- $inside := "00000033" -}}
+{{- $ring_idle := "00000000" -}}
+{{- $text := "ff0084cc" -}}
+{{- $accent := "ff0084cc" -}}
+{{- $alert := "ff4d6dcc" -}}
+{{- $warn := "ffb700cc" -}}
+
+{{- if eq $theme "apex-aeon" -}}
+  {{- $inside = "f5f5f540" -}}
+  {{- $ring_idle = "00000000" -}}
+  {{- $text = "ff0044cc" -}}
+  {{- $accent = "ff0044cc" -}}
+  {{- $alert = "ff4d6dcc" -}}
+  {{- $warn = "d18f00cc" -}}
+{{- end -}}
+
+image={{ $lock_bg }}
+scaling=fill
+
+font=GeistMono Nerd Font
+indicator
+indicator-radius=110
+indicator-thickness=4
+
+line-color=00000000
+separator-color=00000000
+inside-color={{ $inside }}
+ring-color={{ $ring_idle }}
+text-color={{ $text }}
+
+key-hl-color={{ $accent }}
+bs-hl-color={{ $warn }}
+
+inside-clear-color={{ $inside }}
+ring-clear-color={{ $accent }}
+inside-ver-color={{ $inside }}
+ring-ver-color={{ $accent }}
+inside-wrong-color={{ $inside }}
+ring-wrong-color={{ $alert }}
+
+text-clear-color={{ $text }}
+text-ver-color={{ $text }}
+text-wrong-color={{ $text }}
+
+show-failed-attempts
+ignore-empty-password
+
+# If you use swaylock-effects, uncomment these to mirror hyprlock's clock/date feel:
+# clock
+# timestr=%-I:%M
+# datestr=%A, %B %d
