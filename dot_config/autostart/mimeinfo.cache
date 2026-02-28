@@ -1,0 +1,6 @@
+[MIME Cache]
+x-scheme-handler/discord=vesktop.desktop;
+x-scheme-handler/element=io.element.Element.desktop;
+x-scheme-handler/mumble=info.mumble.Mumble.desktop;
+x-scheme-handler/steam=steam.desktop;
+x-scheme-handler/steamlink=steam.desktop;
