@@ -1,0 +1,207 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v hyprctl >/dev/null 2>&1; then
+  echo "hyprctl not found" >&2
+  exit 1
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+  hyprctl notify 0 2500 "rgb(ed8796)" "hypr-show-binds: jq is required" >/dev/null 2>&1 || true
+  exit 1
+fi
+
+binds_json="$(hyprctl -j binds 2>/dev/null || true)"
+if [[ -z "$binds_json" ]]; then
+  hyprctl notify 0 2500 "rgb(ed8796)" "hypr-show-binds: failed to read binds" >/dev/null 2>&1 || true
+  exit 1
+fi
+
+tmp_dir="$(mktemp -d)"
+trap 'rm -rf "$tmp_dir"' EXIT
+menu_file="$tmp_dir/menu.tsv"
+data_file="$tmp_dir/data.tsv"
+
+join_mods() {
+  local parts=("$@")
+  local out=""
+  local p
+  for p in "${parts[@]}"; do
+    if [[ -z "$out" ]]; then
+      out="$p"
+    else
+      out="${out}+${p}"
+    fi
+  done
+  printf '%s' "$out"
+}
+
+ordered_mods() {
+  local -n seen_ref="$1"
+  local ordered=()
+  local key
+  for key in SUPER CTRL SHIFT ALT CAPS MOD2 MOD3 MOD5; do
+    if [[ -n "${seen_ref[$key]:-}" ]]; then
+      ordered+=("$key")
+    fi
+  done
+  join_mods "${ordered[@]}"
+}
+
+modmask_to_human() {
+  local raw="$1"
+  local mask="${raw%%.*}"
+  local -A seen=()
+
+  [[ -n "$mask" && "$mask" =~ ^[0-9]+$ ]] || { printf ''; return; }
+
+  (( mask & 64 )) && seen["SUPER"]=1
+  (( mask & 4 )) && seen["CTRL"]=1
+  (( mask & 1 )) && seen["SHIFT"]=1
+  (( mask & 8 )) && seen["ALT"]=1
+  (( mask & 2 )) && seen["CAPS"]=1
+  (( mask & 16 )) && seen["MOD2"]=1
+  (( mask & 32 )) && seen["MOD3"]=1
+  (( mask & 128 )) && seen["MOD5"]=1
+
+  ordered_mods seen
+}
+
+mods_string_to_human() {
+  local raw="${1^^}"
+  local expanded="$raw"
+  local token mapped
+  local -A seen=()
+
+  # Expand likely glued tokens from different output styles.
+  for token in SUPER CTRL CONTROL SHIFT ALT CAPS WIN LOGO MOD1 MOD2 MOD3 MOD4 MOD5; do
+    expanded="${expanded//${token}/ ${token} }"
+  done
+  expanded="${expanded//[^A-Z0-9]/ }"
+
+  for token in $expanded; do
+    mapped=""
+    case "$token" in
+      CONTROL) mapped="CTRL" ;;
+      WIN|LOGO|MOD4) mapped="SUPER" ;;
+      MOD1) mapped="ALT" ;;
+      SUPER|CTRL|SHIFT|ALT|CAPS|MOD2|MOD3|MOD5) mapped="$token" ;;
+    esac
+    if [[ -n "$mapped" ]]; then
+      seen["$mapped"]=1
+    fi
+  done
+
+  ordered_mods seen
+}
+
+mods_to_human() {
+  local raw="$1"
+  if [[ -z "$raw" || "$raw" == "0" ]]; then
+    printf ''
+    return
+  fi
+  if [[ "$raw" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+    modmask_to_human "$raw"
+  else
+    mods_string_to_human "$raw"
+  fi
+}
+
+printf '%s' "$binds_json" | jq -r '
+  [ .[] | {
+      submap: ((.submap // "global" | tostring) | if . == "" then "global" else . end),
+      mods: ((.mods // .modmask // "" | tostring)),
+      key: ((.key // .keycode // .mouse // "unknown") | tostring),
+      dispatcher: ((.dispatcher // .handler // "") | tostring),
+      arg: ((.arg // .args // "") | tostring)
+    }
+  ]
+  | sort_by((if .submap == "global" then 0 else 1 end), .submap, .key, .mods, .dispatcher, .arg)
+  | to_entries[]
+  | [(.key + 1), .value.submap, .value.mods, .value.key, .value.dispatcher, .value.arg]
+  | @tsv
+' | while IFS=$'\t' read -r idx submap raw_mods key dispatcher arg; do
+  id="$(printf '%04d' "$idx")"
+  mods="$(mods_to_human "$raw_mods")"
+  combo="$key"
+  if [[ -n "$mods" ]]; then
+    combo="${mods}+${key}"
+  fi
+
+  if [[ -n "$arg" ]]; then
+    desc="[${submap}] ${combo} -> ${dispatcher} ${arg}"
+  else
+    desc="[${submap}] ${combo} -> ${dispatcher}"
+  fi
+
+  printf '%s\t%s\n' "$id" "$desc" >> "$menu_file"
+  printf '%s\t%s\t%s\t%s\n' "$id" "$dispatcher" "$arg" "$combo" >> "$data_file"
+done
+
+if [[ ! -s "$menu_file" ]]; then
+  hyprctl notify 0 2500 "rgb(ed8796)" "hypr-show-binds: no binds found" >/dev/null 2>&1 || true
+  exit 1
+fi
+
+selection=""
+if command -v owlry >/dev/null 2>&1; then
+  selection="$(cut -f1,2 "$menu_file" | owlry -m dmenu --prompt 'Hypr binds' 2>/dev/null || true)"
+elif command -v fuzzel >/dev/null 2>&1; then
+  selection="$(cut -f1,2 "$menu_file" | fuzzel --dmenu --prompt 'Hypr binds> ' 2>/dev/null || true)"
+elif command -v kitty >/dev/null 2>&1; then
+  kitty -e sh -lc "cat '$menu_file' | cut -f2 | less -R"
+  exit 0
+else
+  hyprctl notify 0 2500 "rgb(ed8796)" "hypr-show-binds: no menu launcher found" >/dev/null 2>&1 || true
+  exit 1
+fi
+
+if [[ -z "$selection" ]]; then
+  exit 0
+fi
+
+selected_id="${selection%%$'\t'*}"
+if [[ -z "$selected_id" ]]; then
+  exit 0
+fi
+
+selected="$(awk -F '\t' -v id="$selected_id" '$1 == id {print; exit}' "$data_file")"
+if [[ -z "$selected" ]]; then
+  hyprctl notify 0 2500 "rgb(ed8796)" "hypr-show-binds: selection lookup failed" >/dev/null 2>&1 || true
+  exit 1
+fi
+
+dispatcher="$(printf '%s' "$selected" | cut -f2)"
+arg="$(printf '%s' "$selected" | cut -f3)"
+combo="$(printf '%s' "$selected" | cut -f4)"
+
+if [[ -z "$dispatcher" ]]; then
+  hyprctl notify 0 2500 "rgb(ed8796)" "hypr-show-binds: bind has no dispatcher" >/dev/null 2>&1 || true
+  exit 1
+fi
+
+if [[ -z "$arg" ]]; then
+  if hyprctl dispatch "$dispatcher" "_" >/dev/null 2>&1; then
+    hyprctl notify 0 1800 "rgb(a6da95)" "Ran: ${combo} -> ${dispatcher}" >/dev/null 2>&1 || true
+  else
+    hyprctl notify 0 2600 "rgb(ed8796)" "Failed: ${dispatcher}" >/dev/null 2>&1 || true
+    exit 1
+  fi
+else
+  if [[ "$arg" == -* ]]; then
+    if hyprctl dispatch -- "$dispatcher" "$arg" >/dev/null 2>&1; then
+      hyprctl notify 0 1800 "rgb(a6da95)" "Ran: ${combo} -> ${dispatcher}" >/dev/null 2>&1 || true
+    else
+      hyprctl notify 0 2600 "rgb(ed8796)" "Failed: ${dispatcher} ${arg}" >/dev/null 2>&1 || true
+      exit 1
+    fi
+  else
+    if hyprctl dispatch "$dispatcher" "$arg" >/dev/null 2>&1; then
+      hyprctl notify 0 1800 "rgb(a6da95)" "Ran: ${combo} -> ${dispatcher}" >/dev/null 2>&1 || true
+    else
+      hyprctl notify 0 2600 "rgb(ed8796)" "Failed: ${dispatcher} ${arg}" >/dev/null 2>&1 || true
+      exit 1
+    fi
+  fi
+fi

@@ -40,6 +40,7 @@ $mainMod = SUPER
 bind = $mainMod, Return, exec, $terminal
 bind = $mainMod SHIFT, Return, exec, $term_tmux
 bind = $mainMod CTRL, Return, exec, $term_tmux_append
+bind = $mainMod, F1, exec, hypr-show-binds
 bind = $mainMod, E, exec, $filemanager
 bind = $mainMod, W, exec, $browser
 bind = $mainMod, Space, exec, $launcher
@@ -241,4 +242,4 @@ bindl = , XF86AudioPrev, exec, playerctl previous
 # Screenshot and recording controls
 bind = , Print, exec, grimblast --notify copy screen
 bind = $mainMod, Print, exec, owlry-screenshot-menu
-bind = SHIFT, Print, exec, uwsm app -- ghostty --class=scrrec -e wf-recorder -f ~/Videos/scrrec.mkv -y -g "$(slurp)"
+bind = SHIFT, Print, exec, uwsm app -- kitty --class=scrrec -e wf-recorder -f ~/Videos/scrrec.mkv -y -g "$(slurp)"
