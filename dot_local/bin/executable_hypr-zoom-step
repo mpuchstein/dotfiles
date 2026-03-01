@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+step="${1:-}"
+if [[ -z "$step" ]]; then
+  printf 'Usage: %s {+FLOAT|-FLOAT|reset}\n' "${0##*/}" >&2
+  exit 2
+fi
+
+if ! command -v hyprctl >/dev/null 2>&1; then
+  echo "hyprctl not found" >&2
+  exit 1
+fi
+
+current=""
+if command -v jq >/dev/null 2>&1; then
+  if json="$(hyprctl -j getoption cursor:zoom_factor 2>/dev/null)"; then
+    current="$(printf '%s' "$json" | jq -r '.float // .value // empty')"
+  fi
+fi
+
+if [[ -z "$current" ]]; then
+  current="$(hyprctl getoption cursor:zoom_factor 2>/dev/null | sed -n 's/.*float:[[:space:]]*\([-0-9.]*\).*/\1/p' | head -n1)"
+fi
+
+if [[ -z "$current" ]]; then
+  current="1.0"
+fi
+
+if [[ "$step" == "reset" ]]; then
+  next="1.0"
+else
+  next="$(awk -v c="$current" -v s="$step" 'BEGIN { printf "%.3f", c + s }')"
+  next="$(awk -v n="$next" 'BEGIN {
+    if (n < 1.0) n = 1.0;
+    if (n > 5.0) n = 5.0;
+    printf "%.3f", n;
+  }')"
+fi
+
+hyprctl keyword cursor:zoom_factor "$next" >/dev/null
+hyprctl notify -1 1200 "rgb(a6da95)" "Zoom: ${next}" >/dev/null 2>&1 || true
+

@@ -36,44 +36,39 @@ $lockcmd = swaylock -f
 
 $mainMod = SUPER
 
-# Ghostty quick terminal via GlobalShortcuts portal.
-bind = $mainMod, Backspace, global, com.mitchellh.ghostty:LOGO+BackSpace
-
-# Launchers
+# First-class launchers
 bind = $mainMod, Return, exec, $terminal
 bind = $mainMod SHIFT, Return, exec, $term_tmux
-bind = $mainMod ALT_L, Return, exec, $term_tmux_append
-bind = $mainMod CTRL, Return, exec, $terminal
+bind = $mainMod CTRL, Return, exec, $term_tmux_append
 bind = $mainMod, E, exec, $filemanager
+bind = $mainMod, W, exec, $browser
+bind = $mainMod, Space, exec, $launcher
+
+# Secondary app launchers
 bind = $mainMod SHIFT, E, exec, $editor
 bind = $mainMod CTRL, E, exec, $alteditor
-bind = $mainMod, W, exec, $browser
 bind = $mainMod SHIFT, W, exec, $browserprv
 bind = $mainMod CTRL, W, exec, $altbrowser
 bind = $mainMod ALT, W, exec, $browsernewinst
-bind = $mainMod, Space, exec, $launcher
 bind = $mainMod, X, exec, $taskman
 bind = $mainMod, C, exec, $clipman
-bind = $mainMod, R, exec, $pwdmgr
 bind = $mainMod, F4, exec, $soundctl
-bind = $mainMod, backslash, exec, mic-toggle-usb
+bind = $mainMod, A, submap, quickws
 
-# Communication
-bind = $mainMod, A, exec, hypr-element-toggle
-bind = $mainMod, D, exec, hypr-comms-toggle
-
-# Mail
-bind = $mainMod SHIFT, A, exec, hypr-mail-toggle
-
-# Notes
-bind = $mainMod SHIFT, D, exec, hypr-joplin-toggle
-
-# Gaming
-bind = $mainMod, S, exec, hypr-steam-toggle
+submap = quickws
+bind = , a, exec, hypr-element-toggle
+bind = , s, exec, hypr-steam-toggle
+bind = , d, exec, hypr-comms-toggle
+bind = , z, exec, hypr-mail-toggle
+bind = , x, exec, hypr-joplin-toggle
+bind = , Escape, submap, reset
+bind = , Return, submap, reset
+submap = reset
 
 # Notifications
 bind = $mainMod, Grave, exec, $notcenter
 bind = $mainMod SHIFT, Grave, exec, $notdnd
+bind = $mainMod CTRL, Grave, exec, $nothide
 
 # Session
 bind = $mainMod, Pause, exec, $lockcmd
@@ -82,29 +77,32 @@ bind = $mainMod SHIFT, Escape, exec, $lockcmd
 
 # Window management
 bind = $mainMod, Q, killactive,
+bind = $mainMod SHIFT, Q, forcekillactive,
 bind = $mainMod, F, togglefloating,
 bind = $mainMod SHIFT, F, fullscreen
-bind = $mainMod, I, pin
+bind = $mainMod, P, pin
+bind = $mainMod, U, focusurgentorlast
+bind = $mainMod, V, centerwindow
 
 # Special workspaces
 bind = $mainMod SHIFT, Space, togglespecialworkspace          # show/hide special workspace
 bind = $mainMod CTRL, Space, movetoworkspace, special          # move to the special workspace
 bind = $mainMod, N, togglespecialworkspace, passwordmgr
 
-# Master layout
-bind = $mainMod, Tab, layoutmsg, swapwithmaster
-bind = $mainMod SHIFT, Tab, layoutmsg, addmaster
-bind = $mainMod CTRL, Tab, layoutmsg, removemaster
-bind = $mainMod CTRL SHIFT, Tab, layoutmsg, rollnext
-
-# Scrolling layout
-bind = $mainMod, comma, layoutmsg, move -col
-bind = $mainMod, period, layoutmsg, move +col
+# Layout switching
+bind = $mainMod, comma, exec, hypr-workspace-layout toggle-ms
+bind = $mainMod, period, exec, hypr-workspace-layout cycle
+bind = $mainMod SHIFT, comma, layoutmsg, fit active
+bind = $mainMod SHIFT, period, layoutmsg, togglefit
 bind = $mainMod CTRL, comma, layoutmsg, colresize 0.9
-bind = $mainMod CTRL, period, layoutmsg, fit active
-bind = $mainMod CTRL SHIFT, period, layoutmsg, togglefit
-bind = $mainMod ALT, comma, exec, hypr-workspace-layout toggle-ms
-bind = $mainMod ALT, period, exec, hypr-workspace-layout cycle
+
+# Layout-aware navigation (ALT layer)
+bind = $mainMod ALT, Tab, exec, hypr-workspace-layout nav-next
+bind = $mainMod ALT SHIFT, Tab, exec, hypr-workspace-layout nav-prev
+bind = $mainMod ALT, H, exec, hypr-workspace-layout nav-prev
+bind = $mainMod ALT, L, exec, hypr-workspace-layout nav-next
+bind = $mainMod ALT, J, exec, hypr-workspace-layout nav-down
+bind = $mainMod ALT, K, exec, hypr-workspace-layout nav-up
 
 # MOVE FOCUS with mainMod + vim keys
 bind = $mainMod, H, movefocus, l
@@ -118,11 +116,25 @@ bind = $mainMod SHIFT, L, movewindow, r
 bind = $mainMod SHIFT, K, movewindow, u
 bind = $mainMod SHIFT, J, movewindow, d
 
-# Resize window with mainMod + CTRL + vim keys
-bind = $mainMod CTRL, h, resizeactive,-25 0
-bind = $mainMod CTRL, l, resizeactive,25 0
-bind = $mainMod CTRL, k, resizeactive,0 -25
-bind = $mainMod CTRL, j, resizeactive,0 25
+# Resize submap
+bind = $mainMod, R, submap, resize
+
+submap = resize
+bind = , h, resizeactive, -25 0
+bind = , l, resizeactive, 25 0
+bind = , k, resizeactive, 0 -25
+bind = , j, resizeactive, 0 25
+bind = SHIFT, h, resizeactive, -60 0
+bind = SHIFT, l, resizeactive, 60 0
+bind = SHIFT, k, resizeactive, 0 -60
+bind = SHIFT, j, resizeactive, 0 60
+bind = , Escape, submap, reset
+bind = , Return, submap, reset
+submap = reset
+
+# Workspace cycling (per-monitor)
+bind = $mainMod, Tab, workspace, m+1
+bind = $mainMod SHIFT, Tab, workspace, m-1
 
 # SWITCH WORKSPACES with mainMod + [0-9]
 bind = $mainMod, 1, workspace, 1
@@ -136,9 +148,15 @@ bind = $mainMod, 8, workspace, 8
 bind = $mainMod, 9, workspace, 9
 bind = $mainMod, 0, workspace, 10
 
-# MOVE CURRENT WORKSPACE TO A MONITOR with mainMod + SHIFT + [,/.]
-bind = $mainMod SHIFT, comma, movecurrentworkspacetomonitor, l
-bind = $mainMod SHIFT, period, movecurrentworkspacetomonitor, r
+# Monitor focus / workspace move
+bind = $mainMod, O, focusmonitor, l
+bind = $mainMod, I, focusmonitor, r
+bind = $mainMod SHIFT, O, movecurrentworkspacetomonitor, l
+bind = $mainMod SHIFT, I, movecurrentworkspacetomonitor, r
+bind = $mainMod ALT SHIFT, H, movecurrentworkspacetomonitor, l
+bind = $mainMod ALT SHIFT, J, movecurrentworkspacetomonitor, d
+bind = $mainMod ALT SHIFT, K, movecurrentworkspacetomonitor, u
+bind = $mainMod ALT SHIFT, L, movecurrentworkspacetomonitor, r
 
 # MOVE ACTIVE WINDOW TO A WORKSPACE with mainMod + SHIFT + [0-9]
 bind = $mainMod SHIFT, 1, movetoworkspace, 1
@@ -164,14 +182,35 @@ bind = $mainMod CTRL SHIFT, 8, movetoworkspacesilent, 8
 bind = $mainMod CTRL SHIFT, 9, movetoworkspacesilent, 9
 bind = $mainMod CTRL SHIFT, 0, movetoworkspacesilent, 10
 
+# Group tab switching
 bind = $mainMod, Z, changegroupactive, f
 bind = $mainMod SHIFT, Z, changegroupactive, b
-bind = $mainMod CTRL, Z, togglegroup
+bind = $mainMod, G, submap, group
 
-bind = $mainMod ALT_L, H, movewindoworgroup, l
-bind = $mainMod ALT_L, J, movewindoworgroup, d
-bind = $mainMod ALT_L, K, movewindoworgroup, u
-bind = $mainMod ALT_L, L, movewindoworgroup, r
+submap = group
+bind = , h, moveintogroup, l
+bind = , j, moveintogroup, d
+bind = , k, moveintogroup, u
+bind = , l, moveintogroup, r
+bind = , o, moveoutofgroup
+bind = , t, togglegroup
+bind = , d, denywindowfromgroup, toggle
+bind = , f, lockactivegroup, toggle
+bind = SHIFT, f, lockgroups, toggle
+bind = , Escape, submap, reset
+bind = , Return, submap, reset
+submap = reset
+
+# Zoom submap
+bind = $mainMod, M, submap, zoom
+
+submap = zoom
+bind = , equal, exec, hypr-zoom-step +0.2
+bind = , minus, exec, hypr-zoom-step -0.2
+bind = , 0, exec, hypr-zoom-step reset
+bind = , Escape, submap, reset
+bind = , Return, submap, reset
+submap = reset
 
 # MOVE/RESIZE WINDOWS with mainMod + LMB/RMB and dragging
 bindm = $mainMod, mouse:272, movewindow
@@ -192,10 +231,6 @@ bindel = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 bindel = SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+
 bindel = SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-
 bindel = SHIFT, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-
-# Zoom control
-bind = $mainMod, M, exec, hyprctl keyword cursor:zoom_factor 2
-bind = $mainMod SHIFT, M, exec, hyprctl keyword cursor:zoom_factor 1
 
 # Requires playerctl
 bindl = , XF86AudioNext, exec, playerctl next

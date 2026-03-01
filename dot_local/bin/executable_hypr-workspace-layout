@@ -2,8 +2,8 @@
 set -euo pipefail
 
 mode="${1:-}"
-if [[ "$mode" != "toggle-ms" && "$mode" != "cycle" ]]; then
-  printf 'Usage: %s {toggle-ms|cycle}\n' "${0##*/}" >&2
+if [[ "$mode" != "toggle-ms" && "$mode" != "cycle" && "$mode" != "nav-next" && "$mode" != "nav-prev" && "$mode" != "nav-up" && "$mode" != "nav-down" ]]; then
+  printf 'Usage: %s {toggle-ms|cycle|nav-next|nav-prev|nav-up|nav-down}\n' "${0##*/}" >&2
   exit 2
 fi
 
@@ -81,7 +81,7 @@ if [[ "$mode" == "toggle-ms" ]]; then
   else
     next_layout="master"
   fi
-else
+elif [[ "$mode" == "cycle" ]]; then
   layouts=(dwindle master scrolling monocle)
   next_layout="${layouts[0]}"
 
@@ -91,6 +91,38 @@ else
       break
     fi
   done
+elif [[ "$mode" == "nav-next" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "focus r" >/dev/null
+  else
+    hyprctl dispatch cyclenext >/dev/null
+  fi
+  exit 0
+elif [[ "$mode" == "nav-prev" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "focus l" >/dev/null
+  else
+    hyprctl dispatch cyclenext prev >/dev/null
+  fi
+  exit 0
+elif [[ "$mode" == "nav-down" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "focus d" >/dev/null
+  elif [[ "$current_layout" == "master" ]]; then
+    hyprctl dispatch layoutmsg addmaster >/dev/null
+  else
+    hyprctl dispatch cyclenext >/dev/null
+  fi
+  exit 0
+elif [[ "$mode" == "nav-up" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "focus u" >/dev/null
+  elif [[ "$current_layout" == "master" ]]; then
+    hyprctl dispatch layoutmsg removemaster >/dev/null
+  else
+    hyprctl dispatch cyclenext prev >/dev/null
+  fi
+  exit 0
 fi
 
 hyprctl keyword workspace "$ws_selector,layout:$next_layout" >/dev/null
