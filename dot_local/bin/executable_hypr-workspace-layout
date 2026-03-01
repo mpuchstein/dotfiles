@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mode="${1:-}"
+if [[ "$mode" != "toggle-ms" && "$mode" != "cycle" ]]; then
+  printf 'Usage: %s {toggle-ms|cycle}\n' "${0##*/}" >&2
+  exit 2
+fi
+
+if ! command -v hyprctl >/dev/null 2>&1; then
+  echo "hyprctl not found" >&2
+  exit 1
+fi
+
+active_json="$(hyprctl -j activeworkspace 2>/dev/null || true)"
+if [[ -z "$active_json" ]]; then
+  echo "failed to query active workspace" >&2
+  exit 1
+fi
+
+active_name=""
+active_id=""
+if command -v jq >/dev/null 2>&1; then
+  active_name="$(printf '%s' "$active_json" | jq -r '.name // empty')"
+  active_id="$(printf '%s' "$active_json" | jq -r '.id // empty')"
+else
+  active_name="$(printf '%s' "$active_json" | sed -n 's/.*"name":"\([^"]*\)".*/\1/p')"
+  active_id="$(printf '%s' "$active_json" | sed -n 's/.*"id":\([0-9-]\+\).*/\1/p')"
+fi
+
+if [[ -z "$active_name" && -z "$active_id" ]]; then
+  echo "could not parse active workspace" >&2
+  exit 1
+fi
+
+if [[ -n "$active_name" && ! "$active_name" =~ ^[0-9]+$ ]]; then
+  ws_selector="name:$active_name"
+  ws_key="name:$active_name"
+else
+  ws_id="${active_id:-$active_name}"
+  ws_selector="$ws_id"
+  ws_key="id:$ws_id"
+fi
+
+state_file="${XDG_RUNTIME_DIR:-/tmp}/hypr-workspace-layout-state"
+
+get_state() {
+  local key="$1"
+  if [[ -f "$state_file" ]]; then
+    awk -F '\t' -v k="$key" '$1 == k {v = $2} END {print v}' "$state_file"
+  fi
+}
+
+set_state() {
+  local key="$1"
+  local layout="$2"
+  local tmp
+  tmp="$(mktemp "${state_file}.XXXXXX")"
+
+  if [[ -f "$state_file" ]]; then
+    awk -F '\t' -v k="$key" '$1 != k {print $1 "\t" $2}' "$state_file" > "$tmp"
+  fi
+
+  printf '%s\t%s\n' "$key" "$layout" >> "$tmp"
+  mv "$tmp" "$state_file"
+}
+
+default_layout="master"
+if [[ "$ws_selector" == "name:comms" || "$ws_selector" == "name:steam" ]]; then
+  default_layout="scrolling"
+fi
+
+current_layout="$(get_state "$ws_key")"
+if [[ -z "$current_layout" ]]; then
+  current_layout="$default_layout"
+fi
+
+if [[ "$mode" == "toggle-ms" ]]; then
+  if [[ "$current_layout" == "master" ]]; then
+    next_layout="scrolling"
+  else
+    next_layout="master"
+  fi
+else
+  layouts=(dwindle master scrolling monocle)
+  next_layout="${layouts[0]}"
+
+  for i in "${!layouts[@]}"; do
+    if [[ "${layouts[$i]}" == "$current_layout" ]]; then
+      next_layout="${layouts[$(((i + 1) % ${#layouts[@]}))]}"
+      break
+    fi
+  done
+fi
+
+hyprctl keyword workspace "$ws_selector,layout:$next_layout" >/dev/null
+set_state "$ws_key" "$next_layout"
+
+# Best-effort notification so layout switches are visible immediately.
+hyprctl notify -1 1800 "rgb(8bd5ca)" "Layout: ${next_layout} (${ws_selector})" >/dev/null 2>&1 || true

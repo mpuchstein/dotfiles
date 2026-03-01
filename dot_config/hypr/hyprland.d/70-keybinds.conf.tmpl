@@ -100,8 +100,11 @@ bind = $mainMod CTRL SHIFT, Tab, layoutmsg, rollnext
 # Scrolling layout
 bind = $mainMod, comma, layoutmsg, move -col
 bind = $mainMod, period, layoutmsg, move +col
-bind = $mainMod CTRL, comma, layoutmsg, fit active
-bind = $mainMod CTRL, period, layoutmsg, togglefit
+bind = $mainMod CTRL, comma, layoutmsg, colresize 0.9
+bind = $mainMod CTRL, period, layoutmsg, fit active
+bind = $mainMod CTRL SHIFT, period, layoutmsg, togglefit
+bind = $mainMod ALT, comma, exec, hypr-workspace-layout toggle-ms
+bind = $mainMod ALT, period, exec, hypr-workspace-layout cycle
 
 # MOVE FOCUS with mainMod + vim keys
 bind = $mainMod, H, movefocus, l
