@@ -97,6 +97,12 @@ bind = $mainMod SHIFT, Tab, layoutmsg, addmaster
 bind = $mainMod CTRL, Tab, layoutmsg, removemaster
 bind = $mainMod CTRL SHIFT, Tab, layoutmsg, rollnext
 
+# Scrolling layout
+bind = $mainMod, comma, layoutmsg, move -col
+bind = $mainMod, period, layoutmsg, move +col
+bind = $mainMod CTRL, comma, layoutmsg, fit active
+bind = $mainMod CTRL, period, layoutmsg, togglefit
+
 # MOVE FOCUS with mainMod + vim keys
 bind = $mainMod, H, movefocus, l
 bind = $mainMod, L, movefocus, r
