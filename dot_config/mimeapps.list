@@ -1,9 +1,9 @@
 [Default Applications]
 x-scheme-handler/discord=vesktop.desktop
-x-scheme-handler/http=firefox.desktop
-x-scheme-handler/https=firefox.desktop
+x-scheme-handler/http=xdg-https-handler.desktop
+x-scheme-handler/https=xdg-https-handler.desktop
 x-scheme-handler/chrome=firefox.desktop
-text/html=firefox.desktop
+text/html=xdg-https-handler.desktop
 application/x-extension-htm=firefox.desktop
 application/x-extension-html=firefox.desktop
 application/x-extension-shtml=firefox.desktop
@@ -15,6 +15,9 @@ x-scheme-handler/jetbrains=jetbrainsd.desktop
 application/gml+xml=dev.zed.Zed.desktop
 image/png=org.pwmt.zathura-pdf-mupdf.desktop
 image/jpeg=org.pwmt.zathura-pdf-mupdf.desktop
+x-scheme-handler/spotify=spotify-launcher.desktop
+x-scheme-handler/about=xdg-https-handler.desktop
+x-scheme-handler/unknown=xdg-https-handler.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
