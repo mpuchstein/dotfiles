@@ -1,0 +1,10 @@
+#!/bin/bash
+BROWSER=firefox.desktop
+
+if [[ "$1" =~ ^https?://(www\.)?(youtube\.com/watch|youtu\.be)/ ]]; then
+    mpv "$1"
+elif [[ "$1" =~ ^https?://(www\.)?(youtube\.com/shorts|youtu\.be)/ ]]; then
+    mpv "$1"
+else
+    gtk-launch "$BROWSER" "$1"
+fi

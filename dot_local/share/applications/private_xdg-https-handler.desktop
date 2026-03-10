@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=HTTPS Handler
+Exec=xdg-https-handler %u
+Categroies=Network;WebBrowser;
+NoDisplay=true
+MimeType=x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/https;x-scheme-handler/http;text/html;text/xml;application/xhtml+xml;
