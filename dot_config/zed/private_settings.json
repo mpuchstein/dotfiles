@@ -7,6 +7,35 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ssh_connections": [
+    {
+      "host": "192.168.122.168",
+      "username": "mpuchstein",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "C:\\Users\\mpuchstein\\Dev\\/IDEvelopAR_new"
+          ]
+        }
+      ],
+      "nickname": "VM"
+    }
+  ],
+  "project_panel": {
+    "dock": "left"
+  },
+  "prettier": {
+    "allowed": true
+  },
+  "window_decorations": "server",
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "title_bar": {
+    "show_branch_icon": true
+  },
   "ui_font_weight": 400.0,
   "ui_font_family": "GeistMono Nerd Font",
   "buffer_font_family": "GeistMono Nerd Font",
@@ -17,8 +46,8 @@
   },
   "vim_mode": true,
   "base_keymap": "JetBrains",
-  "ui_font_size": 16.0,
-  "buffer_font_size": 12.0,
+  "ui_font_size": 14.0,
+  "buffer_font_size": 13.0,
   "theme": {
     "mode": "system",
     "light": "Apex Aeon",

@@ -7,6 +7,9 @@ monitorv2 {
   {{- if index . "vrr" }}
   vrr = {{ .vrr }}
   {{- end }}
+  {{- if index . "transform" }}
+  transform = {{ .transform }}
+  {{- end }}
 }
 {{- end }}
 {{- if not .monitors }}

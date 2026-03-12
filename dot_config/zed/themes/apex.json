@@ -197,13 +197,13 @@
             "font_style": "italic"
           },
           "keyword": {
-            "color": "#00eaff"
+            "color": "#9d00ff"
           },
           "keyword.import": {
-            "color": "#00eaff"
+            "color": "#9d00ff"
           },
           "keyword.storage": {
-            "color": "#00eaff"
+            "color": "#9d00ff"
           },
           "function": {
             "color": "#0088cc"
@@ -215,10 +215,10 @@
             "color": "#0088cc"
           },
           "type": {
-            "color": "#9d00ff"
+            "color": "#ffb700"
           },
           "type.builtin": {
-            "color": "#9d00ff"
+            "color": "#ffb700"
           },
           "string": {
             "color": "#00ff99"
@@ -230,13 +230,13 @@
             "color": "#ffb700"
           },
           "number": {
-            "color": "#ffb700"
+            "color": "#00eaff"
           },
           "boolean": {
-            "color": "#ffb700"
+            "color": "#00eaff"
           },
           "constant": {
-            "color": "#ededed"
+            "color": "#00eaff"
           },
           "constant.builtin": {
             "color": "#9d00ff"
@@ -509,13 +509,13 @@
             "font_style": "italic"
           },
           "keyword": {
-            "color": "#007a88"
+            "color": "#7a3cff"
           },
           "keyword.import": {
-            "color": "#007a88"
+            "color": "#7a3cff"
           },
           "keyword.storage": {
-            "color": "#007a88"
+            "color": "#7a3cff"
           },
           "function": {
             "color": "#005577"
@@ -527,10 +527,10 @@
             "color": "#005577"
           },
           "type": {
-            "color": "#7a3cff"
+            "color": "#d18f00"
           },
           "type.builtin": {
-            "color": "#7a3cff"
+            "color": "#d18f00"
           },
           "string": {
             "color": "#00b377"
@@ -542,13 +542,13 @@
             "color": "#d18f00"
           },
           "number": {
-            "color": "#d18f00"
+            "color": "#007a88"
           },
           "boolean": {
-            "color": "#d18f00"
+            "color": "#007a88"
           },
           "constant": {
-            "color": "#0a0a0a"
+            "color": "#007a88"
           },
           "constant.builtin": {
             "color": "#7a3cff"

@@ -115,7 +115,7 @@ function M.load()
     Conditional = { fg = p.sacred },
     Repeat = { fg = p.sacred },
     Label = { fg = p.sacred },
-    Operator = { fg = p.tech }, -- Cyan (Tech)
+    Operator = { fg = p.text }, -- White (Neutral)
     Keyword = { fg = p.sacred },
     Exception = { fg = p.razor }, -- Red (Errors)
 
@@ -130,9 +130,9 @@ function M.load()
     Structure = { fg = p.amber },
     Typedef = { fg = p.amber },
 
-    Special = { fg = p.tech },
-    SpecialChar = { fg = p.tech },
-    Tag = { fg = p.tech },
+    Special = { fg = p.sacred },    -- Purple (special grammar tokens)
+    SpecialChar = { fg = p.amber }, -- Amber (escalated string variant: escapes, regex)
+    Tag = { fg = p.azure },         -- Blue (structural: HTML/XML tags)
     Delimiter = { fg = p.dim }, -- Subtle delimiters
     Debug = { fg = p.razor },
 

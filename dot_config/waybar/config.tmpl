@@ -1,8 +1,11 @@
 {{- $tags := .chezmoi.config.data.tags -}}
 {{- $primary_output := "eDP-1" -}}
+{{- $secondary_output := "" -}}
 {{- range .monitors -}}
   {{- if index . "primary" -}}
     {{- $primary_output = .name -}}
+  {{- else -}}
+    {{- $secondary_output = .name -}}
   {{- end -}}
 {{- end -}}
 {{- $workspace_module := "" -}}
@@ -13,8 +16,8 @@
 {{- end -}}
 {
   "layer": "top",
-  "position": "left",
-  "output": "{{ $primary_output }}",
+  "position": "right",
+  "output": "{{ $secondary_output }}",
   "width": 54,
   "spacing": 4,
   "margin-top": 0,

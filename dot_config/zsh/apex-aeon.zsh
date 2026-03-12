@@ -24,6 +24,16 @@ C[PURPLE]="#7a3cff"
 C[ALERT]="#ff4d6d"
 
 # -----------------------------------------------------------------------------
+# 1b) PLUGIN COLORS
+# -----------------------------------------------------------------------------
+# zsh-autosuggestions: ghost text from history (subtle, intentionally dim)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#737373"
+
+# zsh-history-substring-search
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="fg=#007a88,bold"
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="fg=#ff4d6d,bold"
+
+# -----------------------------------------------------------------------------
 # 2) ICONS / GLYPHS (Nerd Font optional)
 # -----------------------------------------------------------------------------
 typeset -gA I
