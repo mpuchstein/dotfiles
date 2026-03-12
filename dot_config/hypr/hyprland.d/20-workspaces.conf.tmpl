@@ -1,5 +1,9 @@
 {{- range $monitor := .monitors }}
-  {{- range $index, $ws := .workspaces }}
+  {{- range $index, $ws := $monitor.workspaces }}
+    {{- if kindIs "map" $ws }}
+workspace = {{ $ws.id }}, monitor:{{ $monitor.name }}{{ if eq $index 0 }}, default:true{{ end }}{{ if index $ws "layout" }}, layout:{{ $ws.layout }}{{ end }}{{ range index $ws "layoutopts" }}, layoutopt:{{ . }}{{ end }}
+    {{- else }}
 workspace = {{ $ws }}, monitor:{{ $monitor.name }}{{ if eq $index 0 }}, default:true{{ end }}
+    {{- end }}
   {{- end }}
 {{- end }}
