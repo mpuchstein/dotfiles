@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+choice=$(printf '%s\n' \
+  "lock" \
+  "suspend" \
+  "logout" \
+  "reboot" \
+  "shutdown" \
+  | owlry -m dmenu -p "Power")
+
+case "$choice" in
+  lock)     swaylock -f ;;
+  suspend)  systemctl suspend ;;
+  logout)   hyprshutdown ;;
+  reboot)   hyprshutdown -t 'Restarting...' --post-cmd 'reboot' ;;
+  shutdown) hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P now' ;;
+esac

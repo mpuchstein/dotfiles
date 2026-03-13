@@ -29,6 +29,7 @@ $notclose = uwsm app -- swaync-client --close-latest
 $notcloseall = uwsm app -- swaync-client --close-all
 
 $lockcmd = swaylock -f
+$powermenu = owlry-power-menu
 
 ##############################################
 ################## KEYBINDS ##################
@@ -74,8 +75,7 @@ bind = $mainMod CTRL, Grave, exec, $nothide
 
 # Session
 bind = $mainMod, Pause, exec, $lockcmd
-bind = $mainMod SHIFT, Pause, exec, uwsm stop
-bind = $mainMod SHIFT, Escape, exec, $lockcmd
+bind = $mainMod SHIFT, Pause, exec, $powermenu
 
 # Window management
 bind = $mainMod, Q, killactive,
