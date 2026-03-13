@@ -112,16 +112,14 @@ bind = $mainMod, L, movefocus, r
 bind = $mainMod, K, movefocus, u
 bind = $mainMod, J, movefocus, d
 
-# MOVE WINDOW with mainMod SHIFT + vim keys
-bind = $mainMod SHIFT, H, movewindow, l
-bind = $mainMod SHIFT, L, movewindow, r
-bind = $mainMod SHIFT, K, movewindow, u
-bind = $mainMod SHIFT, J, movewindow, d
+# MOVE WINDOW with mainMod SHIFT + vim keys (layout-aware)
+bind = $mainMod SHIFT, H, exec, hypr-workspace-layout move-left
+bind = $mainMod SHIFT, L, exec, hypr-workspace-layout move-right
+bind = $mainMod SHIFT, K, exec, hypr-workspace-layout move-up
+bind = $mainMod SHIFT, J, exec, hypr-workspace-layout move-down
 
-bind = $mainMod ALT SHIFT, H, layoutmsg, swapcol l
-bind = $mainMod ALT SHIFT, J, layoutmsg, colresize -0.1
-bind = $mainMod ALT SHIFT, K, layoutmsg, colresize +0.1
-bind = $mainMod ALT SHIFT, L, layoutmsg, swapcol r
+bind = $mainMod ALT SHIFT, J, exec, hypr-workspace-layout resize-shrink-h
+bind = $mainMod ALT SHIFT, K, exec, hypr-workspace-layout resize-grow-h
 
 # Resize submap
 bind = $mainMod, R, submap, resize

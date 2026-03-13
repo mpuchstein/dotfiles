@@ -2,8 +2,8 @@
 set -euo pipefail
 
 mode="${1:-}"
-if [[ "$mode" != "toggle-ms" && "$mode" != "cycle" && "$mode" != "nav-next" && "$mode" != "nav-prev" && "$mode" != "nav-up" && "$mode" != "nav-down" ]]; then
-  printf 'Usage: %s {toggle-ms|cycle|nav-next|nav-prev|nav-up|nav-down}\n' "${0##*/}" >&2
+if [[ "$mode" != "toggle-ms" && "$mode" != "cycle" && "$mode" != "nav-next" && "$mode" != "nav-prev" && "$mode" != "nav-up" && "$mode" != "nav-down" && "$mode" != "move-left" && "$mode" != "move-right" && "$mode" != "move-up" && "$mode" != "move-down" && "$mode" != "resize-grow-h" && "$mode" != "resize-shrink-h" ]]; then
+  printf 'Usage: %s {toggle-ms|cycle|nav-next|nav-prev|nav-up|nav-down|move-left|move-right|move-up|move-down|resize-grow-h|resize-shrink-h}\n' "${0##*/}" >&2
   exit 2
 fi
 
@@ -65,14 +65,14 @@ set_state() {
   mv "$tmp" "$state_file"
 }
 
-default_layout="master"
-if [[ "$ws_selector" == "name:comms" || "$ws_selector" == "name:steam" ]]; then
-  default_layout="scrolling"
-fi
-
 current_layout="$(get_state "$ws_key")"
 if [[ -z "$current_layout" ]]; then
-  current_layout="$default_layout"
+  if command -v jq >/dev/null 2>&1; then
+    current_layout="$(printf '%s' "$active_json" | jq -r '.tiledLayout // empty')"
+  else
+    current_layout="$(printf '%s' "$active_json" | sed -n 's/.*"tiledLayout":"\([^"]*\)".*/\1/p')"
+  fi
+  current_layout="${current_layout:-master}"
 fi
 
 if [[ "$mode" == "toggle-ms" ]]; then
@@ -121,6 +121,40 @@ elif [[ "$mode" == "nav-up" ]]; then
     hyprctl dispatch layoutmsg removemaster >/dev/null
   else
     hyprctl dispatch cyclenext prev >/dev/null
+  fi
+  exit 0
+elif [[ "$mode" == "move-left" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "swapcol l" >/dev/null
+  elif [[ "$current_layout" != "monocle" ]]; then
+    hyprctl dispatch movewindow l >/dev/null
+  fi
+  exit 0
+elif [[ "$mode" == "move-right" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "swapcol r" >/dev/null
+  elif [[ "$current_layout" != "monocle" ]]; then
+    hyprctl dispatch movewindow r >/dev/null
+  fi
+  exit 0
+elif [[ "$mode" == "move-up" ]]; then
+  [[ "$current_layout" != "monocle" ]] && hyprctl dispatch movewindow u >/dev/null
+  exit 0
+elif [[ "$mode" == "move-down" ]]; then
+  [[ "$current_layout" != "monocle" ]] && hyprctl dispatch movewindow d >/dev/null
+  exit 0
+elif [[ "$mode" == "resize-grow-h" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "colresize +0.1" >/dev/null
+  elif [[ "$current_layout" != "monocle" ]]; then
+    hyprctl dispatch resizeactive 25 0 >/dev/null
+  fi
+  exit 0
+elif [[ "$mode" == "resize-shrink-h" ]]; then
+  if [[ "$current_layout" == "scrolling" ]]; then
+    hyprctl dispatch layoutmsg "colresize -0.1" >/dev/null
+  elif [[ "$current_layout" != "monocle" ]]; then
+    hyprctl dispatch resizeactive -25 0 >/dev/null
   fi
   exit 0
 fi

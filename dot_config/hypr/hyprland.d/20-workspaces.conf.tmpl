@@ -1,3 +1,15 @@
+## ========== Special Workspaces ==========
+workspace = special:passwordmgr, on-created-empty:uwsm app -- bitwarden-desktop
+
+## ========== Named Workspaces (IDs 1-6, sorted before numbered) ==========
+workspace = 1, defaultName:comms, monitor:DP-2, layout:scrolling, layoutopt:direction:down, persistent:true
+workspace = 2, defaultName:element, monitor:DP-2, layout:scrolling, layoutopt:direction:down, persistent:true
+workspace = 3, defaultName:mail, persistent:true
+workspace = 4, defaultName:joplin, persistent:true
+workspace = 5, defaultName:steam, layout:scrolling, persistent:true
+workspace = 6, defaultName:spotify, monitor:DP-2, layout:monocle, persistent:true, on-created-empty:uwsm app -- spotify-launcher
+
+## ========== Monitor Workspaces ==========
 {{- range $monitor := .monitors }}
   {{- range $index, $ws := $monitor.workspaces }}
     {{- if kindIs "map" $ws }}
