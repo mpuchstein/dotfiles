@@ -62,6 +62,7 @@ bind = , s, exec, hypr-steam-toggle
 bind = , d, exec, hypr-comms-toggle
 bind = , z, exec, hypr-mail-toggle
 bind = , x, exec, hypr-joplin-toggle
+bind = , c, exec, hypr-spotify-toggle
 bind = , Escape, submap, reset
 bind = , Return, submap, reset
 submap = reset
@@ -117,6 +118,11 @@ bind = $mainMod SHIFT, L, movewindow, r
 bind = $mainMod SHIFT, K, movewindow, u
 bind = $mainMod SHIFT, J, movewindow, d
 
+bind = $mainMod ALT SHIFT, H, layoutmsg, swapcol l
+bind = $mainMod ALT SHIFT, J, layoutmsg, colresize -0.1
+bind = $mainMod ALT SHIFT, K, layoutmsg, colresize +0.1
+bind = $mainMod ALT SHIFT, L, layoutmsg, swapcol r
+
 # Resize submap
 bind = $mainMod, R, submap, resize
 
@@ -138,50 +144,46 @@ bind = $mainMod, Tab, workspace, m+1
 bind = $mainMod SHIFT, Tab, workspace, m-1
 
 # SWITCH WORKSPACES with mainMod + [0-9]
-bind = $mainMod, 1, workspace, name:1
-bind = $mainMod, 2, workspace, name:2
-bind = $mainMod, 3, workspace, name:3
-bind = $mainMod, 4, workspace, name:4
-bind = $mainMod, 5, workspace, name:5
-bind = $mainMod, 6, workspace, name:6
-bind = $mainMod, 7, workspace, name:7
-bind = $mainMod, 8, workspace, name:8
-bind = $mainMod, 9, workspace, name:9
-bind = $mainMod, 0, workspace, name:10
+bind = $mainMod, 1, workspace, 21
+bind = $mainMod, 2, workspace, 22
+bind = $mainMod, 3, workspace, 23
+bind = $mainMod, 4, workspace, 24
+bind = $mainMod, 5, workspace, 25
+bind = $mainMod, 6, workspace, 26
+bind = $mainMod, 7, workspace, 27
+bind = $mainMod, 8, workspace, 28
+bind = $mainMod, 9, workspace, 29
+bind = $mainMod, 0, workspace, 30
 
 # Monitor focus / workspace move
-bind = $mainMod, O, focusmonitor, l
-bind = $mainMod, I, focusmonitor, r
+bind = $mainMod, O, focusmonitor, r
+bind = $mainMod, I, focusmonitor, l
 bind = $mainMod SHIFT, O, movecurrentworkspacetomonitor, l
 bind = $mainMod SHIFT, I, movecurrentworkspacetomonitor, r
-bind = $mainMod ALT SHIFT, H, movecurrentworkspacetomonitor, l
-bind = $mainMod ALT SHIFT, J, movecurrentworkspacetomonitor, d
-bind = $mainMod ALT SHIFT, K, movecurrentworkspacetomonitor, u
-bind = $mainMod ALT SHIFT, L, movecurrentworkspacetomonitor, r
 
 # MOVE ACTIVE WINDOW TO A WORKSPACE with mainMod + SHIFT + [0-9]
-bind = $mainMod SHIFT, 1, movetoworkspace, name:1
-bind = $mainMod SHIFT, 2, movetoworkspace, name:2
-bind = $mainMod SHIFT, 3, movetoworkspace, name:3
-bind = $mainMod SHIFT, 4, movetoworkspace, name:4
-bind = $mainMod SHIFT, 5, movetoworkspace, name:5
-bind = $mainMod SHIFT, 6, movetoworkspace, name:6
-bind = $mainMod SHIFT, 7, movetoworkspace, name:7
-bind = $mainMod SHIFT, 8, movetoworkspace, name:8
-bind = $mainMod SHIFT, 9, movetoworkspace, name:9
-bind = $mainMod SHIFT, 0, movetoworkspace, name:10
+bind = $mainMod SHIFT, 1, movetoworkspace, 21
+bind = $mainMod SHIFT, 2, movetoworkspace, 22
+bind = $mainMod SHIFT, 3, movetoworkspace, 23
+bind = $mainMod SHIFT, 4, movetoworkspace, 24
+bind = $mainMod SHIFT, 5, movetoworkspace, 25
+bind = $mainMod SHIFT, 6, movetoworkspace, 26
+bind = $mainMod SHIFT, 7, movetoworkspace, 27
+bind = $mainMod SHIFT, 8, movetoworkspace, 28
+bind = $mainMod SHIFT, 9, movetoworkspace, 29
+bind = $mainMod SHIFT, 0, movetoworkspace, 30
 
 # MOVE ACTIVE WINDOW TO A WORKSPACE SILENTLY with mainMod + CTRL + SHIFT + [0-9]
-bind = $mainMod CTRL SHIFT, 1, movetoworkspacesilent, name:1
-bind = $mainMod CTRL SHIFT, 2, movetoworkspacesilent, name:2
-bind = $mainMod CTRL SHIFT, 3, movetoworkspacesilent, name:3
-bind = $mainMod CTRL SHIFT, 4, movetoworkspacesilent, name:4
-bind = $mainMod CTRL SHIFT, 5, movetoworkspacesilent, name:5
-bind = $mainMod CTRL SHIFT, 6, movetoworkspacesilent, name:6
-bind = $mainMod CTRL SHIFT, 7, movetoworkspacesilent, name:7
-bind = $mainMod CTRL SHIFT, 8, movetoworkspacesilent, name:8
-bind = $mainMod CTRL SHIFT, 9, movetoworkspacesilent, name:9
-bind = $mainMod CTRL SHIFT, 0, movetoworkspacesilent, name:10
+bind = $mainMod CTRL SHIFT, 1, movetoworkspacesilent, 21
+bind = $mainMod CTRL SHIFT, 2, movetoworkspacesilent, 22
+bind = $mainMod CTRL SHIFT, 3, movetoworkspacesilent, 23
+bind = $mainMod CTRL SHIFT, 4, movetoworkspacesilent, 24
+bind = $mainMod CTRL SHIFT, 5, movetoworkspacesilent, 25
+bind = $mainMod CTRL SHIFT, 6, movetoworkspacesilent, 26
+bind = $mainMod CTRL SHIFT, 7, movetoworkspacesilent, 27
+bind = $mainMod CTRL SHIFT, 8, movetoworkspacesilent, 28
+bind = $mainMod CTRL SHIFT, 9, movetoworkspacesilent, 29
+bind = $mainMod CTRL SHIFT, 0, movetoworkspacesilent, 30
 
 # Group tab switching
 bind = $mainMod, Z, changegroupactive, f
