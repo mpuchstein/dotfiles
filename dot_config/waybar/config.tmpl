@@ -55,12 +55,7 @@
     {{- end }}
   ],
 
-  {{- if $tags.niri }}
-  "niri/workspaces": {
-    "format": "{value}",
-    "all-outputs": true
-  },
-  {{- else if $tags.hyprland }}
+  {{- if $tags.hyprland }}
   "hyprland/workspaces": {
     "format": "{icon}",
     "all-outputs": true,
@@ -87,6 +82,11 @@
     },
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+  {{- else if $tags.niri }}
+  "niri/workspaces": {
+    "format": "{value}",
+    "all-outputs": true
   },
   {{- end }}
 
