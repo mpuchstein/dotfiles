@@ -20,7 +20,17 @@
   {{- $warn = "d18f00cc" -}}
 {{- end -}}
 
+{{- if .monitors -}}
+{{- range .monitors }}
+{{- if index . "lockscreen-wallpaper" }}
+image={{ .name }}:{{ index . "lockscreen-wallpaper" }}
+{{- else }}
+image={{ .name }}:{{ $lock_bg }}
+{{- end }}
+{{- end }}
+{{- else }}
 image={{ $lock_bg }}
+{{- end }}
 scaling=fill
 
 font=GeistMono Nerd Font
