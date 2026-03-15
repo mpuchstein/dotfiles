@@ -1,13 +1,18 @@
+{{- $tags := .chezmoi.config.data.tags -}}
 ## ========== Special Workspaces ==========
 workspace = special:passwordmgr, on-created-empty:uwsm app -- bitwarden-desktop
 
 ## ========== Named Workspaces (IDs 1-6, sorted before numbered) ==========
-workspace = 1, defaultName:mail, persistent:true
-workspace = 2, defaultName:comms, monitor:DP-2, layout:scrolling, layoutopt:direction:down, persistent:true
-workspace = 3, defaultName:element, monitor:DP-2, layout:scrolling, layoutopt:direction:down, persistent:true
-workspace = 4, defaultName:joplin, persistent:true
-workspace = 5, defaultName:steam, layout:scrolling, persistent:true
-workspace = 6, defaultName:spotify, monitor:DP-2, layout:monocle, persistent:true, on-created-empty:uwsm app -- spotify-launcher
+workspace = 1, defaultName:mail
+workspace = 2, defaultName:comms, monitor:DP-2, layout:scrolling, layoutopt:direction:down
+workspace = 3, defaultName:element, monitor:DP-2, layout:scrolling, layoutopt:direction:down
+workspace = 4, defaultName:joplin
+{{- if index $tags "cs2" }}
+workspace = 5, defaultName:steam, layout:scrolling
+{{- end }}
+{{- if index $tags "entertainment" }}
+workspace = 6, defaultName:spotify, monitor:DP-2, layout:monocle, on-created-empty:uwsm app -- spotify-launcher
+{{- end }}
 
 ## ========== Monitor Workspaces ==========
 {{- range $monitor := .monitors }}

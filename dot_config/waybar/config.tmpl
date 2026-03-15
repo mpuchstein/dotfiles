@@ -8,10 +8,10 @@
   {{- end -}}
 {{- end -}}
 {{- $workspace_module := "" -}}
-{{- if $tags.niri -}}
-  {{- $workspace_module = "niri/workspaces" -}}
-{{- else if $tags.hyprland -}}
+{{- if $tags.hyprland -}}
   {{- $workspace_module = "hyprland/workspaces" -}}
+{{- else if $tags.niri -}}
+  {{- $workspace_module = "niri/workspaces" -}}
 {{- end -}}
 {
   "layer": "top",
