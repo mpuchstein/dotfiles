@@ -1,3 +1,4 @@
+{{- $tags := .chezmoi.config.data.tags -}}
 # Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
 # "Smart gaps" / "No gaps when only"
 # uncomment all if you wish to use that.
@@ -80,26 +81,30 @@ windowrule = match:xwayland 1, no_initial_focus on
 
 ## ========== Communication ==========
 # Comms
-windowrule = match:class ^(info\.mumble\.Mumble|discord|vesktop|teamspeak-client|TeamSpeak|TeamSpeak 3|teamspeak3)$, workspace name:comms
+windowrule = match:class ^(info\.mumble\.Mumble|discord|vesktop|teamspeak-client|TeamSpeak|TeamSpeak 3|teamspeak3)$, workspace 2
 # Element
-windowrule = match:class ^(Element)$, workspace name:element
+windowrule = match:class ^(Element)$, workspace 3
 
 ## ========== Mail ==========
-windowrule = match:class ^(org\.mozilla\.Thunderbird)$, workspace name:mail
+windowrule = match:class ^(org\.mozilla\.Thunderbird)$, workspace 1
 
 ## ========== Notes ==========
-windowrule = match:class ^(@joplin/app-desktop)$, workspace name:joplin
+windowrule = match:class ^(@joplin/app-desktop)$, workspace 4
+{{- if index $tags "entertainment" }}
 
 ## ========== Multimedia ==========
-windowrule = match:class Spotify, workspace name:spotify
+windowrule = match:class Spotify, workspace 6
+{{- end }}
 
 ### ========== Development ==========
 #windowrule = match:class jetbrains-webstorm, match:title Welcome to WebStorm, float on
 #windowrule = match:class jetbrains-webstorm, match:title Welcome to WebStorm, size 1080 720
+{{- if index $tags "cs2" }}
 
 ## ========== Gaming ==========
 # Steam
-windowrule = match:class ^(steam)$, workspace name:steam
+windowrule = match:class ^(steam)$, workspace 5
+{{- end }}
 
 ## ========== System ==========
 windowrule = match:class com.saivert.pwvucontrol, float on

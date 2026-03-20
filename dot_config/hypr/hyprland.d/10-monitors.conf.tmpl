@@ -4,11 +4,29 @@ monitorv2 {
   mode = {{ .width }}x{{ .height }}@{{ .refresh_rate }}
   position = {{ .position }}
   scale = {{ .scale }}
-  {{- if index . "vrr" }}
+  {{- if hasKey . "vrr" }}
   vrr = {{ .vrr }}
   {{- end }}
-  {{- if index . "transform" }}
+  {{- if hasKey . "transform" }}
   transform = {{ .transform }}
+  {{- end }}
+  {{- if hasKey . "bitdepth" }}
+  bitdepth = {{ .bitdepth }}
+  {{- end }}
+  {{- if hasKey . "cm" }}
+  cm = {{ .cm }}
+  {{- end }}
+  {{- if hasKey . "supports_hdr" }}
+  supports_hdr = {{ .supports_hdr }}
+  {{- end }}
+  {{- if hasKey . "sdrbrightness" }}
+  sdrbrightness = {{ .sdrbrightness }}
+  {{- end }}
+  {{- if hasKey . "sdrsaturation" }}
+  sdrsaturation = {{ .sdrsaturation }}
+  {{- end }}
+  {{- if hasKey . "max_luminance" }}
+  max_luminance = {{ .max_luminance }}
   {{- end }}
 }
 {{- end }}
