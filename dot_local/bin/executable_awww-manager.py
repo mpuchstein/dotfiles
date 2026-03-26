@@ -232,7 +232,7 @@ def _resolve_wallpaper(output, key, command, state):
 
 def cmd_apply_like(config, dry_run, wait_seconds, command):
     general = config.get("general", {})
-    base_cmd = general.get("backend_cmd", general.get("backend", "swww"))
+    base_cmd = general.get("backend_cmd", general.get("backend", "awww"))
     outputs = config.get("output", [])
 
     if not outputs:
@@ -288,7 +288,7 @@ def cmd_list(config):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Apply wallpapers via swww/awww using a TOML config.")
+    parser = argparse.ArgumentParser(description="Apply wallpapers via awww using a TOML config.")
     parser.add_argument("--config", help="Path to config.toml (default: XDG config)")
     parser.add_argument("--dry-run", action="store_true", help="Print commands without executing them")
     parser.add_argument("--print-config", action="store_true", help="Print the config file and exit")

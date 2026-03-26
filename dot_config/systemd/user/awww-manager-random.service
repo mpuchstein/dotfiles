@@ -1,7 +1,7 @@
 [Unit]
 Description=Randomize wallpapers via awww-manager
-After=graphical-session.target swww.service
-Wants=swww.service
+After=graphical-session.target awww.service
+Wants=awww.service
 
 [Service]
 Type=oneshot

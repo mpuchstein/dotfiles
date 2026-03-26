@@ -18,6 +18,7 @@ image/jpeg=org.pwmt.zathura-pdf-mupdf.desktop
 x-scheme-handler/spotify=spotify-launcher.desktop
 x-scheme-handler/about=xdg-https-handler.desktop
 x-scheme-handler/unknown=xdg-https-handler.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
