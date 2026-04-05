@@ -45,8 +45,12 @@ Item {
     property real diskDataVal: 0
     property string updatesText: ""
     property string updatesClass: ""
+    property bool updatesExpanded: false
+    property var updatesPackages: []
     property string alhpText: ""
     property string alhpClass: ""
+    property bool alhpExpanded: false
+    property var alhpPackages: []
     property string networkIp: "--"
     property string networkIface: "--"
     property bool idleActive: false
@@ -82,6 +86,7 @@ Item {
 
         // ─── UPDATES ─────────────────────────
 
+        // updates pending — clickable, expands package list
         Loader {
             Layout.fillWidth: true
             active: root.updatesClass === "pending" || root.updatesClass === "many"
@@ -89,7 +94,8 @@ Item {
             sourceComponent: Rectangle {
                 implicitHeight: updRow.implicitHeight + 14
                 radius: Shared.Theme.radiusSmall
-                color: Shared.Theme.surface0
+                color: updMouse.containsMouse ? Shared.Theme.surface1 : Shared.Theme.surface0
+                Behavior on color { ColorAnimation { duration: Shared.Theme.animFast } }
 
                 RowLayout {
                     id: updRow
@@ -98,11 +104,59 @@ Item {
                     spacing: 10
                     Text { text: "\u{f0ab7}"; color: Shared.Theme.warning; font.pixelSize: 14; font.family: Shared.Theme.iconFont }
                     Text { text: root.updatesText + " updates available"; color: Shared.Theme.text; font.pixelSize: Shared.Theme.fontSize; font.family: Shared.Theme.fontFamily; Layout.fillWidth: true }
-                    Text { visible: root.alhpText !== ""; text: "ALHP " + root.alhpText; color: Shared.Theme.overlay0; font.pixelSize: Shared.Theme.fontSize; font.family: Shared.Theme.fontFamily }
+                    Text {
+                        text: "\u{f0140}"
+                        color: Shared.Theme.overlay0
+                        font.pixelSize: 12
+                        font.family: Shared.Theme.iconFont
+                        rotation: root.updatesExpanded ? 180 : 0
+                        Behavior on rotation { NumberAnimation { duration: Shared.Theme.animFast } }
+                    }
+                }
+
+                MouseArea {
+                    id: updMouse
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: root.updatesExpanded = !root.updatesExpanded
                 }
             }
         }
 
+        // updates expanded package list
+        Loader {
+            Layout.fillWidth: true
+            active: root.updatesExpanded && root.updatesPackages.length > 0
+            visible: active
+            sourceComponent: Rectangle {
+                radius: Shared.Theme.radiusSmall
+                color: Shared.Theme.surface0
+                implicitHeight: pkgCol.implicitHeight + 12
+
+                ColumnLayout {
+                    id: pkgCol
+                    anchors.fill: parent
+                    anchors.margins: 6
+                    spacing: 2
+
+                    Repeater {
+                        model: root.updatesPackages
+                        Text {
+                            required property string modelData
+                            text: modelData
+                            color: Shared.Theme.subtext0
+                            font.pixelSize: Shared.Theme.fontSmall
+                            font.family: Shared.Theme.fontFamily
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
+                        }
+                    }
+                }
+            }
+        }
+
+        // system up to date
         Loader {
             Layout.fillWidth: true
             active: root.updatesClass !== "pending" && root.updatesClass !== "many" && root.updatesClass !== ""
@@ -111,6 +165,97 @@ Item {
                 spacing: 10
                 Text { text: "\u{f05e0}"; color: Shared.Theme.success; font.pixelSize: 14; font.family: Shared.Theme.iconFont }
                 Text { text: "System up to date"; color: Shared.Theme.overlay0; font.pixelSize: Shared.Theme.fontSize; font.family: Shared.Theme.fontFamily }
+            }
+        }
+
+        // ALHP good
+        Loader {
+            Layout.fillWidth: true
+            active: root.alhpClass === "good"
+            visible: active
+            sourceComponent: RowLayout {
+                spacing: 10
+                Text { text: "\u{f05e0}"; color: Shared.Theme.success; font.pixelSize: 14; font.family: Shared.Theme.iconFont }
+                Text { text: "ALHP \u2713"; color: Shared.Theme.overlay0; font.pixelSize: Shared.Theme.fontSize; font.family: Shared.Theme.fontFamily }
+            }
+        }
+
+        // ALHP mirror stale
+        Loader {
+            Layout.fillWidth: true
+            active: root.alhpClass === "stale"
+            visible: active
+            sourceComponent: RowLayout {
+                spacing: 10
+                Text { text: "\u{f0026}"; color: Shared.Theme.warning; font.pixelSize: 14; font.family: Shared.Theme.iconFont }
+                Text { text: "ALHP mirror outdated"; color: Shared.Theme.warning; font.pixelSize: Shared.Theme.fontSize; font.family: Shared.Theme.fontFamily }
+            }
+        }
+
+        // ALHP packages building — clickable, expands package list
+        Loader {
+            Layout.fillWidth: true
+            active: root.alhpClass === "bad"
+            visible: active
+            sourceComponent: RowLayout {
+                spacing: 10
+
+                Text { text: "\u{f0954}"; color: Shared.Theme.danger; font.pixelSize: 14; font.family: Shared.Theme.iconFont }
+                Text {
+                    text: "ALHP " + root.alhpText + " building"
+                    color: Shared.Theme.danger
+                    font.pixelSize: Shared.Theme.fontSize
+                    font.family: Shared.Theme.fontFamily
+                    Layout.fillWidth: true
+                }
+                Text {
+                    visible: root.alhpPackages.length > 0
+                    text: "\u{f0140}"
+                    color: Shared.Theme.overlay0
+                    font.pixelSize: 12
+                    font.family: Shared.Theme.iconFont
+                    rotation: root.alhpExpanded ? 180 : 0
+                    Behavior on rotation { NumberAnimation { duration: Shared.Theme.animFast } }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: root.alhpPackages.length > 0
+                    cursorShape: root.alhpPackages.length > 0 ? Qt.PointingHandCursor : Qt.ArrowCursor
+                    onClicked: if (root.alhpPackages.length > 0) root.alhpExpanded = !root.alhpExpanded
+                }
+            }
+        }
+
+        // ALHP expanded package list
+        Loader {
+            Layout.fillWidth: true
+            active: root.alhpExpanded && root.alhpPackages.length > 0
+            visible: active
+            sourceComponent: Rectangle {
+                radius: Shared.Theme.radiusSmall
+                color: Shared.Theme.surface0
+                implicitHeight: alhpPkgCol.implicitHeight + 12
+
+                ColumnLayout {
+                    id: alhpPkgCol
+                    anchors.fill: parent
+                    anchors.margins: 6
+                    spacing: 2
+
+                    Repeater {
+                        model: root.alhpPackages
+                        Text {
+                            required property string modelData
+                            text: modelData
+                            color: Shared.Theme.subtext0
+                            font.pixelSize: Shared.Theme.fontSmall
+                            font.family: Shared.Theme.fontFamily
+                            Layout.fillWidth: true
+                            elide: Text.ElideRight
+                        }
+                    }
+                }
             }
         }
 
@@ -782,15 +927,17 @@ Item {
         }
     }}
 
-    Process { id: updateProc; command: ["bash", "-c", "set -o pipefail; checkupdates 2>/dev/null | wc -l; echo \":$?\""]; stdout: StdioCollector {
+    Process { id: updateProc; command: ["bash", "-c", "checkupdates 2>/dev/null; echo \":$?\""]; stdout: StdioCollector {
         onStreamFinished: {
-            let text = this.text.trim();
-            let exitMatch = text.match(/:(\d+)$/);
+            let lines = this.text.trim().split("\n");
+            let exitMatch = lines[lines.length - 1].match(/:(\d+)$/);
             let exit = exitMatch ? parseInt(exitMatch[1]) : 1;
-            let n = parseInt(text);
-            // checkupdates: 0 = updates available, 2 = no updates, anything else = error
+            // checkupdates: exit 0 = updates available, exit 2 = no updates, else error
             if (exit !== 0 && exit !== 2) return;  // error — keep previous state
-            if (isNaN(n) || n === 0) { root.updatesText = ""; root.updatesClass = "uptodate"; }
+            let pkgs = lines.filter(l => l.trim() !== "" && !l.match(/^:/));
+            let n = pkgs.length;
+            root.updatesPackages = pkgs;
+            if (n === 0) { root.updatesText = ""; root.updatesClass = "uptodate"; root.updatesExpanded = false; }
             else if (n > 50) { root.updatesText = n.toString(); root.updatesClass = "many"; }
             else { root.updatesText = n.toString(); root.updatesClass = "pending"; }
         }
@@ -802,9 +949,10 @@ Item {
                 let d = JSON.parse(this.text);
                 let total = d.total || 0;
                 let stale = d.mirror_out_of_date || false;
+                root.alhpPackages = Array.isArray(d.packages) ? d.packages : [];
                 if (stale) { root.alhpText = "stale"; root.alhpClass = "stale"; }
                 else if (total > 0) { root.alhpText = total.toString(); root.alhpClass = "bad"; }
-                else { root.alhpText = ""; root.alhpClass = "good"; }
+                else { root.alhpText = ""; root.alhpClass = "good"; root.alhpExpanded = false; }
             } catch(e) { root.alhpText = "?"; root.alhpClass = "down"; }
         }
     }}
