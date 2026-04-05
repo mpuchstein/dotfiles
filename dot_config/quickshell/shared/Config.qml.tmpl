@@ -1,0 +1,62 @@
+pragma Singleton
+
+import Quickshell
+import QtQuick
+
+Singleton {
+    readonly property string home: Quickshell.env("HOME")
+
+    // Appearance
+    // apexFlavor: "neon" (dark) or "aeon" (light) — synced from chezmoi data.theme
+    readonly property string apexFlavor: "{{ trimPrefix "apex-" .chezmoi.config.data.theme }}"
+    readonly property bool transparency: true            // semi-transparent backgrounds (needs Hyprland blur layerrule)
+
+    // Monitor — quickshell bar lives on the rightmost monitor (portrait, DP-2)
+    readonly property string monitor: "DP-2"
+
+    // Workspaces — show all 10; Hyprland IPC tracks per-monitor active workspace
+    readonly property int workspaceCount: 10
+
+    // Weather
+    readonly property string weatherLocation: "Nospelt"
+    readonly property bool useCelsius: true
+    readonly property string tempUnit: useCelsius ? "°C" : "°F"
+    readonly property string windUnit: useCelsius ? "km/h" : "mph"
+    readonly property int forecastDays: 5
+    readonly property int weatherRefreshMs: 1800000
+
+    // Disk mounts to monitor
+    readonly property string diskMount1: "/"
+    readonly property string diskMount1Label: "/"
+    readonly property string diskMount2: home + "/data"
+    readonly property string diskMount2Label: "/data"
+
+    // Scripts
+    readonly property string scriptsDir: home + "/.config/quickshell/scripts"
+    readonly property string gpuScript: scriptsDir + "/gpu.sh"
+
+    // Idle daemon
+    readonly property string idleProcess: "hypridle"
+    readonly property string lockCommand: "swaylock"
+
+    // Power commands
+    readonly property var powerActions: [
+        { command: ["swaylock"] },
+        { command: ["hyprshutdown"] },
+        { command: ["hyprshutdown", "-t", "Restarting...", "--post-cmd", "systemctl reboot"] },
+        { command: ["hyprshutdown", "-t", "Powering off...", "--post-cmd", "systemctl poweroff"] }
+    ]
+
+    // Network filter (interfaces to exclude from IP display)
+    readonly property string netExcludePattern: "127.0.0\\|docker\\|br-\\|veth"
+
+    // DateTime / Calendar
+    readonly property bool use24h: true
+    readonly property string clockFormat: use24h ? "HH:mm" : "hh:mm A"
+    readonly property string clockSecondsFormat: use24h ? "HH:mm:ss" : "hh:mm:ss A"
+    readonly property string dateFormat: "dddd, d MMMM yyyy"
+    readonly property string pillDateFormat: "ddd\nd"
+    readonly property string pillTimeFormat: use24h ? "HH\nmm" : "hh\nmm"
+    readonly property bool weekStartsMonday: true
+    readonly property var dayHeaders: weekStartsMonday ? ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+}
