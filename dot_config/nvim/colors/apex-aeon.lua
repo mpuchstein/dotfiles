@@ -723,6 +723,8 @@ function M.load()
   end
 end
 
+M.load()
+
 -- PLUGINS: LUALINE --------------------------------------------------------
 -- Export lualine theme from palette for use in lualine config
 do
@@ -760,7 +762,5 @@ do
     },
   }
 end
-
-M.load()
 
 return M
