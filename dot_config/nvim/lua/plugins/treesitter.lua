@@ -1,11 +1,21 @@
--- nvim-treesitter dropped: archived, incompatible with Neovim 0.12 API.
--- Neovim 0.12 handles treesitter natively (highlighting, folding, injections).
--- Bundled parsers: bash, c, lua, markdown, markdown_inline, python, query,
---                  regex, vim, vimdoc.
--- Additional parsers (rust, ts, java, etc.): install via AUR tree-sitter-* or
--- tree-sitter-cli: https://github.com/tree-sitter/tree-sitter
+-- Neovim 0.12 handles treesitter natively. tree-sitter-manager provides
+-- parser installation (replaces archived nvim-treesitter). Requires:
+--   tree-sitter CLI, git, gcc/clang (system-wide)
 
 return {
+  {
+    "romus204/tree-sitter-manager.nvim",
+    cmd = "TSManager",
+    opts = {
+      ensure_installed = {
+        "rust", "typescript", "javascript", "svelte",
+        "java", "latex", "yaml", "toml", "html", "css",
+        "jinja", "json",
+      },
+    },
+  },
+
+
   -- Textobjects: pairs, quotes, args, brackets — no treesitter dependency
   {
     "echasnovski/mini.ai",
