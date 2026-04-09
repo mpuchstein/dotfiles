@@ -18,6 +18,29 @@
 # └─────────────────────────────────────────────────────────────────────┘
 
 # ═══════════════════════════════════════════════════════════════════════
+# DMENU MODE
+# ═══════════════════════════════════════════════════════════════════════
+#
+# Dmenu mode provides interactive selection from piped input.
+# The selected item is printed to stdout (not executed), so pipe
+# the output to execute it:
+#
+# ┌─────────────────────────────────────────────────────────────────────┐
+# │ # Screenshot menu                                                   │
+# │ printf '%s\n' \                                                     │
+# │   "grimblast --notify copy screen" \                                │
+# │   "grimblast --notify copy area" \                                  │
+# │   | owlry -m dmenu -p "Screenshot" \                                │
+# │   | sh                                                              │
+# │                                                                     │
+# │ # Git branch checkout                                               │
+# │ git branch | owlry -m dmenu -p "checkout" | xargs git checkout      │
+# │                                                                     │
+# │ # Package search                                                    │
+# │ pacman -Ssq | owlry -m dmenu -p "install" | xargs sudo pacman -S    │
+# └─────────────────────────────────────────────────────────────────────┘
+
+# ═══════════════════════════════════════════════════════════════════════
 # GENERAL
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -30,10 +53,10 @@ max_results = 100
 # Uncomment to override:
 terminal_command = "kitty"
 
-# Launch wrapper for app execution (auto-detected for uwsm/Hyprland)
-# Examples: "uwsm app --", "hyprctl dispatch exec --", ""
-# launch_wrapper = "uwsm app --"
-
+# Enable uwsm (Universal Wayland Session Manager) for launching apps.
+# When enabled, apps are launched via "uwsm app --" which starts them
+# in a proper systemd user session for better process management.
+# Requires: uwsm to be installed
 use_uwsm = true
 
 # Header tabs - providers shown as toggle buttons (Ctrl+1, Ctrl+2, etc.)
@@ -51,9 +74,8 @@ font_size = 14
 border_radius = 12
 
 # Theme name - loads ~/.config/owlry/themes/{name}.css
-# Built-in: owl, catppuccin-mocha, dracula, gruvbox-dark, nord,
-#           one-dark, rose-pine, solarized-dark, tokyo-night
-# Or leave unset for GTK default
+# Built-in: owl
+# Or leave unset/empty for GTK default
 theme = "{{ .chezmoi.config.data.theme }}"
 
 # Color overrides (applied on top of theme)
@@ -65,58 +87,112 @@ theme = "{{ .chezmoi.config.data.theme }}"
 # text_secondary = "#565f89"
 # accent = "#7aa2f7"
 # accent_bright = "#89b4fa"
+#
+# Provider badge colors (optional)
+# badge_app = "#7aa2f7"
+# badge_cmd = "#9ece6a"
+# badge_bookmark = "#e0af68"
+# badge_calc = "#bb9af7"
+# badge_clip = "#7dcfff"
+# badge_dmenu = "#c0caf5"
+# badge_emoji = "#f7768e"
+# badge_file = "#73daca"
+# badge_script = "#ff9e64"
+# badge_ssh = "#2ac3de"
+# badge_sys = "#f7768e"
+# badge_uuctl = "#9ece6a"
+# badge_web = "#7aa2f7"
+# badge_media = "#bb9af7"
+# badge_weather = "#7dcfff"
+# badge_pomo = "#f7768e"
 
 # ═══════════════════════════════════════════════════════════════════════
 # PLUGINS
 # ═══════════════════════════════════════════════════════════════════════
 #
-# All installed plugins are loaded by default. Use 'disabled' to blacklist.
+# All installed plugins are loaded by default. Use 'disabled_plugins' to blacklist.
 # Plugin IDs: calculator, system, ssh, clipboard, emoji, scripts, bookmarks,
 #             websearch, filesearch, systemd, weather, media, pomodoro
 
 [plugins]
+enabled = true               # Master switch for all plugins
+
 # Plugins to disable (by ID)
-disabled = [ "filesearch" ]
+disabled_plugins = ["filesearch"]
 
 # Examples:
-# disabled = ["emoji", "pomodoro"]     # Disable specific plugins
-# disabled = ["weather", "media"]      # Disable widget plugins
+# disabled_plugins = ["emoji", "pomodoro"]     # Disable specific plugins
+# disabled_plugins = ["weather", "media"]      # Disable widget plugins
+
+# Custom plugin registry URL (defaults to official registry)
+# registry_url = "https://my-registry.example.com/plugins.json"
 
 # ─────────────────────────────────────────────────────────────────────────
-# Per-plugin configuration via [plugins.<name>] sections
+# Sandbox settings (for Lua/Rune script plugins)
 # ─────────────────────────────────────────────────────────────────────────
-
-# Weather widget plugin
-[plugins.weather]
-provider = "open-meteo" # wttr.in (default), openweathermap, open-meteo
-location = ""           # City name, "lat,lon", or empty for auto-detect
-# api_key = ""          # Required for OpenWeatherMap
-
-# Pomodoro timer plugin
-[plugins.pomodoro]
-work_mins = 25 # Work session duration
-break_mins = 5 # Break duration
+# [plugins.sandbox]
+# allow_filesystem = false   # Allow file system access beyond plugin dir
+# allow_network = false      # Allow network requests
+# allow_commands = false     # Allow shell command execution
+# memory_limit = 67108864    # Memory limit in bytes (64 MB default)
 
 # ═══════════════════════════════════════════════════════════════════════
-# CORE PROVIDERS
+# PROVIDERS
 # ═══════════════════════════════════════════════════════════════════════
 #
-# These are built into the core binary, not plugins.
+# Enable/disable providers and configure their settings.
+# Core providers (applications, commands) are built into the binary.
+# Plugin providers require their .so to be installed.
 
 [providers]
 # Core providers (always available)
-applications = true # .desktop applications from XDG dirs
-commands = true     # Executables from $PATH
+applications = true      # .desktop applications from XDG dirs
+commands = true          # Executables from $PATH
 
 # Frecency - boost frequently/recently used items
 # Data stored in: ~/.local/share/owlry/frecency.json
 frecency = true
-frecency_weight = 0.3 # 0.0 = disabled, 1.0 = strong boost
+frecency_weight = 0.3    # 0.0 = disabled, 1.0 = strong boost
 
-# Web Search settings
-search_engine = "duckduckgo"
+# ─────────────────────────────────────────────────────────────────────────
+# Plugin provider toggles (require corresponding plugin installed)
+# ─────────────────────────────────────────────────────────────────────────
+uuctl = true             # systemd user units
+system = true            # System commands (shutdown, reboot, etc.)
+ssh = true               # SSH hosts from ~/.ssh/config
+clipboard = true         # Clipboard history (requires cliphist)
+bookmarks = true         # Browser bookmarks
+emoji = true             # Emoji picker
+scripts = true           # Custom scripts from ~/.local/share/owlry/scripts/
+files = true             # File search (requires fd or mlocate)
+calculator = true        # Calculator (= expression)
+websearch = true         # Web search (? query)
+
+# ─────────────────────────────────────────────────────────────────────────
+# Widget providers (displayed at top of results)
+# ─────────────────────────────────────────────────────────────────────────
+media = true                 # MPRIS media player controls
+weather = false              # Weather widget (disabled by default)
+pomodoro = false             # Pomodoro timer (disabled by default)
+
+# ─────────────────────────────────────────────────────────────────────────
+# Provider settings
+# ─────────────────────────────────────────────────────────────────────────
+
+# Web search engine
 # Options: google, duckduckgo, bing, startpage, searxng, brave, ecosia
+# Or custom URL: "https://search.example.com/?q={query}"
+search_engine = "duckduckgo"
 
-# File Search settings
+# File search
 file_search_max_results = 50
 # file_search_paths = ["/home", "/etc"]  # Custom paths (default: $HOME)
+
+# Weather settings (when weather = true)
+# weather_provider = "wttr.in"     # Options: wttr.in, openweathermap, open-meteo
+# weather_location = "Berlin"       # City name or coordinates
+# weather_api_key = ""              # Required for openweathermap
+
+# Pomodoro settings (when pomodoro = true)
+# pomodoro_work_mins = 25           # Work session duration
+# pomodoro_break_mins = 5           # Break duration
