@@ -168,7 +168,7 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown" },
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       heading = { enabled = true },
       code = { enabled = true, style = "full" },
@@ -194,7 +194,7 @@ return {
   -- Symbols outline panel
   {
     "stevearc/aerial.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<leader>uo", "<cmd>AerialToggle!<cr>", desc = "Symbols outline" },
     },

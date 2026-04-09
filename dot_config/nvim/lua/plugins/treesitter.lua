@@ -1,70 +1,20 @@
+-- nvim-treesitter dropped: archived, incompatible with Neovim 0.12 API.
+-- Neovim 0.12 handles treesitter natively (highlighting, folding, injections).
+-- Bundled parsers: bash, c, lua, markdown, markdown_inline, python, query,
+--                  regex, vim, vimdoc.
+-- Additional parsers (rust, ts, java, etc.): install via AUR tree-sitter-* or
+-- tree-sitter-cli: https://github.com/tree-sitter/tree-sitter
+
 return {
+  -- Textobjects: pairs, quotes, args, brackets — no treesitter dependency
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
+    "echasnovski/mini.ai",
+    event = "VeryLazy",
     opts = {
-      ensure_installed = {
-        "lua", "rust", "typescript", "javascript", "svelte",
-        "java", "latex", "markdown", "markdown_inline",
-        "yaml", "toml", "bash", "html", "css", "jinja",
-        "json", "vim", "vimdoc", "regex",
-      },
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { "latex" }, -- needed for vimtex
-      },
-      indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["am"] = "@function.outer",
-            ["im"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-            ["a,"] = "@parameter.outer",
-            ["i,"] = "@parameter.inner",
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]c"] = "@class.outer",
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]C"] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[c"] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[C"] = "@class.outer",
-          },
-        },
-      },
+      n_lines = 500,
+      -- Extend the default textobjects with mini.extra
+      -- a( i( a[ i[ a{ i{ a< i< a" i" a' i' a` i` — built-in
+      -- af if — function call args (built-in)
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
   },
 }
