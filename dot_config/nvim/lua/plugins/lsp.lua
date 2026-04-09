@@ -43,7 +43,7 @@ return {
         -- Formatters
         "stylua",
         "prettier",
-        "rustfmt",
+        -- rustfmt is managed by rustup, not mason
         "google-java-format",
         "djlint",
         -- DAP
