@@ -49,6 +49,8 @@ return {
         -- DAP
         "codelldb",
         "js-debug-adapter",
+        "java-debug-adapter",
+        "java-test",
       },
       auto_update = false,
       run_on_start = true,

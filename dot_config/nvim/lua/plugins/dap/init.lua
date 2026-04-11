@@ -30,6 +30,7 @@ return {
       -- Load language-specific configs
       require("plugins.dap.rust")
       require("plugins.dap.js")
+      require("plugins.dap.java")
     end,
   },
 

@@ -70,7 +70,18 @@ return {
           },
         },
         init_options = {
-          bundles = {},
+          bundles = (function()
+            local b = {}
+            vim.list_extend(b, vim.split(
+              vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
+              "\n", { trimempty = true }
+            ))
+            vim.list_extend(b, vim.split(
+              vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/java-test/extension/server/*.jar"),
+              "\n", { trimempty = true }
+            ))
+            return b
+          end)(),
         },
         on_attach = function(client, bufnr)
           -- Enable navic for breadcrumbs

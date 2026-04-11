@@ -41,6 +41,16 @@ return {
     },
   },
 
+  -- Split diff view and file history
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
+    keys = {
+      { "<leader>gD", "<cmd>DiffviewOpen<cr>",          desc = "Diff working tree" },
+      { "<leader>gH", "<cmd>DiffviewFileHistory %<cr>", desc = "File history"      },
+    },
+  },
+
   -- Magit-style full git interface
   {
     "NeogitOrg/neogit",

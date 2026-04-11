@@ -6,6 +6,7 @@ return {
       "nvim-neotest/nvim-nio",
       "rouge8/neotest-rust",
       "rcasia/neotest-java",
+      "marilari88/neotest-vitest",
     },
     keys = {
       { "<leader>tr", function() require("neotest").run.run() end,                           desc = "Run nearest test"  },
@@ -19,9 +20,8 @@ return {
       return {
         adapters = {
           require("neotest-rust")({ args = { "--no-capture" } }),
-          require("neotest-java")({
-            ignore_wrapper = false,
-          }),
+          require("neotest-java")({ ignore_wrapper = false }),
+          require("neotest-vitest"),
         },
         output = { open_on_run = false },
         quickfix = { open = false },
