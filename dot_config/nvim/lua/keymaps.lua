@@ -41,3 +41,7 @@ map({ "n", "i" }, "<C-s>", "<cmd>w<cr>", { desc = "Save" })
 -- Quit
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
+
+-- Tab navigation
+map("n", "<A-Tab>",   "<cmd>tabnext<cr>",     { desc = "Next tab" })
+map("n", "<A-S-Tab>", "<cmd>tabprevious<cr>", { desc = "Prev tab" })

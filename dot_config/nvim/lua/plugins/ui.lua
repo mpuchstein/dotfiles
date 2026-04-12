@@ -9,10 +9,10 @@ return {
     },
     keys = {
       -- Navigate
-      { "<C-h>", function() require("smart-splits").move_cursor_left()  end, mode = { "n", "t" }, desc = "Move to left split/pane"  },
-      { "<C-j>", function() require("smart-splits").move_cursor_down()  end, mode = { "n", "t" }, desc = "Move to lower split/pane" },
-      { "<C-k>", function() require("smart-splits").move_cursor_up()    end, mode = { "n", "t" }, desc = "Move to upper split/pane" },
-      { "<C-l>", function() require("smart-splits").move_cursor_right() end, mode = { "n", "t" }, desc = "Move to right split/pane" },
+      { "<A-h>", function() require("smart-splits").move_cursor_left()  end, mode = { "n", "t" }, desc = "Move to left split/pane"  },
+      { "<A-j>", function() require("smart-splits").move_cursor_down()  end, mode = { "n", "t" }, desc = "Move to lower split/pane" },
+      { "<A-k>", function() require("smart-splits").move_cursor_up()    end, mode = { "n", "t" }, desc = "Move to upper split/pane" },
+      { "<A-l>", function() require("smart-splits").move_cursor_right() end, mode = { "n", "t" }, desc = "Move to right split/pane" },
       -- Resize
       { "<C-A-h>", function() require("smart-splits").resize_left()  end, desc = "Resize left"  },
       { "<C-A-j>", function() require("smart-splits").resize_down()  end, desc = "Resize down"  },

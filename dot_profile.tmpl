@@ -11,6 +11,7 @@ export PATH="${PATH}:{{ .chezmoi.homeDir }}/.cargo/bin"
 export ZDOTDIR="{{ .chezmoi.homeDir }}/.config/zsh"
 
 export EDITOR="nvim"
+export DIFFPROG="nvim -d"
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
